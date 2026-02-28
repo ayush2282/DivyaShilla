@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DivyaShilla – Sacred Black Stone Tulsi Katta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Josefin+Sans:wght@300;400;600&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron:       #E07B20;
+  --saffron-deep:  #C05E0A;
+  --saffron-light: #F0A855;
+  --terracotta:    #B84E32;
+  --stone:         #5C4A32;
+  --cream:         #FBF5EA;
+  --cream-dark:    #F2E8D5;
+  --ivory:         #FAF7F0;
+  --sand:          #E2CEAA;
+  --sand-dark:     #C8AF88;
+  --brown:         #3D2B1A;
+  --muted:         #7A6652;
+  --white:         #FFFDF8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--brown);font-family:'Lato',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+.lbl{display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:0.6rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--saffron-deep);margin-bottom:12px;}
+.rule{display:block;width:54px;height:2px;background:linear-gradient(90deg,var(--saffron),var(--saffron-light),transparent);margin:18px 0 36px;}
+section{padding:84px 6%;}
+@media(max-width:680px){section{padding:60px 5%;}}
+
+.btn{display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.26em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all 0.28s;}
+.btn-fill{background:var(--saffron-deep);color:var(--white);padding:15px 44px;}
+.btn-fill:hover{background:var(--terracotta);transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,78,50,0.3);}
+.btn-outline{background:transparent;border:1.5px solid var(--saffron-deep);color:var(--saffron-deep);padding:12px 26px;}
+.btn-outline:hover{background:var(--saffron-deep);color:var(--white);}
+.btn-cta{background:linear-gradient(135deg,var(--saffron-deep),var(--terracotta));color:var(--white);padding:18px 0;width:100%;font-size:0.73rem;letter-spacing:0.24em;box-shadow:0 6px 24px rgba(200,94,16,0.28);}
+.btn-cta:hover{box-shadow:0 10px 32px rgba(200,94,16,0.42);transform:translateY(-2px);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:14px 6%;background:rgba(251,245,234,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--sand);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown);letter-spacing:0.03em;}
+.nav-logo span{color:var(--saffron-deep);}
+.nav-links a{font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-left:24px;transition:color 0.22s;}
+.nav-links a:hover{color:var(--saffron-deep);}
+.nav-links a.nav-special{color:var(--saffron-deep);border:1px solid var(--saffron-deep);padding:6px 14px;}
+.nav-links a.nav-special:hover{background:var(--saffron-deep);color:var(--white);}
+@media(max-width:640px){.nav-links{display:none;}}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 6% 60px;position:relative;overflow:hidden;background:var(--cream);}
+.hero-dots{position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,rgba(224,123,32,0.09) 1.5px,transparent 1.5px);background-size:26px 26px;}
+.hero-glow{position:absolute;right:-8%;top:5%;width:60vw;height:90vh;background:radial-gradient(ellipse at center,rgba(224,123,32,0.11) 0%,transparent 65%);z-index:0;pointer-events:none;}
+.hero-body{position:relative;z-index:1;max-width:640px;}
+.hero-orn{font-size:1.3rem;color:var(--saffron);margin-bottom:16px;letter-spacing:0.4em;opacity:0;animation:fadeUp 0.6s ease forwards 0.1s;}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:700;color:var(--brown);line-height:1.07;margin-bottom:18px;opacity:0;animation:fadeUp 0.8s ease forwards 0.3s;}
+.hero-h1 em{font-style:italic;color:var(--saffron-deep);}
+.hero-sub{font-size:1.05rem;color:var(--muted);font-weight:300;margin-bottom:38px;line-height:1.8;opacity:0;animation:fadeUp 0.8s ease forwards 0.5s;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease forwards 0.7s;}
+.hero-img-side{position:absolute;right:0;top:0;bottom:0;width:42%;overflow:hidden;z-index:0;}
+.hero-img-side img{width:100%;height:100%;object-fit:cover;opacity:0.18;filter:sepia(25%) saturate(110%);}
+@media(max-width:900px){.hero-img-side{display:none;}}
+.hero-badge{position:absolute;bottom:36px;right:6%;background:var(--white);border:1px solid var(--sand);padding:16px 26px;box-shadow:0 8px 32px rgba(61,43,26,0.1);z-index:2;opacity:0;animation:fadeIn 1s ease forwards 1.1s;}
+@media(max-width:640px){.hero-badge{display:none;}}
+.badge-n{font-family:'Playfair Display',serif;font-size:2rem;color:var(--saffron-deep);line-height:1;}
+.badge-t{font-family:'Josefin Sans',sans-serif;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* SIZES */
+#size{background:var(--ivory);}
+.size-layout{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+@media(max-width:860px){.size-layout{grid-template-columns:1fr;}}
+.size-img-box{background:var(--cream-dark);border:1px solid var(--sand);padding:32px 24px 20px;text-align:center;}
+.size-img-box img{width:100%;max-width:320px;height:auto;display:block;margin:0 auto;object-fit:contain;}
+.size-img-note{font-family:'Josefin Sans',sans-serif;font-size:0.56rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-top:14px;}
+.size-cards{display:flex;flex-direction:column;gap:10px;}
+.size-card{cursor:pointer;border:1.5px solid var(--sand);background:var(--white);padding:18px 22px;display:flex;align-items:center;gap:18px;transition:all 0.26s;position:relative;}
+.size-card:hover{border-color:var(--saffron);box-shadow:0 4px 18px rgba(224,123,32,0.1);}
+.size-card.active{border-color:var(--saffron-deep);background:#FFF9F3;}
+.size-card.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--saffron-deep),var(--terracotta));}
+.sc-thumb{flex-shrink:0;width:52px;}
+.sc-thumb img{width:100%;height:70px;object-fit:cover;display:block;}
+.sc-info{flex:1;}
+.sc-ft{font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--brown);line-height:1;margin-bottom:3px;}
+.sc-desc{font-size:0.83rem;color:var(--muted);font-weight:300;}
+.sc-tick{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:var(--saffron-deep);color:#fff;font-size:0.68rem;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.22s;}
+.size-card.active .sc-tick{opacity:1;}
+
+/* BUILDER */
+#builder{background:var(--cream);}
+.bstep{margin-bottom:52px;}
+.bstep-head{display:flex;align-items:center;gap:16px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--sand);}
+.bstep-num{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--saffron-deep),var(--terracotta));color:#fff;font-family:'Josefin Sans',sans-serif;font-size:0.76rem;font-weight:600;display:flex;align-items:center;justify-content:center;}
+.bstep-title{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);}
+
+/* Part cards — fixed touch interaction */
+.part-card{
+  cursor:pointer;
+  border:1.5px solid var(--sand);
+  background:var(--white);
+  overflow:hidden;
+  transition:border-color 0.26s, box-shadow 0.26s;
+  position:relative;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:manipulation; /* KEY FIX: prevents scroll hijack on touch */
+}
+.part-card:hover{border-color:var(--saffron);box-shadow:0 8px 26px rgba(224,123,32,0.12);}
+.part-card.selected{border-color:var(--saffron-deep);}
+.part-card.selected::after{
+  content:'✓ Selected';
+  position:absolute;top:9px;right:9px;
+  background:var(--saffron-deep);color:#fff;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:4px 8px;
+  pointer-events:none; /* FIX: badge doesn't block clicks */
+}
+.part-img-wrap{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--cream-dark);}
+.part-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.38s;pointer-events:none;}
+.part-card:hover .part-img-wrap img{transform:scale(1.05);}
+.part-body{padding:13px 14px;pointer-events:none;}
+.part-name{font-family:'Playfair Display',serif;font-size:0.98rem;color:var(--brown);margin-bottom:2px;}
+.part-style{font-size:0.78rem;color:var(--muted);margin-bottom:7px;}
+.part-price{font-family:'Josefin Sans',sans-serif;font-size:0.85rem;font-weight:600;color:var(--saffron-deep);}
+
+/* Price bar */
+.price-bar{background:linear-gradient(135deg,var(--brown),var(--stone));color:var(--white);padding:26px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:6px;}
+.pb-lbl{font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--sand);margin-bottom:4px;}
+.pb-bd{font-size:0.87rem;color:rgba(255,255,255,0.5);font-style:italic;}
+.pb-total{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--saffron-light);line-height:1;}
+
+/* READYMADE BANNER — replaces the old readymade section */
+#readymade-banner{
+  background:linear-gradient(135deg,var(--brown) 0%,var(--stone) 100%);
+  padding:72px 6%;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:40px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+#readymade-banner::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(224,123,32,0.07) 1.5px,transparent 1.5px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+.rm-banner-left{position:relative;z-index:1;}
+.rm-banner-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:0.6rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--saffron-light);margin-bottom:12px;}
+.rm-banner-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);margin-bottom:12px;line-height:1.15;}
+.rm-banner-sub{font-size:0.95rem;color:var(--sand-dark);font-weight:300;max-width:460px;line-height:1.75;}
+.rm-banner-right{position:relative;z-index:1;flex-shrink:0;}
+.rm-banner-count{text-align:center;margin-bottom:18px;}
+.rm-banner-num{font-family:'Playfair Display',serif;font-size:3.5rem;color:var(--saffron-light);line-height:1;}
+.rm-banner-num-lbl{font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--sand-dark);}
+.btn-rm{
+  display:inline-block;
+  font-family:'Josefin Sans',sans-serif;font-size:0.72rem;letter-spacing:0.28em;
+  text-transform:uppercase;text-decoration:none;
+  background:var(--saffron-deep);color:var(--white);
+  padding:16px 40px;border:none;cursor:pointer;
+  transition:all 0.28s;
+  box-shadow:0 6px 24px rgba(192,94,10,0.35);
+}
+.btn-rm:hover{background:var(--terracotta);transform:translateY(-2px);box-shadow:0 10px 32px rgba(184,78,50,0.4);}
+@media(max-width:640px){#readymade-banner{flex-direction:column;}.rm-banner-right{width:100%;display:flex;flex-direction:column;align-items:flex-start;}.rm-banner-count{text-align:left;}}
+
+/* PREVIEW */
+#preview{background:var(--brown);color:var(--cream);}
+#preview .lbl{color:var(--saffron-light);}
+.pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+@media(max-width:860px){.pv-grid{grid-template-columns:1fr;}}
+.pv-mockup{position:relative;aspect-ratio:3/4;overflow:hidden;background:#241809;border:1px solid rgba(224,123,32,0.18);}
+.pv-mockup img{width:100%;height:100%;object-fit:cover;opacity:0.42;filter:sepia(18%);}
+.pv-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(20,10,5,0.78) 100%);}
+.pv-badge{position:absolute;bottom:22px;left:22px;right:22px;background:rgba(251,245,234,0.09);border:1px solid rgba(224,123,32,0.28);backdrop-filter:blur(6px);padding:15px 18px;}
+.pv-badge-t{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--cream);margin-bottom:3px;}
+.pv-badge-s{font-size:0.78rem;color:var(--sand);font-style:italic;}
+.pv-specs{margin:24px 0;}
+.spec-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.07);}
+.spec-k{font-family:'Josefin Sans',sans-serif;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);min-width:68px;flex-shrink:0;padding-top:2px;}
+.spec-v{font-size:0.93rem;color:var(--cream);}
+.price-bx{background:linear-gradient(135deg,rgba(224,123,32,0.11),rgba(184,78,50,0.07));border:1px solid rgba(224,123,32,0.26);padding:22px 26px;}
+.price-bx-lbl{font-family:'Josefin Sans',sans-serif;font-size:0.57rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--sand);margin-bottom:7px;}
+.price-bx-amt{font-family:'Playfair Display',serif;font-size:2.9rem;color:var(--saffron-light);line-height:1;}
+.price-bx-note{font-size:0.8rem;color:rgba(255,255,255,0.36);margin-top:6px;font-style:italic;}
+
+/* ORDER FORM */
+#order{background:var(--cream-dark);}
+.form-wrap{max-width:580px;}
+.form-row{margin-bottom:18px;}
+.form-lbl{display:block;font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--stone);margin-bottom:7px;}
+.form-inp,.form-ta{width:100%;background:var(--white);border:1px solid var(--sand-dark);color:var(--brown);font-family:'Lato',sans-serif;font-size:0.96rem;padding:12px 15px;outline:none;transition:border-color 0.24s;border-radius:0;}
+.form-inp:focus,.form-ta:focus{border-color:var(--saffron-deep);}
+.form-ta{min-height:92px;resize:vertical;}
+.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:500px){.form-2col{grid-template-columns:1fr;}}
+.form-note{margin-top:18px;padding-top:16px;border-top:1px solid var(--sand);text-align:center;font-size:0.86rem;color:var(--muted);font-style:italic;line-height:1.7;}
+
+/* TRUST */
+#trust{background:var(--ivory);}
+.trust-layout{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+@media(max-width:860px){.trust-layout{grid-template-columns:1fr;}}
+.tpt{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--sand);}
+.tpt-icon{width:30px;height:30px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--saffron-deep),var(--terracotta));color:#fff;font-size:0.72rem;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.tpt-title{font-family:'Playfair Display',serif;font-size:1.02rem;color:var(--brown);margin-bottom:3px;}
+.tpt-desc{font-size:0.82rem;color:var(--muted);font-weight:300;}
+
+/* CAROUSEL */
+.carousel-wrap{position:relative;}
+.carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding-bottom:12px;scrollbar-width:none;}
+.carousel-track::-webkit-scrollbar{display:none;}
+.c-arrows{display:flex;gap:8px;margin-bottom:14px;justify-content:flex-end;}
+.c-arr{width:36px;height:36px;border-radius:50%;background:var(--white);border:1.5px solid var(--sand);cursor:pointer;font-size:1rem;color:var(--brown);display:flex;align-items:center;justify-content:center;transition:all 0.22s;flex-shrink:0;}
+.c-arr:hover{background:var(--saffron-deep);color:#fff;border-color:var(--saffron-deep);}
+.carousel-track .part-card{flex:0 0 calc(33.33% - 10px);scroll-snap-align:start;}
+@media(max-width:860px){.carousel-track .part-card{flex:0 0 calc(50% - 8px);}}
+@media(max-width:520px){.carousel-track .part-card{flex:0 0 82vw;}}
+
+/* Trust photo slides */
+.tc-slide{flex:0 0 calc(33.33% - 10px);scroll-snap-align:start;position:relative;overflow:hidden;background:var(--cream-dark);aspect-ratio:3/4;}
+@media(max-width:860px){.tc-slide{flex:0 0 calc(50% - 8px);}}
+@media(max-width:520px){.tc-slide{flex:0 0 75vw;}}
+.tc-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.38s;}
+.tc-slide:hover img{transform:scale(1.04);}
+.tc-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(61,43,26,0.72));padding:28px 12px 10px;font-family:'Josefin Sans',sans-serif;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(251,245,234,0.85);}
+
+/* FOOTER */
+footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;border-top:3px solid var(--saffron-deep);}
+.f-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--cream);}
+.f-logo span{color:var(--saffron-light);}
+.f-sub{font-size:0.78rem;color:var(--muted);margin-top:3px;}
+.f-note{font-size:0.78rem;color:var(--muted);text-align:right;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Divya<span>Shilla</span></div>
+  <div class="nav-links">
+    <a href="#size">Sizes</a>
+    <a href="#builder">Customize</a>
+    <a href="readymade.html" class="nav-special">Readymade</a>
+    <a href="#order">Order</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-body">
+    <div class="hero-orn">❈ ❈ ❈</div>
+    <span class="lbl">Premium Black Stone Craftsmanship</span>
+    <h1 class="hero-h1">Design Your Own<br><em>Tulsi Vrindavan</em></h1>
+    <p class="hero-sub">Handcrafted from solid black stone by master artisans. Every Tulsi Katta is built to honour your home's sacred corner — and to last generations.</p>
+    <div class="hero-btns">
+      <a href="#size" class="btn btn-fill">Start Designing</a>
+      <a href="readymade.html" class="btn btn-outline">View Readymade</a>
+    </div>
+  </div>
+  <div class="hero-img-side">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80" alt="Stone background">
+  </div>
+  <div class="hero-badge">
+    <div class="badge-n">500+</div>
+    <div class="badge-t">Homes Delivered</div>
+  </div>
+</section>
+
+<!-- SIZE SELECTION -->
+<section id="size">
+  <span class="lbl">Step One</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);margin-bottom:9px;">Choose Your Size</h2>
+  <p style="color:var(--muted);font-weight:300;margin-bottom:0;max-width:500px;">Select the height that fits your sacred space.</p>
+  <span class="rule"></span>
+  <div class="size-layout">
+    <div class="size-img-box">
+      <!-- Replace src with your size comparison chart image -->
+      <img src="body_measure.png" alt="Size comparison chart">
+      <p class="size-img-note">Human height reference for scale comparison</p>
+    </div>
+    <div class="size-cards">
+      <div class="size-card" onclick="selectSize(this,'2.5 ft')">
+        <div class="sc-thumb"><img src="mid_thigh.png" alt="2.5 ft"></div>
+        <div class="sc-info">
+          <div class="sc-ft">2.5 ft</div>
+          <div class="sc-desc">Compact &amp; elegant · Ideal for balcony or small courtyard</div>
+        </div>
+        <div class="sc-tick">✓</div>
+      </div>
+      <div class="size-card active" onclick="selectSize(this,'3.15 ft')">
+        <div class="sc-thumb"><img src="waist.png" alt="3.15 ft"></div>
+        <div class="sc-info">
+          <div class="sc-ft">3.15 ft</div>
+          <div class="sc-desc">Most popular · Perfect for an open courtyard</div>
+        </div>
+        <div class="sc-tick">✓</div>
+      </div>
+      <div class="size-card" onclick="selectSize(this,'3.5 ft')">
+        <div class="sc-thumb"><img src="stomach.png" alt="3.5 ft"></div>
+        <div class="sc-info">
+          <div class="sc-ft">3.5 ft</div>
+          <div class="sc-desc">Grand &amp; majestic · Large courtyards &amp; temples</div>
+        </div>
+        <div class="sc-tick">✓</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDER -->
+<section id="builder">
+  <span class="lbl">Step Two</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);margin-bottom:9px;">Craft Your Design</h2>
+  <p style="color:var(--muted);font-weight:300;max-width:500px;">Choose every part. Carved from solid black stone by master craftsmen.</p>
+  <span class="rule"></span>
+
+  <!-- STEP 1: LOWER BASE -->
+  <div class="bstep">
+    <div class="bstep-head">
+      <div class="bstep-num">01</div>
+      <div class="bstep-title">Select Lower Base</div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="c-arrows">
+        <button class="c-arr" onclick="scrollC('lower-track',-1)">&#8592;</button>
+        <button class="c-arr" onclick="scrollC('lower-track',1)">&#8594;</button>
+      </div>
+      <!-- ✏️ To add a new option: copy one part-card div and paste it here -->
+      <div class="carousel-track" id="lower-track">
+        <div class="part-card selected" data-type="lower" data-name="Classic Step Base" data-price="4500">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=75" alt="Classic Step Base"></div>
+          <div class="part-body">
+            <div class="part-name">Classic Step Base</div>
+            <div class="part-style">Traditional stepped platform</div>
+            <div class="part-price">₹ 4,500</div>
+          </div>
+        </div>
+        <div class="part-card" data-type="lower" data-name="Arch Base" data-price="5800">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=75" alt="Arch Base"></div>
+          <div class="part-body">
+            <div class="part-name">Arch Base</div>
+            <div class="part-style">Curved arch relief carving</div>
+            <div class="part-price">₹ 5,800</div>
+          </div>
+        </div>
+        <div class="part-card" data-type="lower" data-name="Temple Base" data-price="7200">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=75" alt="Temple Base"></div>
+          <div class="part-body">
+            <div class="part-name">Temple Base</div>
+            <div class="part-style">Shikhara-inspired stepped pyramid</div>
+            <div class="part-price">₹ 7,200</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: MIDDLE COLUMN -->
+  <div class="bstep">
+    <div class="bstep-head">
+      <div class="bstep-num">02</div>
+      <div class="bstep-title">Select Middle Column</div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="c-arrows">
+        <button class="c-arr" onclick="scrollC('middle-track',-1)">&#8592;</button>
+        <button class="c-arr" onclick="scrollC('middle-track',1)">&#8594;</button>
+      </div>
+      <!-- ✏️ To add a new option: copy one part-card div and paste it here -->
+      <div class="carousel-track" id="middle-track">
+        <div class="part-card selected" data-type="middle" data-name="Plain Column" data-price="3200">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=75" alt="Plain Column"></div>
+          <div class="part-body">
+            <div class="part-name">Plain Column</div>
+            <div class="part-style">Smooth polished finish</div>
+            <div class="part-price">₹ 3,200</div>
+          </div>
+        </div>
+        <div class="part-card" data-type="middle" data-name="Floral Column" data-price="4800">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=75" alt="Floral Column"></div>
+          <div class="part-body">
+            <div class="part-name">Floral Column</div>
+            <div class="part-style">Hand-carved lotus motifs</div>
+            <div class="part-price">₹ 4,800</div>
+          </div>
+        </div>
+        <div class="part-card" data-type="middle" data-name="Sculpted Column" data-price="6500">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=75" alt="Sculpted Column"></div>
+          <div class="part-body">
+            <div class="part-name">Sculpted Column</div>
+            <div class="part-style">Kalash &amp; vine relief</div>
+            <div class="part-price">₹ 6,500</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: UPPER CROWN -->
+  <div class="bstep">
+    <div class="bstep-head">
+      <div class="bstep-num">03</div>
+      <div class="bstep-title">Select Upper Crown</div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="c-arrows">
+        <button class="c-arr" onclick="scrollC('upper-track',-1)">&#8592;</button>
+        <button class="c-arr" onclick="scrollC('upper-track',1)">&#8594;</button>
+      </div>
+      <!-- ✏️ To add a new option: copy one part-card div and paste it here -->
+      <div class="carousel-track" id="upper-track">
+        <div class="part-card selected" data-type="upper" data-name="Simple Pinnacle" data-price="2800">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=400&q=75" alt="Simple Pinnacle"></div>
+          <div class="part-body">
+            <div class="part-name">Simple Pinnacle</div>
+            <div class="part-style">Classic triangular crown</div>
+            <div class="part-price">₹ 2,800</div>
+          </div>
+        </div>
+        <div class="part-card" data-type="upper" data-name="Stepped Shikhara" data-price="4200">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=400&q=75" alt="Stepped Shikhara"></div>
+          <div class="part-body">
+            <div class="part-name">Stepped Shikhara</div>
+            <div class="part-style">Multi-tier temple crown</div>
+            <div class="part-price">₹ 4,200</div>
+          </div>
+        </div>
+        <div class="part-card" data-type="upper" data-name="Kalash Crown" data-price="5600">
+          <div class="part-img-wrap"><img src="https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=400&q=75" alt="Kalash Crown"></div>
+          <div class="part-body">
+            <div class="part-name">Kalash Crown</div>
+            <div class="part-style">Dome with sacred Kalash</div>
+            <div class="part-price">₹ 5,600</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICE BAR -->
+  <div class="price-bar">
+    <div>
+      <div class="pb-lbl">Your Configuration</div>
+      <div class="pb-bd" id="breakdown">Classic Step Base · Plain Column · Simple Pinnacle</div>
+    </div>
+    <div style="text-align:right">
+      <div class="pb-lbl">Estimated Total</div>
+      <div class="pb-total" id="customTotal">₹ 10,500</div>
+    </div>
+  </div>
+</section>
+
+<!-- READYMADE BANNER — links to separate page -->
+<div id="readymade-banner">
+  <div class="rm-banner-left">
+    <div class="rm-banner-eyebrow">Ready to Ship</div>
+    <h2 class="rm-banner-title">Browse Our Readymade Collection</h2>
+    <p class="rm-banner-sub">Don't want to customize? Explore our full catalogue of curated Tulsi Katta designs — ready to order, ready to deliver.</p>
+  </div>
+  <div class="rm-banner-right">
+    <div class="rm-banner-count">
+      <div class="rm-banner-num">20+</div>
+      <div class="rm-banner-num-lbl">Designs Available</div>
+    </div>
+    <a href="readymade.html" class="btn-rm">View All Designs →</a>
+  </div>
+</div>
+
+<!-- FINAL PREVIEW -->
+<section id="preview">
+  <span class="lbl">Your Selection</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);color:var(--cream);margin-bottom:9px;">Final Preview</h2>
+  <p style="color:var(--sand);font-weight:300;max-width:500px;margin-bottom:0;">Review your complete design before placing your order.</p>
+  <span class="rule"></span>
+  <div class="pv-grid">
+    <div class="pv-mockup">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Home courtyard setting">
+      <div class="pv-overlay"></div>
+      <div class="pv-badge">
+        <div class="pv-badge-t">Your Tulsi Katta</div>
+        <div class="pv-badge-s">As it would appear in your courtyard</div>
+      </div>
+    </div>
+    <div>
+      <div class="pv-specs">
+        <div class="spec-row"><div class="spec-k">Size</div><div class="spec-v" id="previewSize">5 ft</div></div>
+        <div class="spec-row"><div class="spec-k">Base</div><div class="spec-v" id="previewLower">Classic Step Base</div></div>
+        <div class="spec-row"><div class="spec-k">Column</div><div class="spec-v" id="previewMiddle">Plain Column</div></div>
+        <div class="spec-row"><div class="spec-k">Crown</div><div class="spec-v" id="previewUpper">Simple Pinnacle</div></div>
+        <div class="spec-row"><div class="spec-k">Material</div><div class="spec-v">Solid Black Granite Stone</div></div>
+      </div>
+      <div class="price-bx">
+        <div class="price-bx-lbl">Total Estimated Price</div>
+        <div class="price-bx-amt" id="previewTotal">₹ 10,500</div>
+        <div class="price-bx-note">30% advance · Balance after dispatch</div>
+      </div>
+      <br>
+      <a href="#order" class="btn btn-fill" style="display:block;text-align:center;padding:15px;">Place This Order</a>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section id="order">
+  <span class="lbl">Place Your Order</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);margin-bottom:9px;">Request a Confirmation Call</h2>
+  <p style="color:var(--muted);font-weight:300;max-width:500px;margin-bottom:0;">Our team will call you within 15 minutes to confirm your design and delivery.</p>
+  <span class="rule"></span>
+  <div class="form-wrap">
+    <form id="orderForm" onsubmit="submitForm(event)">
+      <div class="form-2col">
+        <div class="form-row">
+          <label class="form-lbl" for="fname">Full Name</label>
+          <input class="form-inp" type="text" id="fname" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-row">
+          <label class="form-lbl" for="fphone">Phone Number</label>
+          <input class="form-inp" type="tel" id="fphone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-lbl" for="faddress">Delivery Address</label>
+        <textarea class="form-ta" id="faddress" name="address" placeholder="Full delivery address with PIN code" required></textarea>
+      </div>
+      <input type="hidden" id="hsize"   name="selected_size"   value="5 ft">
+      <input type="hidden" id="hlower"  name="selected_lower"  value="Classic Step Base">
+      <input type="hidden" id="hmiddle" name="selected_middle" value="Plain Column">
+      <input type="hidden" id="hupper"  name="selected_upper"  value="Simple Pinnacle">
+      <input type="hidden" id="htotal"  name="total_price"     value="10500">
+      <button type="submit" class="btn btn-cta">Request Confirmation Call</button>
+    </form>
+    <div class="form-note">
+      We will call you within 15 minutes to confirm your design and delivery details.<br>
+      No payment needed to confirm — 30% advance only after you approve.
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <span class="lbl">Why Choose Us</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);margin-bottom:0;">Trusted by 500+ Families</h2>
+  <span class="rule"></span>
+  <div class="trust-layout">
+    <div class="carousel-wrap">
+      <div class="c-arrows">
+        <button class="c-arr" onclick="scrollC('trust-track',-1)">&#8592;</button>
+        <button class="c-arr" onclick="scrollC('trust-track',1)">&#8594;</button>
+      </div>
+      <!-- ✏️ ADD INSTALLATION PHOTOS: copy a tc-slide block and paste here -->
+      <div class="carousel-track" id="trust-track">
+        <div class="tc-slide">
+          <img src="person_4.png" alt="Customer Home">
+          <div class="tc-cap">Customer Home, Pune</div>
+        </div>
+        <div class="tc-slide">
+          <img src="person_3.png" alt="Carving Detail">
+          <div class="tc-cap">Stone Carving Detail</div>
+        </div>
+        <div class="tc-slide">
+          <img src="person_2.png" alt="Craftsman">
+          <div class="tc-cap">Master Craftsman at Work</div>
+        </div>
+      </div>
+    </div>
+    <div class="trust-pts">
+      <div class="tpt"><div class="tpt-icon">✔</div><div><div class="tpt-title">Solid Black Stone</div><div class="tpt-desc">Every piece is carved from a single block of natural black granite — no composites, no shortcuts.</div></div></div>
+      <div class="tpt"><div class="tpt-icon">✔</div><div><div class="tpt-title">Traditional Finish</div><div class="tpt-desc">Hand-polished by artisans trained in classical stone carving passed down for generations.</div></div></div>
+      <div class="tpt"><div class="tpt-icon">✔</div><div><div class="tpt-title">Delivery in 7–12 Days</div><div class="tpt-desc">Custom pieces carved and dispatched within 7–12 working days from order confirmation.</div></div></div>
+      <div class="tpt"><div class="tpt-icon">✔</div><div><div class="tpt-title">30% Advance · Balance After Dispatch</div><div class="tpt-desc">Pay only 30% to confirm. Balance collected only after your piece is ready — zero risk.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-logo">Divya<span>Shilla</span></div>
+    <div class="f-sub">Sacred Black Stone Craftsmanship · Built for Generations</div>
+  </div>
+  <div class="f-note">
+    Call us: +91 86051 31717<br>
+    Pune, Maharashtra
+  </div>
+</footer>
+
+<script>
+/* ============ STATE ============ */
+const S = {
+  size:   '5 ft',
+  lower:  { name:'Classic Step Base', price:4500 },
+  middle: { name:'Plain Column',      price:3200 },
+  upper:  { name:'Simple Pinnacle',   price:2800 }
+};
+
+/* ============ SIZE SELECTION ============ */
+function selectSize(el, size) {
+  document.querySelectorAll('.size-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  S.size = size;
+  updateUI();
+}
+
+/* ============ PART SELECTION — FIXED ============
+   Uses data attributes instead of onclick parameters.
+   touch-action:manipulation on .part-card prevents scroll interference.
+   pointer-events:none on child elements ensures clicks always reach the card.
+*/
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.part-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      const type  = card.dataset.type;
+      const name  = card.dataset.name;
+      const price = parseInt(card.dataset.price);
+
+      // Remove selected from all cards of same type
+      document.querySelectorAll('.part-card[data-type="' + type + '"]')
+        .forEach(c => c.classList.remove('selected'));
+
+      card.classList.add('selected');
+      S[type] = { name: name, price: price };
+      updateUI();
+    });
+  });
+});
+
+/* ============ UPDATE PREVIEW & TOTALS ============ */
+function updateUI() {
+  const total = S.lower.price + S.middle.price + S.upper.price;
+  const fmt   = n => '₹ ' + n.toLocaleString('en-IN');
+
+  document.getElementById('breakdown').textContent   = S.lower.name + ' · ' + S.middle.name + ' · ' + S.upper.name;
+  document.getElementById('customTotal').textContent  = fmt(total);
+  document.getElementById('previewSize').textContent  = S.size;
+  document.getElementById('previewLower').textContent = S.lower.name;
+  document.getElementById('previewMiddle').textContent= S.middle.name;
+  document.getElementById('previewUpper').textContent = S.upper.name;
+  document.getElementById('previewTotal').textContent = fmt(total);
+  document.getElementById('hsize').value   = S.size;
+  document.getElementById('hlower').value  = S.lower.name;
+  document.getElementById('hmiddle').value = S.middle.name;
+  document.getElementById('hupper').value  = S.upper.name;
+  document.getElementById('htotal').value  = total;
+}
+
+/* ============ CAROUSEL SCROLL ============ */
+function scrollC(id, dir) {
+  const track = document.getElementById(id);
+  const card  = track.querySelector('.part-card, .tc-slide');
+  if (!card) return;
+  track.scrollBy({ left: dir * (card.offsetWidth + 14), behavior: 'smooth' });
+}
+
+/* ============ FORM SUBMIT ============ */
+function submitForm(e) {
+  e.preventDefault();
+  const b = e.target.querySelector('.btn-cta');
+  b.textContent = '✓  Request Sent — We Will Call You Shortly';
+  b.style.background = 'linear-gradient(135deg,#3a7a50,#2d6040)';
+  b.style.boxShadow  = '0 6px 24px rgba(58,122,80,0.32)';
+  b.disabled = true;
+}
+</script>
+</body>
+</html>

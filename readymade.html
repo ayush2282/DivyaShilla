@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Readymade Designs – DivyaShilla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Josefin+Sans:wght@300;400;600&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron:       #E07B20;
+  --saffron-deep:  #C05E0A;
+  --saffron-light: #F0A855;
+  --terracotta:    #B84E32;
+  --stone:         #5C4A32;
+  --cream:         #FBF5EA;
+  --cream-dark:    #F2E8D5;
+  --ivory:         #FAF7F0;
+  --sand:          #E2CEAA;
+  --sand-dark:     #C8AF88;
+  --brown:         #3D2B1A;
+  --muted:         #7A6652;
+  --white:         #FFFDF8;
+  --green:         #3a7a50;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ivory);color:var(--brown);font-family:'Lato',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:14px 6%;background:rgba(251,245,234,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--sand);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown);letter-spacing:0.03em;text-decoration:none;}
+.nav-logo span{color:var(--saffron-deep);}
+.nav-links a{font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-left:24px;transition:color 0.22s;}
+.nav-links a:hover{color:var(--saffron-deep);}
+.nav-links a.active-page{color:var(--saffron-deep);border-bottom:2px solid var(--saffron-deep);padding-bottom:2px;}
+@media(max-width:640px){.nav-links{display:none;}}
+
+/* PAGE HEADER */
+.page-header{
+  background:linear-gradient(135deg,var(--brown) 0%,var(--stone) 100%);
+  padding:64px 6% 52px;
+  position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(224,123,32,0.07) 1.5px,transparent 1.5px);
+  background-size:28px 28px;pointer-events:none;
+}
+.ph-inner{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+.ph-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:0.6rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--saffron-light);margin-bottom:10px;}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);color:var(--cream);line-height:1.1;margin-bottom:10px;}
+.ph-sub{font-size:0.95rem;color:var(--sand-dark);font-weight:300;max-width:480px;}
+.ph-stats{display:flex;gap:32px;flex-shrink:0;}
+.ph-stat{text-align:center;}
+.ph-stat-n{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--saffron-light);line-height:1;}
+.ph-stat-l{font-family:'Josefin Sans',sans-serif;font-size:0.55rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sand-dark);margin-top:3px;}
+@media(max-width:640px){.ph-stats{display:none;}}
+
+/* FILTER + SORT BAR */
+.filter-bar{
+  background:var(--white);
+  border-bottom:1px solid var(--sand);
+  padding:16px 6%;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  position:sticky;top:57px;z-index:100;
+}
+.filter-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.filter-lbl{font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-right:4px;white-space:nowrap;}
+.filter-btn{
+  font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:7px 16px;background:transparent;border:1px solid var(--sand);color:var(--muted);
+  cursor:pointer;transition:all 0.22s;white-space:nowrap;
+}
+.filter-btn:hover{border-color:var(--saffron);color:var(--saffron-deep);}
+.filter-btn.active{background:var(--saffron-deep);border-color:var(--saffron-deep);color:var(--white);}
+.sort-select{
+  font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.1em;
+  padding:7px 14px;background:var(--white);border:1px solid var(--sand);
+  color:var(--brown);cursor:pointer;outline:none;
+}
+.results-count{font-family:'Josefin Sans',sans-serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+
+/* LAYOUT */
+.page-body{display:flex;gap:0;min-height:80vh;}
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;flex-shrink:0;
+  background:var(--white);
+  border-right:1px solid var(--sand);
+  padding:28px 20px;
+  position:sticky;top:110px;
+  height:fit-content;
+  max-height:calc(100vh - 120px);
+  overflow-y:auto;
+}
+@media(max-width:860px){.sidebar{display:none;}}
+.sb-section{margin-bottom:28px;}
+.sb-title{font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--stone);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--sand);}
+.sb-option{display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer;}
+.sb-option input{accent-color:var(--saffron-deep);width:14px;height:14px;cursor:pointer;}
+.sb-option label{font-size:0.88rem;color:var(--brown);cursor:pointer;}
+.sb-option label span{color:var(--muted);font-size:0.78rem;margin-left:4px;}
+.price-range{width:100%;}
+.price-range input[type=range]{width:100%;accent-color:var(--saffron-deep);}
+.price-range-vals{display:flex;justify-content:space-between;font-size:0.78rem;color:var(--muted);margin-top:4px;}
+
+/* PRODUCT GRID */
+.product-area{flex:1;padding:28px 6% 60px;}
+
+/* Grid view */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media(max-width:1100px){.product-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.product-grid{grid-template-columns:1fr 1fr;gap:12px;}}
+@media(max-width:420px){.product-grid{grid-template-columns:1fr;}}
+
+/* PRODUCT CARD */
+.product-card{
+  background:var(--white);
+  border:1px solid var(--sand);
+  overflow:hidden;
+  transition:all 0.28s;
+  position:relative;
+  cursor:pointer;
+}
+.product-card:hover{box-shadow:0 12px 40px rgba(61,43,26,0.12);transform:translateY(-3px);border-color:var(--sand-dark);}
+
+/* Image gallery — shows 2 images, hover swaps */
+.product-imgs{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream-dark);}
+.product-imgs img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:opacity 0.38s;
+}
+.product-imgs img.img-primary{opacity:1;z-index:1;}
+.product-imgs img.img-secondary{opacity:0;z-index:2;}
+.product-card:hover .img-secondary{opacity:1;}
+.product-card:hover .img-primary{opacity:0;}
+
+/* Badges */
+.prod-badges{position:absolute;top:10px;left:10px;z-index:10;display:flex;flex-direction:column;gap:5px;}
+.prod-badge{
+  font-family:'Josefin Sans',sans-serif;font-size:0.5rem;letter-spacing:0.15em;
+  text-transform:uppercase;padding:4px 9px;
+}
+.badge-bestseller{background:var(--saffron-deep);color:#fff;}
+.badge-new{background:var(--green);color:#fff;}
+.badge-sale{background:var(--terracotta);color:#fff;}
+
+/* Wishlist btn */
+.prod-wish{
+  position:absolute;top:10px;right:10px;z-index:10;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(251,245,234,0.88);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.95rem;transition:all 0.22s;
+}
+.prod-wish:hover{background:var(--white);transform:scale(1.1);}
+.prod-wish.wished{color:var(--terracotta);}
+
+/* Card body */
+.product-body{padding:14px 16px 18px;}
+.prod-series{font-family:'Josefin Sans',sans-serif;font-size:0.54rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--saffron-deep);margin-bottom:4px;}
+.prod-name{font-family:'Playfair Display',serif;font-size:1.08rem;color:var(--brown);margin-bottom:4px;line-height:1.25;}
+.prod-desc{font-size:0.8rem;color:var(--muted);font-weight:300;margin-bottom:10px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.prod-specs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.prod-spec-tag{font-family:'Josefin Sans',sans-serif;font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;padding:3px 8px;background:var(--cream-dark);color:var(--stone);border:1px solid var(--sand);}
+.prod-pricing{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
+.prod-price{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--saffron-deep);line-height:1;}
+.prod-price-orig{font-size:0.85rem;color:var(--muted);text-decoration:line-through;}
+.prod-price-off{font-family:'Josefin Sans',sans-serif;font-size:0.62rem;color:var(--green);letter-spacing:0.1em;}
+.prod-rating{display:flex;align-items:center;gap:6px;margin-bottom:14px;}
+.prod-stars{color:var(--saffron);font-size:0.85rem;letter-spacing:2px;}
+.prod-rating-count{font-size:0.78rem;color:var(--muted);}
+.prod-cta{
+  display:block;width:100%;
+  font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;
+  padding:11px;background:var(--saffron-deep);color:var(--white);border:none;cursor:pointer;
+  transition:all 0.26s;text-align:center;text-decoration:none;
+}
+.prod-cta:hover{background:var(--terracotta);}
+
+/* ORDER MODAL */
+.modal-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:500;
+  background:rgba(20,10,5,0.65);
+  backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--white);
+  max-width:520px;width:100%;
+  max-height:90vh;overflow-y:auto;
+  position:relative;
+}
+.modal-header{
+  background:linear-gradient(135deg,var(--brown),var(--stone));
+  padding:24px 28px;
+  display:flex;justify-content:space-between;align-items:flex-start;
+}
+.modal-close{background:none;border:none;color:var(--sand);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;}
+.modal-close:hover{color:var(--white);}
+.modal-product-name{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--cream);margin-bottom:4px;}
+.modal-product-price{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--saffron-light);}
+.modal-body{padding:28px;}
+.modal-product-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:20px;}
+.modal-desc{font-size:0.9rem;color:var(--muted);margin-bottom:20px;line-height:1.7;}
+.modal-specs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.m-spec{font-family:'Josefin Sans',sans-serif;font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;background:var(--cream-dark);color:var(--stone);border:1px solid var(--sand);}
+.modal-form-lbl{display:block;font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--stone);margin-bottom:7px;}
+.modal-inp,.modal-ta{width:100%;background:var(--ivory);border:1px solid var(--sand-dark);color:var(--brown);font-family:'Lato',sans-serif;font-size:0.96rem;padding:12px 15px;outline:none;transition:border-color 0.24s;border-radius:0;margin-bottom:14px;}
+.modal-inp:focus,.modal-ta:focus{border-color:var(--saffron-deep);}
+.modal-ta{min-height:80px;resize:vertical;}
+.modal-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:480px){.modal-2col{grid-template-columns:1fr;}}
+.modal-submit{
+  width:100%;padding:15px;
+  background:linear-gradient(135deg,var(--saffron-deep),var(--terracotta));
+  color:var(--white);border:none;cursor:pointer;
+  font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;
+  transition:all 0.26s;box-shadow:0 6px 20px rgba(200,94,16,0.28);
+}
+.modal-submit:hover{box-shadow:0 10px 28px rgba(200,94,16,0.4);}
+.modal-note{text-align:center;font-size:0.82rem;color:var(--muted);font-style:italic;margin-top:14px;line-height:1.6;}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:80px 20px;color:var(--muted);}
+.empty-state-icon{font-size:3rem;margin-bottom:16px;opacity:0.4;}
+.empty-state-text{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--brown);margin-bottom:8px;}
+
+/* FOOTER */
+footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;border-top:3px solid var(--saffron-deep);}
+.f-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--cream);}
+.f-logo span{color:var(--saffron-light);}
+.f-sub{font-size:0.78rem;color:var(--muted);margin-top:3px;}
+.f-note{font-size:0.78rem;color:var(--muted);text-align:right;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Divya<span>Shilla</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#builder">Customize</a>
+    <a href="readymade.html" class="active-page">Readymade</a>
+    <a href="index.html#order">Order</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="ph-inner">
+    <div>
+      <div class="ph-eyebrow">Curated Collection</div>
+      <h1 class="ph-title">Readymade Tulsi Katta</h1>
+      <p class="ph-sub">Complete designs crafted by master artisans — ready to order, ready to deliver in 7–12 days.</p>
+    </div>
+    <div class="ph-stats">
+      <div class="ph-stat">
+        <div class="ph-stat-n">20+</div>
+        <div class="ph-stat-l">Designs</div>
+      </div>
+      <div class="ph-stat">
+        <div class="ph-stat-n">500+</div>
+        <div class="ph-stat-l">Delivered</div>
+      </div>
+      <div class="ph-stat">
+        <div class="ph-stat-n">4.9★</div>
+        <div class="ph-stat-l">Avg Rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-group">
+    <span class="filter-lbl">Filter:</span>
+    <button class="filter-btn active" onclick="filterProducts('all',this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('small',this)">2.5 ft</button>
+    <button class="filter-btn" onclick="filterProducts('medium',this)">5 ft</button>
+    <button class="filter-btn" onclick="filterProducts('large',this)">8 ft</button>
+    <button class="filter-btn" onclick="filterProducts('bestseller',this)">Bestsellers</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+    <span class="results-count" id="resultCount">Showing 9 designs</span>
+    <select class="sort-select" onchange="sortProducts(this.value)">
+      <option value="default">Sort: Featured</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+      <option value="rating">Top Rated</option>
+    </select>
+  </div>
+</div>
+
+<!-- BODY: SIDEBAR + GRID -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-section">
+      <div class="sb-title">Size</div>
+      <div class="sb-option"><input type="checkbox" id="f-s1" checked onchange="applyFilters()"><label for="f-s1">2.5 ft <span>(3)</span></label></div>
+      <div class="sb-option"><input type="checkbox" id="f-s2" checked onchange="applyFilters()"><label for="f-s2">5 ft <span>(4)</span></label></div>
+      <div class="sb-option"><input type="checkbox" id="f-s3" checked onchange="applyFilters()"><label for="f-s3">8 ft <span>(2)</span></label></div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Style</div>
+      <div class="sb-option"><input type="checkbox" id="f-t1" checked onchange="applyFilters()"><label for="f-t1">Traditional</label></div>
+      <div class="sb-option"><input type="checkbox" id="f-t2" checked onchange="applyFilters()"><label for="f-t2">Temple</label></div>
+      <div class="sb-option"><input type="checkbox" id="f-t3" checked onchange="applyFilters()"><label for="f-t3">Floral</label></div>
+      <div class="sb-option"><input type="checkbox" id="f-t4" checked onchange="applyFilters()"><label for="f-t4">Majestic</label></div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Price Range</div>
+      <div class="price-range">
+        <input type="range" min="8000" max="35000" value="35000" step="500" oninput="updatePriceRange(this.value)" id="priceRange">
+        <div class="price-range-vals">
+          <span>₹ 8,000</span>
+          <span id="priceMax">₹ 35,000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="product-area">
+    <div class="product-grid" id="productGrid">
+
+      <!--
+      ============================================================
+      HOW TO ADD A NEW PRODUCT:
+      Copy one product-card div below, paste it here, then change:
+        data-size   = "small" | "medium" | "large"
+        data-price  = number (no commas)
+        data-badge  = "bestseller" | "new" | "sale" | ""
+        data-style  = "traditional" | "temple" | "floral" | "majestic"
+        data-rating = number e.g. "4.8"
+        data-reviews= number e.g. "24"
+        img src     = your product image paths (primary + secondary)
+        All text fields = your product details
+      ============================================================
+      -->
+
+      <!-- PRODUCT 1 -->
+      <div class="product-card" data-size="medium" data-price="10500" data-badge="bestseller" data-style="traditional" data-rating="4.9" data-reviews="38">
+        <div class="product-imgs">
+          <img class="img-primary" src="imge_1.png" alt="Shanthi Classic">
+          <img class="img-secondary" src="image_2.png" alt="Shanthi Classic detail">
+        </div>
+        <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Shanthi Series</div>
+          <div class="prod-name">Shanthi Classic</div>
+          <div class="prod-desc">Timeless stepped base with smooth polished column and simple crown. The perfect traditional Tulsi Katta for any courtyard.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">5 ft</span>
+            <span class="prod-spec-tag">Classic Base</span>
+            <span class="prod-spec-tag">Plain Column</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.9 (38 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 10,500</span></div>
+          <button class="prod-cta" onclick="openOrder('Shanthi Classic','10500','5 ft · Classic Base · Plain Column · Simple Crown')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 2 -->
+      <div class="product-card" data-size="medium" data-price="15800" data-badge="new" data-style="floral" data-rating="4.8" data-reviews="14">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_4.jpeg" alt="Divya Floral">
+          <img class="img-secondary" src="image_4.jpeg" alt="Divya Floral detail">
+        </div>
+        <div class="prod-badges"><span class="prod-badge badge-new">New</span></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Divya Series</div>
+          <div class="prod-name">Divya Floral</div>
+          <div class="prod-desc">Elegant arch base with hand-carved lotus motifs on the column, crowned with a sacred Kalash. A statement piece.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">5 ft</span>
+            <span class="prod-spec-tag">Arch Base</span>
+            <span class="prod-spec-tag">Floral Column</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.8 (14 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 15,800</span></div>
+          <button class="prod-cta" onclick="openOrder('Divya Floral','15800','5 ft · Arch Base · Floral Column · Kalash Crown')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 3 -->
+      <div class="product-card" data-size="large" data-price="24500" data-badge="" data-style="majestic" data-rating="5.0" data-reviews="9">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_3.jpeg" alt="Majestic Grand">
+          <img class="img-secondary" src="image_3.jpeg" alt="Majestic Grand detail">
+        </div>
+        <div class="prod-badges"></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Majestic Series</div>
+          <div class="prod-name">Majestic Grand</div>
+          <div class="prod-desc">Temple-grade Shikhara base with full vine &amp; Kalash relief sculpture. Designed for large courtyards and temples.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">8 ft</span>
+            <span class="prod-spec-tag">Temple Base</span>
+            <span class="prod-spec-tag">Sculpted Column</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">5.0 (9 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 24,500</span></div>
+          <button class="prod-cta" onclick="openOrder('Majestic Grand','24500','8 ft · Temple Base · Sculpted Column · Stepped Shikhara')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 4 -->
+      <div class="product-card" data-size="small" data-price="8200" data-badge="bestseller" data-style="traditional" data-rating="4.7" data-reviews="52">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_5.jpeg" alt="Ghar Tulsi">
+          <img class="img-secondary" src="image_5.jpeg" alt="Ghar Tulsi detail">
+        </div>
+        <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Ghar Series</div>
+          <div class="prod-name">Ghar Tulsi</div>
+          <div class="prod-desc">Compact and beautiful. Perfect for balconies, flats, and small home courtyards. Our most popular compact design.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">2.5 ft</span>
+            <span class="prod-spec-tag">Classic Base</span>
+            <span class="prod-spec-tag">Simple Crown</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.7 (52 reviews)</span></div>
+          <div class="prod-pricing">
+            <span class="prod-price">₹ 8,200</span>
+            <span class="prod-price-orig">₹ 9,500</span>
+            <span class="prod-price-off">14% off</span>
+          </div>
+          <button class="prod-cta" onclick="openOrder('Ghar Tulsi','8200','2.5 ft · Classic Base · Plain Column · Simple Crown')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 5 -->
+      <div class="product-card" data-size="small" data-price="9800" data-badge="" data-style="floral" data-rating="4.6" data-reviews="21">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_3.jpeg" alt="Ghar Lotus">
+          <img class="img-secondary" src="image_3.jpeg" alt="Ghar Lotus detail">
+        </div>
+        <div class="prod-badges"></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Ghar Series</div>
+          <div class="prod-name">Ghar Lotus</div>
+          <div class="prod-desc">Small but detailed. Features hand-carved lotus motifs on the column — a premium compact choice.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">2.5 ft</span>
+            <span class="prod-spec-tag">Arch Base</span>
+            <span class="prod-spec-tag">Floral Column</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★☆</span><span class="prod-rating-count">4.6 (21 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 9,800</span></div>
+          <button class="prod-cta" onclick="openOrder('Ghar Lotus','9800','2.5 ft · Arch Base · Floral Column · Simple Pinnacle')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 6 -->
+      <div class="product-card" data-size="medium" data-price="18500" data-badge="sale" data-style="temple" data-rating="4.9" data-reviews="17">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_4.jpeg" alt="Mandir Classic">
+          <img class="img-secondary" src="image_4.jpeg" alt="Mandir Classic detail">
+        </div>
+        <div class="prod-badges"><span class="prod-badge badge-sale">Sale</span></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Mandir Series</div>
+          <div class="prod-name">Mandir Classic</div>
+          <div class="prod-desc">Temple arch base with Shikhara crown. Inspired by classical South Indian temple architecture — deeply sacred.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">5 ft</span>
+            <span class="prod-spec-tag">Arch Base</span>
+            <span class="prod-spec-tag">Stepped Shikhara</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.9 (17 reviews)</span></div>
+          <div class="prod-pricing">
+            <span class="prod-price">₹ 18,500</span>
+            <span class="prod-price-orig">₹ 21,000</span>
+            <span class="prod-price-off">12% off</span>
+          </div>
+          <button class="prod-cta" onclick="openOrder('Mandir Classic','18500','5 ft · Arch Base · Plain Column · Stepped Shikhara')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 7 -->
+      <div class="product-card" data-size="large" data-price="31000" data-badge="new" data-style="majestic" data-rating="5.0" data-reviews="4">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_6.jpeg" alt="Rajguru Grand">
+          <img class="img-secondary" src="image_6.jpeg" alt="Rajguru Grand detail">
+        </div>
+        <div class="prod-badges"><span class="prod-badge badge-new">New</span></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Rajguru Series</div>
+          <div class="prod-name">Rajguru Grand</div>
+          <div class="prod-desc">The most premium design in our collection. Full sculpted column, Kalash dome crown, and decorative arch base — for those who want the best.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">8 ft</span>
+            <span class="prod-spec-tag">Arch Base</span>
+            <span class="prod-spec-tag">Sculpted Column</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">5.0 (4 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 31,000</span></div>
+          <button class="prod-cta" onclick="openOrder('Rajguru Grand','31000','8 ft · Arch Base · Sculpted Column · Kalash Crown')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 8 -->
+      <div class="product-card" data-size="small" data-price="11200" data-badge="" data-style="temple" data-rating="4.8" data-reviews="11">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_2.png" alt="Ghar Mandir">
+          <img class="img-secondary" src="image_2.jpeg" alt="Ghar Mandir detail">
+        </div>
+        <div class="prod-badges"></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Ghar Series</div>
+          <div class="prod-name">Ghar Mandir</div>
+          <div class="prod-desc">Temple-style compact design with Shikhara crown. Big temple energy in a small footprint.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">2.5 ft</span>
+            <span class="prod-spec-tag">Temple Base</span>
+            <span class="prod-spec-tag">Stepped Shikhara</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.8 (11 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 11,200</span></div>
+          <button class="prod-cta" onclick="openOrder('Ghar Mandir','11200','2.5 ft · Temple Base · Plain Column · Stepped Shikhara')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 9 -->
+      <div class="product-card" data-size="medium" data-price="13400" data-badge="" data-style="traditional" data-rating="4.7" data-reviews="29">
+        <div class="product-imgs">
+          <img class="img-primary" src="image_6.jpeg" alt="Shanthi Deluxe">
+          <img class="img-secondary" src="image_6.jpeg" alt="Shanthi Deluxe detail">
+        </div>
+        <div class="prod-badges"></div>
+        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <div class="product-body">
+          <div class="prod-series">Shanthi Series</div>
+          <div class="prod-name">Shanthi Deluxe</div>
+          <div class="prod-desc">Upgraded classic with a decorative sculpted column and Kalash crown. Traditional feel with premium detailing.</div>
+          <div class="prod-specs">
+            <span class="prod-spec-tag">5 ft</span>
+            <span class="prod-spec-tag">Classic Base</span>
+            <span class="prod-spec-tag">Sculpted Column</span>
+          </div>
+          <div class="prod-rating"><span class="prod-stars">★★★★☆</span><span class="prod-rating-count">4.7 (29 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 13,400</span></div>
+          <button class="prod-cta" onclick="openOrder('Shanthi Deluxe','13400','5 ft · Classic Base · Sculpted Column · Kalash Crown')">Enquire &amp; Order</button>
+        </div>
+      </div>
+
+    </div><!-- end product-grid -->
+
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-state-icon">🪨</div>
+      <div class="empty-state-text">No designs match your filters</div>
+      <p style="font-size:0.9rem;color:var(--muted);">Try changing the size or style filter above.</p>
+    </div>
+
+  </div><!-- end product-area -->
+</div><!-- end page-body -->
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <div class="modal-product-name" id="modalName">Product Name</div>
+        <div class="modal-product-price" id="modalPrice">₹ 0</div>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body">
+      <img class="modal-product-img" id="modalImg" src="" alt="">
+      <div class="modal-desc" id="modalSpec">Specs here</div>
+      <div class="modal-specs" id="modalTags"></div>
+
+      <form onsubmit="submitModal(event)">
+        <div class="modal-2col">
+          <div>
+            <label class="modal-form-lbl">Full Name</label>
+            <input class="modal-inp" type="text" placeholder="Your name" required>
+          </div>
+          <div>
+            <label class="modal-form-lbl">Phone Number</label>
+            <input class="modal-inp" type="tel" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+        </div>
+        <label class="modal-form-lbl">Delivery Address</label>
+        <textarea class="modal-ta" placeholder="Full address with PIN code" required></textarea>
+        <input type="hidden" id="modalProductField" name="product" value="">
+        <button type="submit" class="modal-submit">Request Confirmation Call</button>
+      </form>
+      <div class="modal-note">
+        We call within 15 minutes to confirm · 30% advance only after approval
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-logo">Divya<span>Shilla</span></div>
+    <div class="f-sub">Sacred Black Stone Craftsmanship · Built for Generations</div>
+  </div>
+  <div class="f-note">
+    Call us: +91 83051 31717<br>
+    Pune, Maharashtra
+  </div>
+</footer>
+
+<script>
+/* ============ ALL PRODUCTS DATA (for filtering/sorting) ============ */
+let activeFilter = 'all';
+let maxPrice = 35000;
+
+/* ============ FILTER BY SIZE BUTTON ============ */
+function filterProducts(filter, btn) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+/* ============ APPLY ALL FILTERS ============ */
+function applyFilters() {
+  const cards = document.querySelectorAll('.product-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const size    = card.dataset.size;
+    const price   = parseInt(card.dataset.price);
+    const badge   = card.dataset.badge;
+    const style   = card.dataset.style;
+
+    let show = true;
+
+    // Filter bar
+    if (activeFilter === 'small'      && size !== 'small')      show = false;
+    if (activeFilter === 'medium'     && size !== 'medium')     show = false;
+    if (activeFilter === 'large'      && size !== 'large')      show = false;
+    if (activeFilter === 'bestseller' && badge !== 'bestseller') show = false;
+
+    // Price range
+    if (price > maxPrice) show = false;
+
+    if (show) {
+      card.style.display = '';
+      visible++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  document.getElementById('resultCount').textContent = 'Showing ' + visible + ' design' + (visible !== 1 ? 's' : '');
+  document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+}
+
+/* ============ SORT ============ */
+function sortProducts(val) {
+  const grid  = document.getElementById('productGrid');
+  const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+  cards.sort((a, b) => {
+    if (val === 'price-low')  return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+    if (val === 'price-high') return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+    if (val === 'rating')     return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+    return 0;
+  });
+
+  cards.forEach(c => grid.appendChild(c));
+}
+
+/* ============ PRICE RANGE ============ */
+function updatePriceRange(val) {
+  maxPrice = parseInt(val);
+  document.getElementById('priceMax').textContent = '₹ ' + parseInt(val).toLocaleString('en-IN');
+  applyFilters();
+}
+
+/* ============ WISHLIST ============ */
+function toggleWish(btn) {
+  btn.classList.toggle('wished');
+  btn.textContent = btn.classList.contains('wished') ? '♥' : '♡';
+}
+
+/* ============ ORDER MODAL ============ */
+function openOrder(name, price, spec) {
+  document.getElementById('modalName').textContent  = name;
+  document.getElementById('modalPrice').textContent = '₹ ' + parseInt(price).toLocaleString('en-IN');
+  document.getElementById('modalSpec').textContent  = spec;
+  document.getElementById('modalProductField').value = name;
+
+  // Build spec tags
+  const tags = spec.split('·');
+  document.getElementById('modalTags').innerHTML = tags.map(t =>
+    '<span class="m-spec">' + t.trim() + '</span>'
+  ).join('');
+
+  // Grab current card image
+  const card = event.target.closest('.product-card');
+  const img  = card ? card.querySelector('.img-primary') : null;
+  document.getElementById('modalImg').src = img ? img.src : '';
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ESC key closes modal */
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+/* ============ MODAL FORM SUBMIT ============ */
+function submitModal(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.modal-submit');
+  btn.textContent = '✓  Request Sent — We Will Call You Shortly';
+  btn.style.background = 'linear-gradient(135deg,#3a7a50,#2d6040)';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
