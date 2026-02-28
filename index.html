@@ -513,26 +513,26 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
   <p style="color:var(--muted);font-weight:300;max-width:500px;margin-bottom:0;">Our team will call you within 15 minutes to confirm your design and delivery.</p>
   <span class="rule"></span>
   <div class="form-wrap">
-    <form id="orderForm" onsubmit="submitForm(event)">
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSdiMdrY055do-BbjePa5OnnBjdISO_edo96cY90H3OYwzoXBQ/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
       <div class="form-2col">
         <div class="form-row">
           <label class="form-lbl" for="fname">Full Name</label>
-          <input class="form-inp" type="text" id="fname" name="name" placeholder="Your full name" required>
+          <input class="form-inp" type="text" id="fname" name="entry.296350534" placeholder="Your full name" required>
         </div>
         <div class="form-row">
           <label class="form-lbl" for="fphone">Phone Number</label>
-          <input class="form-inp" type="tel" id="fphone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+          <input class="form-inp" type="tel" id="fphone" name="entry.1619490560" placeholder="+91 XXXXX XXXXX" required>
         </div>
       </div>
       <div class="form-row">
-        <label class="form-lbl" for="faddress">Delivery Address</label>
-        <textarea class="form-ta" id="faddress" name="address" placeholder="Full delivery address with PIN code" required></textarea>
+        <label class="form-lbl" for="faddress">City Name</label>
+        <textarea class="form-ta" id="faddress" name="entry.949151690" placeholder="Enter your city name" required></textarea>
       </div>
-      <input type="hidden" id="hsize"   name="selected_size"   value="5 ft">
-      <input type="hidden" id="hlower"  name="selected_lower"  value="Classic Step Base">
-      <input type="hidden" id="hmiddle" name="selected_middle" value="Plain Column">
-      <input type="hidden" id="hupper"  name="selected_upper"  value="Simple Pinnacle">
-      <input type="hidden" id="htotal"  name="total_price"     value="10500">
+      <input type="hidden" id="hsize"   name="entry.265454343"   value="5 ft">
+      <input type="hidden" id="hlower"  name="entry.170019609"  value="Classic Step Base">
+      <input type="hidden" id="hmiddle" name="entry.1270196947" value="Plain Column">
+      <input type="hidden" id="hupper"  name="entry.1867125562"  value="Simple Pinnacle">
+      <input type="hidden" id="htotal"  name="entry.204078193"     value="10500">
       <button type="submit" class="btn btn-cta">Request Confirmation Call</button>
     </form>
     <div class="form-note">
@@ -657,15 +657,8 @@ function scrollC(id, dir) {
   track.scrollBy({ left: dir * (card.offsetWidth + 14), behavior: 'smooth' });
 }
 
-/* ============ FORM SUBMIT ============ */
-function submitForm(e) {
-  e.preventDefault();
-  const b = e.target.querySelector('.btn-cta');
-  b.textContent = '✓  Request Sent — We Will Call You Shortly';
-  b.style.background = 'linear-gradient(135deg,#3a7a50,#2d6040)';
-  b.style.boxShadow  = '0 6px 24px rgba(58,122,80,0.32)';
-  b.disabled = true;
-}
+
 </script>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 </body>
 </html>
