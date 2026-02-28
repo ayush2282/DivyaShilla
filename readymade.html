@@ -594,20 +594,22 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
       <div class="modal-desc" id="modalSpec">Specs here</div>
       <div class="modal-specs" id="modalTags"></div>
 
-      <form onsubmit="submitModal(event)">
+      <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIi3OS6mnOyv9KM06NwHMRZCpr63C8DYcWtg4JJU5-Yah11Q/formResponse" method="POST" target="hidden_iframe">
         <div class="modal-2col">
           <div>
             <label class="modal-form-lbl">Full Name</label>
-            <input class="modal-inp" type="text" placeholder="Your name" required>
+            <input class="modal-inp" type="text" name="entry.448886202" placeholder="Your name" required>
           </div>
           <div>
             <label class="modal-form-lbl">Phone Number</label>
-            <input class="modal-inp" type="tel" placeholder="+91 XXXXX XXXXX" required>
+            <input class="modal-inp" type="tel" name="entry.960694153" placeholder="+91 XXXXX XXXXX" required>
           </div>
         </div>
-        <label class="modal-form-lbl">Delivery Address</label>
-        <textarea class="modal-ta" placeholder="Full address with PIN code" required></textarea>
-        <input type="hidden" id="modalProductField" name="product" value="">
+        <label class="modal-form-lbl">City Name</label>
+        <textarea class="modal-ta" name="entry.1984381595" placeholder="Enter your city name" required></textarea>
+        <input type="hidden" id="modalProductField" name="entry.1711063176" value="">
+        <input type="hidden" id="modalPriceField"   name="entry.811843989"  value="">
+        <input type="hidden" id="modalSpecsField"   name="entry.160852949"  value="">
         <button type="submit" class="modal-submit">Request Confirmation Call</button>
       </form>
       <div class="modal-note">
@@ -710,6 +712,8 @@ function openOrder(name, price, spec) {
   document.getElementById('modalPrice').textContent = '₹ ' + parseInt(price).toLocaleString('en-IN');
   document.getElementById('modalSpec').textContent  = spec;
   document.getElementById('modalProductField').value = name;
+  document.getElementById('modalPriceField').value = price;
+  document.getElementById('modalSpecsField').value = spec;
 
   // Build spec tags
   const tags = spec.split('·');
@@ -746,5 +750,6 @@ function submitModal(e) {
   btn.disabled = true;
 }
 </script>
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 </body>
 </html>
