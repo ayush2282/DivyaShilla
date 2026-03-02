@@ -117,8 +117,7 @@ nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-conten
   gap:20px;
 }
 @media(max-width:1100px){.product-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:600px){.product-grid{grid-template-columns:1fr 1fr;gap:12px;}}
-@media(max-width:420px){.product-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.product-grid{grid-template-columns:repeat(2,1fr);gap:10px;}}
 
 /* PRODUCT CARD */
 .product-card{
@@ -131,17 +130,52 @@ nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-conten
 }
 .product-card:hover{box-shadow:0 12px 40px rgba(61,43,26,0.12);transform:translateY(-3px);border-color:var(--sand-dark);}
 
-/* Image gallery — shows 2 images, hover swaps */
-.product-imgs{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--cream-dark);}
-.product-imgs img{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;display:block;
-  transition:opacity 0.38s;
+/* Multi-image swiper inside card */
+.product-imgs{
+  position:relative;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:var(--cream-dark);
 }
-.product-imgs img.img-primary{opacity:1;z-index:1;}
-.product-imgs img.img-secondary{opacity:0;z-index:2;}
-.product-card:hover .img-secondary{opacity:1;}
-.product-card:hover .img-primary{opacity:0;}
+.product-imgs .swiper-track{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform 0.36s ease;
+}
+.product-imgs .swiper-track img{
+  flex:0 0 100%;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  pointer-events:none;
+}
+/* Swiper arrows */
+.swiper-arr{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(251,245,234,0.82);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.8rem;color:var(--brown);
+  z-index:5;transition:all 0.2s;
+  opacity:0;
+}
+.product-card:hover .swiper-arr{opacity:1;}
+.swiper-arr.prev{left:7px;}
+.swiper-arr.next{right:7px;}
+.swiper-arr:hover{background:var(--white);}
+/* Dot indicators */
+.swiper-dots{
+  position:absolute;bottom:8px;left:0;right:0;
+  display:flex;justify-content:center;gap:5px;z-index:5;
+}
+.swiper-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(251,245,234,0.5);
+  transition:background 0.22s,transform 0.22s;
+}
+.swiper-dot.active{background:var(--white);transform:scale(1.3);}
 
 /* Badges */
 .prod-badges{position:absolute;top:10px;left:10px;z-index:10;display:flex;flex-direction:column;gap:5px;}
@@ -186,51 +220,111 @@ nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-conten
 }
 .prod-cta:hover{background:var(--terracotta);}
 
-/* ORDER MODAL */
+/* ORDER MODAL — Instagram-style split layout */
 .modal-overlay{
   display:none;
   position:fixed;inset:0;z-index:500;
-  background:rgba(20,10,5,0.65);
-  backdrop-filter:blur(4px);
+  background:rgba(10,5,2,0.78);
+  backdrop-filter:blur(6px);
   align-items:center;justify-content:center;
-  padding:20px;
+  padding:16px;
 }
 .modal-overlay.open{display:flex;}
 .modal{
   background:var(--white);
-  max-width:520px;width:100%;
-  max-height:90vh;overflow-y:auto;
+  max-width:900px;width:100%;
+  max-height:92vh;
+  display:flex;
   position:relative;
+  overflow:hidden;
+  border-radius:2px;
+}
+/* Left — image gallery */
+.modal-gallery{
+  flex:0 0 50%;
+  background:var(--brown);
+  position:relative;
+  overflow:hidden;
+  min-height:420px;
+}
+.modal-gallery .mg-track{
+  display:flex;
+  height:100%;
+  transition:transform 0.38s ease;
+}
+.modal-gallery .mg-track img{
+  flex:0 0 100%;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.mg-arr{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(251,245,234,0.82);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;color:var(--brown);z-index:5;transition:all 0.22s;
+}
+.mg-arr.prev{left:10px;}
+.mg-arr.next{right:10px;}
+.mg-arr:hover{background:var(--white);}
+.mg-dots{
+  position:absolute;bottom:12px;left:0;right:0;
+  display:flex;justify-content:center;gap:6px;z-index:5;
+}
+.mg-dot{width:6px;height:6px;border-radius:50%;background:rgba(251,245,234,0.45);transition:background 0.22s,transform 0.22s;}
+.mg-dot.active{background:var(--white);transform:scale(1.3);}
+/* Right — details */
+.modal-detail{
+  flex:1;
+  display:flex;flex-direction:column;
+  overflow-y:auto;
 }
 .modal-header{
   background:linear-gradient(135deg,var(--brown),var(--stone));
-  padding:24px 28px;
+  padding:22px 26px;
   display:flex;justify-content:space-between;align-items:flex-start;
+  flex-shrink:0;
 }
-.modal-close{background:none;border:none;color:var(--sand);font-size:1.4rem;cursor:pointer;line-height:1;padding:0;}
+.modal-close{background:none;border:none;color:var(--sand);font-size:1.5rem;cursor:pointer;line-height:1;padding:0;margin-top:2px;}
 .modal-close:hover{color:var(--white);}
-.modal-product-name{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--cream);margin-bottom:4px;}
-.modal-product-price{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--saffron-light);}
-.modal-body{padding:28px;}
-.modal-product-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:20px;}
-.modal-desc{font-size:0.9rem;color:var(--muted);margin-bottom:20px;line-height:1.7;}
-.modal-specs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.modal-product-name{font-family:'Playfair Display',serif;font-size:1.28rem;color:var(--cream);margin-bottom:4px;}
+.modal-product-price{font-family:'Playfair Display',serif;font-size:1.65rem;color:var(--saffron-light);}
+.modal-body{padding:24px 26px;flex:1;}
+.modal-desc{font-size:0.91rem;color:var(--muted);margin-bottom:18px;line-height:1.75;}
+.modal-specs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px;}
 .m-spec{font-family:'Josefin Sans',sans-serif;font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;background:var(--cream-dark);color:var(--stone);border:1px solid var(--sand);}
-.modal-form-lbl{display:block;font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--stone);margin-bottom:7px;}
-.modal-inp,.modal-ta{width:100%;background:var(--ivory);border:1px solid var(--sand-dark);color:var(--brown);font-family:'Lato',sans-serif;font-size:0.96rem;padding:12px 15px;outline:none;transition:border-color 0.24s;border-radius:0;margin-bottom:14px;}
+.modal-form-lbl{display:block;font-family:'Josefin Sans',sans-serif;font-size:0.57rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--stone);margin-bottom:7px;margin-top:14px;}
+.modal-inp,.modal-ta{width:100%;background:var(--ivory);border:1px solid var(--sand-dark);color:var(--brown);font-family:'Lato',sans-serif;font-size:0.94rem;padding:11px 14px;outline:none;transition:border-color 0.24s;border-radius:0;}
 .modal-inp:focus,.modal-ta:focus{border-color:var(--saffron-deep);}
-.modal-ta{min-height:80px;resize:vertical;}
-.modal-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.modal-ta{min-height:72px;resize:vertical;margin-bottom:14px;}
+.modal-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:480px){.modal-2col{grid-template-columns:1fr;}}
 .modal-submit{
-  width:100%;padding:15px;
+  width:100%;padding:14px;margin-top:6px;
   background:linear-gradient(135deg,var(--saffron-deep),var(--terracotta));
   color:var(--white);border:none;cursor:pointer;
-  font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;
+  font-family:'Josefin Sans',sans-serif;font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;
   transition:all 0.26s;box-shadow:0 6px 20px rgba(200,94,16,0.28);
 }
-.modal-submit:hover{box-shadow:0 10px 28px rgba(200,94,16,0.4);}
-.modal-note{text-align:center;font-size:0.82rem;color:var(--muted);font-style:italic;margin-top:14px;line-height:1.6;}
+.modal-submit:hover:not(:disabled){box-shadow:0 10px 28px rgba(200,94,16,0.4);}
+.modal-submit:disabled{opacity:0.75;cursor:not-allowed;}
+.modal-note{text-align:center;font-size:0.8rem;color:var(--muted);font-style:italic;margin-top:12px;line-height:1.6;}
+.modal-success{
+  display:none;
+  background:linear-gradient(135deg,rgba(58,122,80,0.08),rgba(45,96,64,0.04));
+  border:1px solid rgba(58,122,80,0.3);
+  padding:18px;text-align:center;margin-top:8px;
+}
+.modal-success.show{display:block;}
+.modal-success-icon{font-size:1.6rem;margin-bottom:6px;}
+.modal-success-text{font-family:'Playfair Display',serif;font-size:1rem;color:#2d6040;margin-bottom:4px;}
+.modal-success-sub{font-size:0.82rem;color:var(--muted);}
+/* Responsive: stack on mobile */
+@media(max-width:680px){
+  .modal{flex-direction:column;max-height:95vh;}
+  .modal-gallery{flex:0 0 52vw;min-height:52vw;}
+}
 
 /* EMPTY STATE */
 .empty-state{text-align:center;padding:80px 20px;color:var(--muted);}
@@ -252,7 +346,7 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
   <a href="index.html" class="nav-logo">Divya<span>Shilla</span></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="index.html#builder">Customize</a>
+    <a href="about.html">About Us</a>
     <a href="readymade.html" class="active-page">Readymade</a>
     <a href="index.html#order">Order</a>
   </div>
@@ -354,13 +448,19 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
       -->
 
       <!-- PRODUCT 1 -->
-      <div class="product-card" data-size="medium" data-price="10500" data-badge="bestseller" data-style="traditional" data-rating="4.9" data-reviews="38">
-        <div class="product-imgs">
-          <img class="img-primary" src="imge_1.png" alt="Shanthi Classic">
-          <img class="img-secondary" src="image_2.png" alt="Shanthi Classic detail">
+      <div class="product-card" data-size="medium" data-price="10500" data-badge="bestseller" data-style="traditional" data-rating="4.9" data-reviews="38"
+           data-name="Shanthi Classic" data-desc="Timeless stepped base with smooth polished column and simple crown. The perfect traditional Tulsi Katta for any courtyard." data-specs="5 ft · Classic Base · Plain Column · Simple Crown">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="imge_1.png" alt="Shanthi Classic">
+            <img src="image_2.png" alt="Shanthi Classic detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Shanthi Series</div>
           <div class="prod-name">Shanthi Classic</div>
@@ -372,18 +472,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.9 (38 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 10,500</span></div>
-          <button class="prod-cta" onclick="openOrder('Shanthi Classic','10500','5 ft · Classic Base · Plain Column · Simple Crown')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 2 -->
-      <div class="product-card" data-size="medium" data-price="15800" data-badge="new" data-style="floral" data-rating="4.8" data-reviews="14">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_4.jpeg" alt="Divya Floral">
-          <img class="img-secondary" src="image_4.jpeg" alt="Divya Floral detail">
+      <div class="product-card" data-size="medium" data-price="15800" data-badge="new" data-style="floral" data-rating="4.8" data-reviews="14"
+           data-name="Divya Floral" data-desc="Elegant arch base with hand-carved lotus motifs on the column, crowned with a sacred Kalash. A statement piece." data-specs="5 ft · Arch Base · Floral Column · Kalash Crown">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_4.jpeg" alt="Divya Floral">
+            <img src="image_4.jpeg" alt="Divya Floral detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"><span class="prod-badge badge-new">New</span></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Divya Series</div>
           <div class="prod-name">Divya Floral</div>
@@ -395,18 +501,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.8 (14 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 15,800</span></div>
-          <button class="prod-cta" onclick="openOrder('Divya Floral','15800','5 ft · Arch Base · Floral Column · Kalash Crown')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 3 -->
-      <div class="product-card" data-size="large" data-price="24500" data-badge="" data-style="majestic" data-rating="5.0" data-reviews="9">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_3.jpeg" alt="Majestic Grand">
-          <img class="img-secondary" src="image_3.jpeg" alt="Majestic Grand detail">
+      <div class="product-card" data-size="large" data-price="24500" data-badge="" data-style="majestic" data-rating="5.0" data-reviews="9"
+           data-name="Majestic Grand" data-desc="Temple-grade Shikhara base with full vine &amp; Kalash relief sculpture. Designed for large courtyards and temples." data-specs="8 ft · Temple Base · Sculpted Column · Stepped Shikhara">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_3.jpeg" alt="Majestic Grand">
+            <img src="image_3.jpeg" alt="Majestic Grand detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Majestic Series</div>
           <div class="prod-name">Majestic Grand</div>
@@ -418,18 +530,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">5.0 (9 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 24,500</span></div>
-          <button class="prod-cta" onclick="openOrder('Majestic Grand','24500','8 ft · Temple Base · Sculpted Column · Stepped Shikhara')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 4 -->
-      <div class="product-card" data-size="small" data-price="8200" data-badge="bestseller" data-style="traditional" data-rating="4.7" data-reviews="52">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_5.jpeg" alt="Ghar Tulsi">
-          <img class="img-secondary" src="image_5.jpeg" alt="Ghar Tulsi detail">
+      <div class="product-card" data-size="small" data-price="8200" data-badge="bestseller" data-style="traditional" data-rating="4.7" data-reviews="52"
+           data-name="Ghar Tulsi" data-desc="Compact and beautiful. Perfect for balconies, flats, and small home courtyards. Our most popular compact design." data-specs="2.5 ft · Classic Base · Plain Column · Simple Crown">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_5.jpeg" alt="Ghar Tulsi">
+            <img src="image_5.jpeg" alt="Ghar Tulsi detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Ghar Series</div>
           <div class="prod-name">Ghar Tulsi</div>
@@ -445,18 +563,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <span class="prod-price-orig">₹ 9,500</span>
             <span class="prod-price-off">14% off</span>
           </div>
-          <button class="prod-cta" onclick="openOrder('Ghar Tulsi','8200','2.5 ft · Classic Base · Plain Column · Simple Crown')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 5 -->
-      <div class="product-card" data-size="small" data-price="9800" data-badge="" data-style="floral" data-rating="4.6" data-reviews="21">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_3.jpeg" alt="Ghar Lotus">
-          <img class="img-secondary" src="image_3.jpeg" alt="Ghar Lotus detail">
+      <div class="product-card" data-size="small" data-price="9800" data-badge="" data-style="floral" data-rating="4.6" data-reviews="21"
+           data-name="Ghar Lotus" data-desc="Small but detailed. Features hand-carved lotus motifs on the column — a premium compact choice." data-specs="2.5 ft · Arch Base · Floral Column · Simple Pinnacle">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_3.jpeg" alt="Ghar Lotus">
+            <img src="image_3.jpeg" alt="Ghar Lotus detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Ghar Series</div>
           <div class="prod-name">Ghar Lotus</div>
@@ -468,18 +592,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★☆</span><span class="prod-rating-count">4.6 (21 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 9,800</span></div>
-          <button class="prod-cta" onclick="openOrder('Ghar Lotus','9800','2.5 ft · Arch Base · Floral Column · Simple Pinnacle')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 6 -->
-      <div class="product-card" data-size="medium" data-price="18500" data-badge="sale" data-style="temple" data-rating="4.9" data-reviews="17">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_4.jpeg" alt="Mandir Classic">
-          <img class="img-secondary" src="image_4.jpeg" alt="Mandir Classic detail">
+      <div class="product-card" data-size="medium" data-price="18500" data-badge="sale" data-style="temple" data-rating="4.9" data-reviews="17"
+           data-name="Mandir Classic" data-desc="Temple arch base with Shikhara crown. Inspired by classical South Indian temple architecture — deeply sacred." data-specs="5 ft · Arch Base · Plain Column · Stepped Shikhara">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_4.jpeg" alt="Mandir Classic">
+            <img src="image_4.jpeg" alt="Mandir Classic detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"><span class="prod-badge badge-sale">Sale</span></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Mandir Series</div>
           <div class="prod-name">Mandir Classic</div>
@@ -495,18 +625,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <span class="prod-price-orig">₹ 21,000</span>
             <span class="prod-price-off">12% off</span>
           </div>
-          <button class="prod-cta" onclick="openOrder('Mandir Classic','18500','5 ft · Arch Base · Plain Column · Stepped Shikhara')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 7 -->
-      <div class="product-card" data-size="large" data-price="31000" data-badge="new" data-style="majestic" data-rating="5.0" data-reviews="4">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_6.jpeg" alt="Rajguru Grand">
-          <img class="img-secondary" src="image_6.jpeg" alt="Rajguru Grand detail">
+      <div class="product-card" data-size="large" data-price="31000" data-badge="new" data-style="majestic" data-rating="5.0" data-reviews="4"
+           data-name="Rajguru Grand" data-desc="The most premium design in our collection. Full sculpted column, Kalash dome crown, and decorative arch base — for those who want the best." data-specs="8 ft · Arch Base · Sculpted Column · Kalash Crown">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_6.jpeg" alt="Rajguru Grand">
+            <img src="image_6.jpeg" alt="Rajguru Grand detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"><span class="prod-badge badge-new">New</span></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Rajguru Series</div>
           <div class="prod-name">Rajguru Grand</div>
@@ -518,18 +654,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">5.0 (4 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 31,000</span></div>
-          <button class="prod-cta" onclick="openOrder('Rajguru Grand','31000','8 ft · Arch Base · Sculpted Column · Kalash Crown')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 8 -->
-      <div class="product-card" data-size="small" data-price="11200" data-badge="" data-style="temple" data-rating="4.8" data-reviews="11">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_2.png" alt="Ghar Mandir">
-          <img class="img-secondary" src="image_2.jpeg" alt="Ghar Mandir detail">
+      <div class="product-card" data-size="small" data-price="11200" data-badge="" data-style="temple" data-rating="4.8" data-reviews="11"
+           data-name="Ghar Mandir" data-desc="Temple-style compact design with Shikhara crown. Big temple energy in a small footprint." data-specs="2.5 ft · Temple Base · Plain Column · Stepped Shikhara">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_2.png" alt="Ghar Mandir">
+            <img src="image_2.jpeg" alt="Ghar Mandir detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Ghar Series</div>
           <div class="prod-name">Ghar Mandir</div>
@@ -541,18 +683,24 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.8 (11 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 11,200</span></div>
-          <button class="prod-cta" onclick="openOrder('Ghar Mandir','11200','2.5 ft · Temple Base · Plain Column · Stepped Shikhara')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 9 -->
-      <div class="product-card" data-size="medium" data-price="13400" data-badge="" data-style="traditional" data-rating="4.7" data-reviews="29">
-        <div class="product-imgs">
-          <img class="img-primary" src="image_6.jpeg" alt="Shanthi Deluxe">
-          <img class="img-secondary" src="image_6.jpeg" alt="Shanthi Deluxe detail">
+      <div class="product-card" data-size="medium" data-price="13400" data-badge="" data-style="traditional" data-rating="4.7" data-reviews="29"
+           data-name="Shanthi Deluxe" data-desc="Upgraded classic with a decorative sculpted column and Kalash crown. Traditional feel with premium detailing." data-specs="5 ft · Classic Base · Sculpted Column · Kalash Crown">
+        <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+          <div class="swiper-track">
+            <img src="image_6.jpeg" alt="Shanthi Deluxe">
+            <img src="image_6.jpeg" alt="Shanthi Deluxe detail">
+          </div>
+          <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+          <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+          <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
         <div class="prod-badges"></div>
-        <button class="prod-wish" onclick="toggleWish(this)">♡</button>
+        <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Shanthi Series</div>
           <div class="prod-name">Shanthi Deluxe</div>
@@ -564,7 +712,7 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★☆</span><span class="prod-rating-count">4.7 (29 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 13,400</span></div>
-          <button class="prod-cta" onclick="openOrder('Shanthi Deluxe','13400','5 ft · Classic Base · Sculpted Column · Kalash Crown')">Enquire &amp; Order</button>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
@@ -579,41 +727,59 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
   </div><!-- end product-area -->
 </div><!-- end page-body -->
 
-<!-- ORDER MODAL -->
+<!-- PRODUCT MODAL — Instagram-style split layout -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-header">
-      <div>
-        <div class="modal-product-name" id="modalName">Product Name</div>
-        <div class="modal-product-price" id="modalPrice">₹ 0</div>
-      </div>
-      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <!-- Left: Image Gallery -->
+    <div class="modal-gallery" id="mgGallery">
+      <div class="mg-track" id="mgTrack"></div>
+      <button class="mg-arr prev" id="mgPrev" onclick="mgSlide(-1)">&#8592;</button>
+      <button class="mg-arr next" id="mgNext" onclick="mgSlide(1)">&#8594;</button>
+      <div class="mg-dots" id="mgDots"></div>
     </div>
-    <div class="modal-body">
-      <img class="modal-product-img" id="modalImg" src="" alt="">
-      <div class="modal-desc" id="modalSpec">Specs here</div>
-      <div class="modal-specs" id="modalTags"></div>
-
-      <form action="https://docs.google.com/forms/d/e/1FAIpQLSeIi3OS6mnOyv9KM06NwHMRZCpr63C8DYcWtg4JJU5-Yah11Q/formResponse" method="POST" target="hidden_iframe">
-        <div class="modal-2col">
-          <div>
-            <label class="modal-form-lbl">Full Name</label>
-            <input class="modal-inp" type="text" name="entry.448886202" placeholder="Your name" required>
-          </div>
-          <div>
-            <label class="modal-form-lbl">Phone Number</label>
-            <input class="modal-inp" type="tel" name="entry.960694153" placeholder="+91 XXXXX XXXXX" required>
-          </div>
+    <!-- Right: Details -->
+    <div class="modal-detail">
+      <div class="modal-header">
+        <div>
+          <div class="modal-product-name" id="modalName">Product Name</div>
+          <div class="modal-product-price" id="modalPrice">₹ 0</div>
         </div>
-        <label class="modal-form-lbl">City Name</label>
-        <textarea class="modal-ta" name="entry.1984381595" placeholder="Enter your city name" required></textarea>
-        <input type="hidden" id="modalProductField" name="entry.1711063176" value="">
-        <input type="hidden" id="modalPriceField"   name="entry.811843989"  value="">
-        <input type="hidden" id="modalSpecsField"   name="entry.160852949"  value="">
-        <button type="submit" class="modal-submit">Request Confirmation Call</button>
-      </form>
-      <div class="modal-note">
-        We call within 15 minutes to confirm · 30% advance only after approval
+        <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-desc" id="modalDesc"></div>
+        <div class="modal-specs" id="modalTags"></div>
+
+        <form id="modalForm" action="https://docs.google.com/forms/d/e/1FAIpQLSeIi3OS6mnOyv9KM06NwHMRZCpr63C8DYcWtg4JJU5-Yah11Q/formResponse" method="POST" target="hidden_iframe">
+          <div class="modal-2col">
+            <div>
+              <label class="modal-form-lbl">Full Name</label>
+              <input class="modal-inp" type="text" name="entry.448886202" placeholder="Your name" required>
+            </div>
+            <div>
+              <label class="modal-form-lbl">Phone Number</label>
+              <input class="modal-inp" type="tel" name="entry.960694153" placeholder="+91 XXXXX XXXXX" required
+                pattern="[6-9][0-9]{9}" title="Enter valid 10-digit mobile number">
+            </div>
+          </div>
+          <label class="modal-form-lbl">City Name</label>
+          <textarea class="modal-ta" name="entry.1984381595" placeholder="Enter your city name" required></textarea>
+          <input type="hidden" id="modalProductField" name="entry.1711063176" value="">
+          <input type="hidden" id="modalPriceField"   name="entry.811843989"  value="">
+          <input type="hidden" id="modalSpecsField"   name="entry.160852949"  value="">
+          <button type="submit" class="modal-submit" id="modalSubmitBtn">Request Confirmation Call</button>
+        </form>
+
+        <!-- Success state -->
+        <div class="modal-success" id="modalSuccess">
+          <div class="modal-success-icon">✓</div>
+          <div class="modal-success-text">Enquiry Submitted!</div>
+          <div class="modal-success-sub">Your enquiry has been submitted. We will contact you shortly.</div>
+        </div>
+
+        <div class="modal-note">
+          We call within 15 minutes to confirm · 30% advance only after approval
+        </div>
       </div>
     </div>
   </div>
@@ -632,9 +798,159 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 </footer>
 
 <script>
-/* ============ ALL PRODUCTS DATA (for filtering/sorting) ============ */
+/* ============ FILTER STATE ============ */
 let activeFilter = 'all';
 let maxPrice = 35000;
+
+/* ============ CARD SWIPER ============ */
+function getCardSwiper(container) {
+  return {
+    track: container.querySelector('.swiper-track'),
+    dots: container.querySelectorAll('.swiper-dot'),
+    imgs: container.querySelectorAll('.swiper-track img'),
+    get idx() { return parseInt(container.dataset.swiperIdx || 0); },
+    set idx(v) { container.dataset.swiperIdx = v; }
+  };
+}
+function swiperPrev(e, btn) {
+  e.stopPropagation();
+  const c = btn.closest('.product-imgs');
+  const s = getCardSwiper(c);
+  s.idx = (s.idx - 1 + s.imgs.length) % s.imgs.length;
+  updateSwiper(c, s);
+}
+function swiperNext(e, btn) {
+  e.stopPropagation();
+  const c = btn.closest('.product-imgs');
+  const s = getCardSwiper(c);
+  s.idx = (s.idx + 1) % s.imgs.length;
+  updateSwiper(c, s);
+}
+function updateSwiper(c, s) {
+  s.track.style.transform = 'translateX(-' + (s.idx * 100) + '%)';
+  s.dots.forEach((d,i) => d.classList.toggle('active', i === s.idx));
+}
+
+/* Touch swipe for card images */
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.product-imgs').forEach(function(c) {
+    let startX = 0;
+    c.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+    c.addEventListener('touchend', function(e) {
+      const dx = e.changedTouches[0].clientX - startX;
+      if(Math.abs(dx) < 30) return;
+      const s = getCardSwiper(c);
+      if(dx < 0) s.idx = (s.idx + 1) % s.imgs.length;
+      else        s.idx = (s.idx - 1 + s.imgs.length) % s.imgs.length;
+      updateSwiper(c, s);
+    });
+  });
+});
+
+/* ============ PRODUCT MODAL ============ */
+let mgCurrentIdx = 0;
+let mgImages = [];
+
+function openProductModal(card) {
+  const name  = card.dataset.name;
+  const price = card.dataset.price;
+  const desc  = card.dataset.desc;
+  const specs = card.dataset.specs;
+
+  document.getElementById('modalName').textContent  = name;
+  document.getElementById('modalPrice').textContent = '₹ ' + parseInt(price).toLocaleString('en-IN');
+  document.getElementById('modalDesc').textContent  = desc;
+  document.getElementById('modalProductField').value = name;
+  document.getElementById('modalPriceField').value  = price;
+  document.getElementById('modalSpecsField').value  = specs;
+
+  // Spec tags
+  const tags = specs.split('·');
+  document.getElementById('modalTags').innerHTML = tags.map(t =>
+    '<span class="m-spec">' + t.trim() + '</span>'
+  ).join('');
+
+  // Build gallery from all images in card
+  const imgs = card.querySelectorAll('.swiper-track img');
+  mgImages = Array.from(imgs).map(i => ({ src: i.src, alt: i.alt }));
+  mgCurrentIdx = 0;
+  buildMgGallery();
+
+  // Reset form
+  document.getElementById('modalForm').reset();
+  const btn = document.getElementById('modalSubmitBtn');
+  btn.disabled = false;
+  btn.textContent = 'Request Confirmation Call';
+  btn.style.background = '';
+  document.getElementById('modalSuccess').classList.remove('show');
+  document.getElementById('modalForm').style.display = '';
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildMgGallery() {
+  const track = document.getElementById('mgTrack');
+  const dots  = document.getElementById('mgDots');
+  track.innerHTML = mgImages.map(img => '<img src="' + img.src + '" alt="' + img.alt + '">').join('');
+  dots.innerHTML  = mgImages.map((_,i) => '<span class="mg-dot' + (i===0?' active':'') + '"></span>').join('');
+  track.style.transform = 'translateX(0)';
+  document.getElementById('mgPrev').style.display = mgImages.length < 2 ? 'none' : '';
+  document.getElementById('mgNext').style.display = mgImages.length < 2 ? 'none' : '';
+}
+
+function mgSlide(dir) {
+  mgCurrentIdx = (mgCurrentIdx + dir + mgImages.length) % mgImages.length;
+  document.getElementById('mgTrack').style.transform = 'translateX(-' + (mgCurrentIdx * 100) + '%)';
+  document.querySelectorAll('.mg-dot').forEach((d,i) => d.classList.toggle('active', i === mgCurrentIdx));
+}
+
+/* Touch swipe for modal gallery */
+(function(){
+  let startX = 0;
+  const gal = document.getElementById('mgGallery');
+  if(!gal) return;
+  gal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  gal.addEventListener('touchend', function(e){
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) < 30) return;
+    mgSlide(dx < 0 ? 1 : -1);
+  });
+})();
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+/* ============ MODAL FORM SUBMIT — DUPLICATE PREVENTION ============ */
+(function(){
+  let submitted = false;
+  document.getElementById('modalForm').addEventListener('submit', function(e) {
+    if(submitted){ e.preventDefault(); return; }
+    // Basic phone validation
+    const phone = this.querySelector('[type="tel"]').value.trim();
+    if(!/^[6-9][0-9]{9}$/.test(phone)){
+      e.preventDefault();
+      this.querySelector('[type="tel"]').focus();
+      return;
+    }
+    submitted = true;
+    const btn = document.getElementById('modalSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    setTimeout(function(){
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('modalSuccess').classList.add('show');
+      submitted = false; // reset for next product enquiry
+    }, 1400);
+  });
+})();
 
 /* ============ FILTER BY SIZE BUTTON ============ */
 function filterProducts(filter, btn) {
@@ -648,32 +964,19 @@ function filterProducts(filter, btn) {
 function applyFilters() {
   const cards = document.querySelectorAll('.product-card');
   let visible = 0;
-
   cards.forEach(card => {
-    const size    = card.dataset.size;
-    const price   = parseInt(card.dataset.price);
-    const badge   = card.dataset.badge;
-    const style   = card.dataset.style;
-
+    const size  = card.dataset.size;
+    const price = parseInt(card.dataset.price);
+    const badge = card.dataset.badge;
     let show = true;
-
-    // Filter bar
-    if (activeFilter === 'small'      && size !== 'small')      show = false;
-    if (activeFilter === 'medium'     && size !== 'medium')     show = false;
-    if (activeFilter === 'large'      && size !== 'large')      show = false;
+    if (activeFilter === 'small'      && size !== 'small')       show = false;
+    if (activeFilter === 'medium'     && size !== 'medium')      show = false;
+    if (activeFilter === 'large'      && size !== 'large')       show = false;
     if (activeFilter === 'bestseller' && badge !== 'bestseller') show = false;
-
-    // Price range
     if (price > maxPrice) show = false;
-
-    if (show) {
-      card.style.display = '';
-      visible++;
-    } else {
-      card.style.display = 'none';
-    }
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
   });
-
   document.getElementById('resultCount').textContent = 'Showing ' + visible + ' design' + (visible !== 1 ? 's' : '');
   document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
 }
@@ -682,14 +985,12 @@ function applyFilters() {
 function sortProducts(val) {
   const grid  = document.getElementById('productGrid');
   const cards = Array.from(grid.querySelectorAll('.product-card'));
-
   cards.sort((a, b) => {
     if (val === 'price-low')  return parseInt(a.dataset.price) - parseInt(b.dataset.price);
     if (val === 'price-high') return parseInt(b.dataset.price) - parseInt(a.dataset.price);
     if (val === 'rating')     return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
     return 0;
   });
-
   cards.forEach(c => grid.appendChild(c));
 }
 
@@ -701,55 +1002,30 @@ function updatePriceRange(val) {
 }
 
 /* ============ WISHLIST ============ */
-function toggleWish(btn) {
+function toggleWish(e, btn) {
+  e.stopPropagation();
   btn.classList.toggle('wished');
   btn.textContent = btn.classList.contains('wished') ? '♥' : '♡';
 }
-
-/* ============ ORDER MODAL ============ */
-function openOrder(name, price, spec) {
-  document.getElementById('modalName').textContent  = name;
-  document.getElementById('modalPrice').textContent = '₹ ' + parseInt(price).toLocaleString('en-IN');
-  document.getElementById('modalSpec').textContent  = spec;
-  document.getElementById('modalProductField').value = name;
-  document.getElementById('modalPriceField').value = price;
-  document.getElementById('modalSpecsField').value = spec;
-
-  // Build spec tags
-  const tags = spec.split('·');
-  document.getElementById('modalTags').innerHTML = tags.map(t =>
-    '<span class="m-spec">' + t.trim() + '</span>'
-  ).join('');
-
-  // Grab current card image
-  const card = event.target.closest('.product-card');
-  const img  = card ? card.querySelector('.img-primary') : null;
-  document.getElementById('modalImg').src = img ? img.src : '';
-
-  document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
-}
-function closeModalDirect() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-/* ESC key closes modal */
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
-
-/* ============ MODAL FORM SUBMIT ============ */
-function submitModal(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.modal-submit');
-  btn.textContent = '✓  Request Sent — We Will Call You Shortly';
-  btn.style.background = 'linear-gradient(135deg,#3a7a50,#2d6040)';
-  btn.disabled = true;
-}
 </script>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/918605131717?text=Hello%2C%20I%20am%20interested%20in%20a%20Tulsi%20Vrindavan." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<style>
+.wa-float{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 22px rgba(37,211,102,0.42);
+  transition:transform 0.26s,box-shadow 0.26s;
+  text-decoration:none;
+}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,0.55);}
+</style>
+
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 </body>
 </html>

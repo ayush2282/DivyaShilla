@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us – DivyaShilla | Sacred Black Stone Craftsmanship</title>
+<meta name="description" content="Learn about DivyaShilla's artisan partnership network, our black stone craftsmanship, and the sacred tradition behind every Tulsi Vrindavan we deliver.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Josefin+Sans:wght@300;400;600&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+/* ===== VARIABLES (same as site) ===== */
+:root {
+  --saffron:       #E07B20;
+  --saffron-deep:  #C05E0A;
+  --saffron-light: #F0A855;
+  --terracotta:    #B84E32;
+  --stone:         #5C4A32;
+  --cream:         #FBF5EA;
+  --cream-dark:    #F2E8D5;
+  --ivory:         #FAF7F0;
+  --sand:          #E2CEAA;
+  --sand-dark:     #C8AF88;
+  --brown:         #3D2B1A;
+  --muted:         #7A6652;
+  --white:         #FFFDF8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--brown);font-family:'Lato',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+/* ===== SHARED UTILITIES ===== */
+.lbl{display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:0.6rem;letter-spacing:0.38em;text-transform:uppercase;color:var(--saffron-deep);margin-bottom:12px;}
+.rule{display:block;width:54px;height:2px;background:linear-gradient(90deg,var(--saffron),var(--saffron-light),transparent);margin:18px 0 36px;}
+section{padding:84px 6%;}
+@media(max-width:680px){section{padding:60px 5%;}}
+
+/* ===== NAV ===== */
+nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:14px 6%;background:rgba(251,245,234,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--sand);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown);letter-spacing:0.03em;text-decoration:none;}
+.nav-logo span{color:var(--saffron-deep);}
+.nav-links a{font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-left:24px;transition:color 0.22s;}
+.nav-links a:hover{color:var(--saffron-deep);}
+.nav-links a.nav-special{color:var(--saffron-deep);border:1px solid var(--saffron-deep);padding:6px 14px;}
+.nav-links a.nav-special:hover{background:var(--saffron-deep);color:var(--white);}
+.nav-links a.active-page{color:var(--saffron-deep);border-bottom:2px solid var(--saffron-deep);padding-bottom:2px;}
+@media(max-width:640px){.nav-links{display:none;}}
+
+/* ===== PAGE HERO ===== */
+.page-header{
+  background:linear-gradient(150deg,var(--brown) 0%,var(--stone) 60%,#4a3828 100%);
+  padding:80px 6% 68px;
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(224,123,32,0.08) 1.5px,transparent 1.5px);
+  background-size:28px 28px;pointer-events:none;
+}
+.page-header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--saffron-deep),transparent);
+}
+.ph-orn{font-size:1rem;letter-spacing:0.5em;color:var(--saffron);margin-bottom:20px;opacity:0.7;position:relative;z-index:1;}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);color:var(--cream);line-height:1.1;margin-bottom:20px;position:relative;z-index:1;}
+.ph-title em{font-style:italic;color:var(--saffron-light);}
+.ph-para{font-size:1.05rem;color:var(--sand-dark);font-weight:300;max-width:620px;margin:0 auto;line-height:1.9;position:relative;z-index:1;}
+
+/* ===== PROCESS SECTION ===== */
+#process{background:var(--ivory);}
+.process-step{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:52px;
+  align-items:center;
+  margin-bottom:72px;
+}
+.process-step:last-child{margin-bottom:0;}
+.process-step.reverse{direction:rtl;}
+.process-step.reverse > *{direction:ltr;}
+@media(max-width:860px){
+  .process-step,.process-step.reverse{
+    grid-template-columns:1fr;
+    direction:ltr;
+    gap:28px;
+    margin-bottom:52px;
+  }
+}
+/* Image box */
+.ps-img-wrap{
+  position:relative;
+  overflow:hidden;
+  background:var(--cream-dark);
+  aspect-ratio:4/3;
+}
+.ps-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  filter:sepia(8%) saturate(105%);
+}
+.ps-img-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(61,43,26,0.06),transparent 60%);
+  pointer-events:none;
+}
+/* Step number accent */
+.ps-num{
+  position:absolute;bottom:14px;left:14px;
+  font-family:'Playfair Display',serif;
+  font-size:3.5rem;line-height:1;
+  color:rgba(224,123,32,0.2);
+  font-weight:700;
+  z-index:2;
+  user-select:none;
+}
+/* Text side */
+.ps-text{}
+.ps-step-label{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:0.58rem;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--saffron-deep);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;
+}
+.ps-step-label::after{content:'';flex:1;height:1px;background:var(--sand-dark);max-width:48px;}
+.ps-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.5rem,2.8vw,2.1rem);
+  color:var(--brown);margin-bottom:14px;line-height:1.15;
+}
+.ps-desc{
+  font-size:0.97rem;color:var(--muted);
+  font-weight:300;line-height:1.85;
+}
+
+/* ===== ARTISAN PARTNERS SECTION ===== */
+#partners{background:var(--cream);}
+.partners-intro{
+  display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;
+  margin-bottom:60px;
+}
+@media(max-width:860px){.partners-intro{grid-template-columns:1fr;gap:32px;}}
+.pi-left{}
+.pi-right{
+  display:flex;flex-direction:column;gap:18px;
+}
+.pi-pillar{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:16px 18px;
+  background:var(--white);
+  border-left:3px solid var(--saffron-deep);
+  border-top:1px solid var(--sand);
+  border-right:1px solid var(--sand);
+  border-bottom:1px solid var(--sand);
+}
+.pi-pillar-icon{
+  width:32px;height:32px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--saffron-deep),var(--terracotta));
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.85rem;
+  margin-top:2px;
+}
+.pi-pillar-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown);margin-bottom:3px;}
+.pi-pillar-desc{font-size:0.83rem;color:var(--muted);font-weight:300;line-height:1.6;}
+
+/* ===== ARTISAN CARDS ===== */
+.artisan-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+@media(max-width:1000px){.artisan-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){.artisan-grid{grid-template-columns:1fr;}}
+.artisan-card{
+  background:var(--white);
+  border:1px solid var(--sand);
+  padding:28px 24px 24px;
+  position:relative;
+  transition:box-shadow 0.28s,transform 0.28s;
+}
+.artisan-card:hover{box-shadow:0 10px 36px rgba(61,43,26,0.1);transform:translateY(-2px);}
+.artisan-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--saffron-deep),var(--terracotta));
+}
+.ac-photo{
+  width:80px;height:80px;border-radius:50%;
+  overflow:hidden;margin:0 auto 16px;
+  border:3px solid var(--sand);
+}
+.ac-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.ac-name{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--brown);text-align:center;margin-bottom:2px;}
+.ac-location{font-family:'Josefin Sans',sans-serif;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron-deep);text-align:center;margin-bottom:14px;}
+.ac-meta{display:flex;justify-content:center;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
+.ac-tag{font-family:'Josefin Sans',sans-serif;font-size:0.54rem;letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;background:var(--cream-dark);color:var(--stone);border:1px solid var(--sand);}
+.ac-spec{font-size:0.84rem;color:var(--muted);text-align:center;font-style:italic;margin-bottom:16px;line-height:1.6;}
+.ac-divider{height:1px;background:var(--sand);margin-bottom:14px;}
+.ac-quote{
+  font-size:0.88rem;color:var(--brown);
+  font-style:italic;line-height:1.7;
+  text-align:center;
+  padding:0 4px;
+  position:relative;
+}
+.ac-quote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--saffron);line-height:0;vertical-align:-0.6em;margin-right:4px;}
+.ac-quote::after{content:'\201D';font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--saffron);line-height:0;vertical-align:-0.6em;margin-left:4px;}
+
+/* ===== OUR ROLE SECTION ===== */
+#our-role{background:var(--brown);color:var(--cream);}
+#our-role .lbl{color:var(--saffron-light);}
+.role-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.08);
+  margin-top:16px;
+}
+@media(max-width:860px){.role-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.role-grid{grid-template-columns:1fr;}}
+.role-item{
+  padding:32px 26px;
+  background:rgba(20,10,5,0.2);
+  border:1px solid rgba(255,255,255,0.06);
+  transition:background 0.26s;
+}
+.role-item:hover{background:rgba(224,123,32,0.07);}
+.role-icon{
+  width:42px;height:42px;
+  border:1.5px solid rgba(224,123,32,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  margin-bottom:16px;
+  color:var(--saffron-light);
+}
+.role-title{font-family:'Playfair Display',serif;font-size:1.06rem;color:var(--cream);margin-bottom:8px;}
+.role-desc{font-size:0.83rem;color:rgba(255,255,255,0.48);font-weight:300;line-height:1.7;}
+
+/* ===== TRUST BAR ===== */
+#trust-bar{background:var(--ivory);padding:64px 6%;}
+.trust-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--sand);
+  border:1px solid var(--sand);
+}
+@media(max-width:700px){.trust-row{grid-template-columns:repeat(2,1fr);}}
+.trust-stat{
+  background:var(--white);
+  padding:32px 20px;
+  text-align:center;
+}
+.ts-num{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--saffron-deep);line-height:1;margin-bottom:6px;}
+.ts-label{font-family:'Josefin Sans',sans-serif;font-size:0.57rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--muted);}
+
+/* ===== FOOTER ===== */
+footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;border-top:3px solid var(--saffron-deep);}
+.f-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--cream);}
+.f-logo span{color:var(--saffron-light);}
+.f-sub{font-size:0.78rem;color:var(--muted);margin-top:3px;}
+.f-note{font-size:0.78rem;color:var(--muted);text-align:right;}
+
+/* ===== WHATSAPP ===== */
+.wa-float{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 22px rgba(37,211,102,0.42);
+  transition:transform 0.26s,box-shadow 0.26s;
+  text-decoration:none;
+}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,0.55);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Divya<span>Shilla</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active-page">About Us</a>
+    <a href="readymade.html" class="nav-special">Readymade</a>
+    <a href="index.html#order">Order</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-header">
+  <div class="ph-orn">❈ ❈ ❈</div>
+  <h1 class="ph-title">Our Craft. Our People.<br><em>Our Purpose.</em></h1>
+  <p class="ph-para">
+    The Tulsi Vrindavan is not merely a structure. It is the sacred heart of an Indian home — a living altar 
+    where devotion takes form in stone, season after season. At DivyaShilla, we work with master craftsmen 
+    who have inherited the language of black granite across generations. Every cut, every detail, every 
+    polished surface carries not just skill, but reverence. We exist to bring that tradition into your home — 
+    with honesty, quality, and care that endures.
+  </p>
+</div>
+
+<!-- HOW IT IS MADE -->
+<section id="process">
+  <span class="lbl">The Process</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);margin-bottom:9px;">How Every Piece is Made</h2>
+  <p style="color:var(--muted);font-weight:300;max-width:520px;margin-bottom:0;">From raw stone to sacred cornerpiece — five deliberate stages, no shortcuts.</p>
+  <span class="rule"></span>
+
+  <!-- Step 1 -->
+  <div class="process-step">
+    <div class="ps-img-wrap">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Stone Selection">
+      <div class="ps-num">01</div>
+    </div>
+    <div class="ps-text">
+      <div class="ps-step-label">Step 01</div>
+      <h3 class="ps-title">Stone Selection</h3>
+      <p class="ps-desc">
+        Every Tulsi Vrindavan begins with the right stone. Our craftsmen source dense, fine-grained black granite 
+        from trusted quarries in southern India. Each slab is assessed by hand — checked for uniformity, grain consistency, 
+        and structural integrity. Inferior stone is rejected at this stage. Only material worthy of a sacred space moves forward.
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 2 — reverse -->
+  <div class="process-step reverse">
+    <div class="ps-img-wrap">
+      <img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=700&q=80" alt="Rough Carving">
+      <div class="ps-num">02</div>
+    </div>
+    <div class="ps-text">
+      <div class="ps-step-label">Step 02</div>
+      <h3 class="ps-title">Rough Carving</h3>
+      <p class="ps-desc">
+        Using chisels and angle grinders, the rough form of the Vrindavan is carved from the block. 
+        This stage demands strength and spatial precision — the proportions of the base, column, and crown 
+        are established here. Experienced craftsmen who have trained for years handle this stage exclusively. 
+        The rough shape must be balanced, plumb, and true before any detail work begins.
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="process-step">
+    <div class="ps-img-wrap">
+      <img src="https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=700&q=80" alt="Hand Detailing">
+      <div class="ps-num">03</div>
+    </div>
+    <div class="ps-text">
+      <div class="ps-step-label">Step 03</div>
+      <h3 class="ps-title">Hand Detailing</h3>
+      <p class="ps-desc">
+        The most meditative stage. Fine chisels bring out the lotus petals, Kalash motifs, vine reliefs, 
+        and stepped Shikhara patterns that define each design. This work cannot be rushed — a single artisan 
+        may spend two to four days on the detail of a single piece. It is in this stage that the stone 
+        transforms from raw material into something with devotional presence.
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 4 — reverse -->
+  <div class="process-step reverse">
+    <div class="ps-img-wrap">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="Polishing and Finishing">
+      <div class="ps-num">04</div>
+    </div>
+    <div class="ps-text">
+      <div class="ps-step-label">Step 04</div>
+      <h3 class="ps-title">Polishing & Finishing</h3>
+      <p class="ps-desc">
+        The carved piece moves through a sequence of polishing stages — from coarse diamond pads through 
+        progressively finer grits until the surface achieves its characteristic deep black sheen. Polishing 
+        also reveals any hidden flaws in the stone, which are addressed before the piece proceeds. 
+        The final surface is sealed to protect against weathering and daily ritual use.
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="process-step">
+    <div class="ps-img-wrap">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Quality Inspection">
+      <div class="ps-num">05</div>
+    </div>
+    <div class="ps-text">
+      <div class="ps-step-label">Step 05</div>
+      <h3 class="ps-title">Quality Inspection & Dispatch</h3>
+      <p class="ps-desc">
+        Before any piece leaves the workshop, it undergoes a structured inspection — dimensions verified, 
+        carvings reviewed, finish assessed. Pieces that do not meet our standard are returned for rework, 
+        not shipped. Once approved, each Vrindavan is wrapped in protective padding and dispatched 
+        with care. Every delivery is tracked and followed up personally.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISAN PARTNERS -->
+<section id="partners">
+  <span class="lbl">Artisan Collaboration</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);margin-bottom:9px;">Our Artisan Partners</h2>
+  <p style="color:var(--muted);font-weight:300;max-width:560px;margin-bottom:0;">DivyaShilla is not a factory. It is a curated network of skilled craftsmen — built on direct partnership, shared standards, and long-term trust.</p>
+  <span class="rule"></span>
+
+  <div class="partners-intro">
+    <div class="pi-left">
+      <p style="font-size:1.02rem;color:var(--brown);line-height:1.88;font-weight:300;margin-bottom:20px;">
+        We believe the best sacred objects in the world are still made by hand — by people who have 
+        spent decades learning a craft from their family, their community, their stone. DivyaShilla was 
+        built to find those people, support their work, and connect it with homes that understand its value.
+      </p>
+      <p style="font-size:0.96rem;color:var(--muted);line-height:1.85;font-weight:300;">
+        We work directly with craftsmen in stone-carving clusters across Maharashtra and Tamil Nadu. 
+        Our relationship with each artisan is long-term — not transactional. We bring design direction, 
+        quality standards, and customer relationships. They bring mastery, tradition, and devotion to material 
+        that we could not replicate in any other way.
+      </p>
+    </div>
+    <div class="pi-right">
+      <div class="pi-pillar">
+        <div class="pi-pillar-icon">⬡</div>
+        <div>
+          <div class="pi-pillar-title">Direct Partnership</div>
+          <div class="pi-pillar-desc">We work with craftsmen directly — no middlemen, no wholesale brokers. Every rupee of margin supports the people who actually make the work.</div>
+        </div>
+      </div>
+      <div class="pi-pillar">
+        <div class="pi-pillar-icon">⬡</div>
+        <div>
+          <div class="pi-pillar-title">Ethical Sourcing</div>
+          <div class="pi-pillar-desc">Stone is sourced from certified quarries. Craftsmen work in their own workshops under their own terms. We do not run a production facility.</div>
+        </div>
+      </div>
+      <div class="pi-pillar">
+        <div class="pi-pillar-icon">⬡</div>
+        <div>
+          <div class="pi-pillar-title">Design Direction & Quality Control</div>
+          <div class="pi-pillar-desc">DivyaShilla sets the design specifications, finish standards, and inspection criteria. We ensure every piece that leaves a partner workshop meets our standard.</div>
+        </div>
+      </div>
+      <div class="pi-pillar">
+        <div class="pi-pillar-icon">⬡</div>
+        <div>
+          <div class="pi-pillar-title">Long-Term Collaboration</div>
+          <div class="pi-pillar-desc">We invest in relationships, not one-off orders. Our partners grow with us, and we grow because of them. This is a craft community, not a supply chain.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTISAN PROFILE CARDS -->
+  <div class="artisan-grid">
+
+    <!-- Artisan 1 -->
+    <div class="artisan-card">
+      <div class="ac-photo">
+        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=200&h=200&fit=crop&q=80" alt="Ramesh Shilpkar">
+      </div>
+      <div class="ac-name">Ramesh Shilpkar</div>
+      <div class="ac-location">📍 Nashik, Maharashtra</div>
+      <div class="ac-meta">
+        <span class="ac-tag">24 Years Experience</span>
+        <span class="ac-tag">Shikhara Carving</span>
+      </div>
+      <div class="ac-spec">Specialises in Shikhara crowns and multi-tier temple-form Vrindavan structures.</div>
+      <div class="ac-divider"></div>
+      <div class="ac-quote">Stone has memory. When I carve a Tulsi Vrindavan, I am not just shaping granite — I am continuing a conversation that started before I was born.</div>
+    </div>
+
+    <!-- Artisan 2 -->
+    <div class="artisan-card">
+      <div class="ac-photo">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&q=80" alt="Subramaniam Pillai">
+      </div>
+      <div class="ac-name">Subramaniam Pillai</div>
+      <div class="ac-location">📍 Madurai, Tamil Nadu</div>
+      <div class="ac-meta">
+        <span class="ac-tag">31 Years Experience</span>
+        <span class="ac-tag">Floral Relief</span>
+      </div>
+      <div class="ac-spec">Third-generation stone carver. Master of lotus relief and Kalash motif detailing on column surfaces.</div>
+      <div class="ac-divider"></div>
+      <div class="ac-quote">My father taught me that every lotus you carve in stone should look like it just opened. That standard never changes, no matter how many you make.</div>
+    </div>
+
+    <!-- Artisan 3 -->
+    <div class="artisan-card">
+      <div class="ac-photo">
+        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&h=200&fit=crop&q=80" alt="Govind Waghmare">
+      </div>
+      <div class="ac-name">Govind Waghmare</div>
+      <div class="ac-location">📍 Pune, Maharashtra</div>
+      <div class="ac-meta">
+        <span class="ac-tag">18 Years Experience</span>
+        <span class="ac-tag">Base & Column Work</span>
+      </div>
+      <div class="ac-spec">Expert in classical stepped-base forms and polished column finishing. Known for structural precision.</div>
+      <div class="ac-divider"></div>
+      <div class="ac-quote">The base determines everything. If the foundation is not true, nothing above it will feel right — in stone or in life.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OUR ROLE -->
+<section id="our-role">
+  <span class="lbl">What We Do</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);color:var(--cream);margin-bottom:9px;">Our Role in the Process</h2>
+  <p style="color:var(--sand-dark);font-weight:300;max-width:540px;margin-bottom:0;line-height:1.8;">We are not manufacturers. We are curators, quality partners, and the bridge between exceptional craftsmen and the homes that deserve their work.</p>
+  <span class="rule" style="background:linear-gradient(90deg,var(--saffron-light),var(--saffron),transparent);"></span>
+  <div class="role-grid">
+    <div class="role-item">
+      <div class="role-icon">◈</div>
+      <div class="role-title">Curate Artisans</div>
+      <div class="role-desc">We identify, verify, and onboard craftsmen with a demonstrated mastery of black stone carving. Every partner is visited in person before collaboration begins.</div>
+    </div>
+    <div class="role-item">
+      <div class="role-icon">◈</div>
+      <div class="role-title">Standardise Quality</div>
+      <div class="role-desc">We define exact design specifications, dimension standards, finish grades, and inspection checkpoints. No piece ships without passing our review process.</div>
+    </div>
+    <div class="role-item">
+      <div class="role-icon">◈</div>
+      <div class="role-title">Handle Communication</div>
+      <div class="role-desc">Every customer enquiry, confirmation call, and delivery update is managed by our team. Artisans focus on craft. We handle everything else.</div>
+    </div>
+    <div class="role-item">
+      <div class="role-icon">◈</div>
+      <div class="role-title">Ensure Delivery</div>
+      <div class="role-desc">We coordinate packaging, logistics, and last-mile delivery across India. Every order is tracked, and we follow up personally to confirm receipt.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section id="trust-bar" style="padding:64px 6%;">
+  <span class="lbl">By the Numbers</span>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.5rem);margin-bottom:36px;">Built on Trust, Delivered in Stone</h2>
+  <div class="trust-row">
+    <div class="trust-stat">
+      <div class="ts-num">500+</div>
+      <div class="ts-label">Homes Delivered</div>
+    </div>
+    <div class="trust-stat">
+      <div class="ts-num">100%</div>
+      <div class="ts-label">Handcrafted in Black Stone</div>
+    </div>
+    <div class="trust-stat">
+      <div class="ts-num">3</div>
+      <div class="ts-label">Artisan Partner Workshops</div>
+    </div>
+    <div class="trust-stat">
+      <div class="ts-num">4.9 ★</div>
+      <div class="ts-label">Average Customer Rating</div>
+    </div>
+  </div>
+
+  <!-- Final brand statement -->
+  <div style="margin-top:52px;padding:36px 40px;background:var(--brown);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);color:var(--cream);margin-bottom:8px;">Ready to bring one home?</div>
+      <div style="font-size:0.9rem;color:var(--sand-dark);font-weight:300;">Browse our readymade collection — crafted, inspected, and ready to deliver.</div>
+    </div>
+    <a href="readymade.html" style="display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:0.26em;text-transform:uppercase;text-decoration:none;background:var(--saffron-deep);color:var(--white);padding:15px 40px;transition:all 0.28s;white-space:nowrap;">View Collection →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-logo">Divya<span>Shilla</span></div>
+    <div class="f-sub">Sacred Black Stone Craftsmanship · Built for Generations</div>
+  </div>
+  <div class="f-note">
+    Call us: +91 86051 31717<br>
+    Pune, Maharashtra
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/918605131717?text=Hello%2C%20I%20am%20interested%20in%20a%20Tulsi%20Vrindavan." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</body>
+</html>
