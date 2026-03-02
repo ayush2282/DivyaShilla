@@ -383,8 +383,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
     <span class="filter-lbl">Filter:</span>
     <button class="filter-btn active" onclick="filterProducts('all',this)">All</button>
     <button class="filter-btn" onclick="filterProducts('small',this)">2.5 ft</button>
-    <button class="filter-btn" onclick="filterProducts('medium',this)">5 ft</button>
-    <button class="filter-btn" onclick="filterProducts('large',this)">8 ft</button>
+    <button class="filter-btn" onclick="filterProducts('medium',this)">3.15 ft</button>
+    <button class="filter-btn" onclick="filterProducts('large',this)">3.5 ft</button>
     <button class="filter-btn" onclick="filterProducts('bestseller',this)">Bestsellers</button>
   </div>
   <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
@@ -406,8 +406,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
     <div class="sb-section">
       <div class="sb-title">Size</div>
       <div class="sb-option"><input type="checkbox" id="f-s1" checked onchange="applyFilters()"><label for="f-s1">2.5 ft <span>(3)</span></label></div>
-      <div class="sb-option"><input type="checkbox" id="f-s2" checked onchange="applyFilters()"><label for="f-s2">5 ft <span>(4)</span></label></div>
-      <div class="sb-option"><input type="checkbox" id="f-s3" checked onchange="applyFilters()"><label for="f-s3">8 ft <span>(2)</span></label></div>
+      <div class="sb-option"><input type="checkbox" id="f-s2" checked onchange="applyFilters()"><label for="f-s2">3.15 ft <span>(4)</span></label></div>
+      <div class="sb-option"><input type="checkbox" id="f-s3" checked onchange="applyFilters()"><label for="f-s3">3.5 ft <span>(2)</span></label></div>
     </div>
     <div class="sb-section">
       <div class="sb-title">Style</div>
@@ -448,12 +448,12 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
       -->
 
       <!-- PRODUCT 1 -->
-      <div class="product-card" data-size="medium" data-price="10500" data-badge="bestseller" data-style="traditional" data-rating="4.9" data-reviews="38"
-           data-name="Shanthi Classic" data-desc="Timeless stepped base with smooth polished column and simple crown. The perfect traditional Tulsi Katta for any courtyard." data-specs="5 ft · Classic Base · Plain Column · Simple Crown">
+      <div class="product-card" data-size="medium" data-price="18500" data-badge="bestseller" data-style="majestic" data-rating="4.9" data-reviews="48"
+           data-name="Classic Design" data-desc="Timeless stepped base with smooth polished column and simple crown. The perfect traditional Tulsi Katta for any courtyard." data-specs="3.5 ft">
         <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
           <div class="swiper-track">
-            <img src="imge_1.png" alt="Shanthi Classic">
-            <img src="image_2.png" alt="Shanthi Classic detail">
+            <img src="product_image/classic_design.png" alt="Classic Design">
+            <img src="product_image/classic_design_2.jpeg" alt="Classic Design Detail">
           </div>
           <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
@@ -462,27 +462,27 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
-          <div class="prod-series">Shanthi Series</div>
-          <div class="prod-name">Shanthi Classic</div>
+          <div class="prod-series">Majestic Series</div>
+          <div class="prod-name">Classic Design</div>
           <div class="prod-desc">Timeless stepped base with smooth polished column and simple crown. The perfect traditional Tulsi Katta for any courtyard.</div>
           <div class="prod-specs">
-            <span class="prod-spec-tag">5 ft</span>
-            <span class="prod-spec-tag">Classic Base</span>
-            <span class="prod-spec-tag">Plain Column</span>
+            <span class="prod-spec-tag">3.5 ft</span>
+            <!-- <span class="prod-spec-tag">Classic Base</span>
+            <span class="prod-spec-tag">Plain Column</span> -->
           </div>
-          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.9 (38 reviews)</span></div>
-          <div class="prod-pricing"><span class="prod-price">₹ 10,500</span></div>
+          <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.9 (48 reviews)</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 18,500</span></div>
           <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 2 -->
-      <div class="product-card" data-size="medium" data-price="15800" data-badge="new" data-style="floral" data-rating="4.8" data-reviews="14"
-           data-name="Divya Floral" data-desc="Elegant arch base with hand-carved lotus motifs on the column, crowned with a sacred Kalash. A statement piece." data-specs="5 ft · Arch Base · Floral Column · Kalash Crown">
+      <div class="product-card" data-size="medium" data-price="15800" data-badge="new" data-style="traditional" data-rating="4.8" data-reviews="14"
+           data-name="Classic Vrindavan" data-desc="Elegant arch base with hand-carved lotus motifs on the column, crowned with a sacred Kalash. A statement piece." data-specs="5 ft">
         <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
           <div class="swiper-track">
-            <img src="image_4.jpeg" alt="Divya Floral">
-            <img src="image_4.jpeg" alt="Divya Floral detail">
+            <img src="product_image/classic_vrindavan.png" alt="Classic Vrindavan">
+            <img src="product_image/classic_vrindavan_2.png" alt="Classic Vrindavan detail">
           </div>
           <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
@@ -491,13 +491,13 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <div class="prod-badges"><span class="prod-badge badge-new">New</span></div>
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
-          <div class="prod-series">Divya Series</div>
-          <div class="prod-name">Divya Floral</div>
+          <div class="prod-series">Traditional Series</div>
+          <div class="prod-name">Classic Vrindavan</div>
           <div class="prod-desc">Elegant arch base with hand-carved lotus motifs on the column, crowned with a sacred Kalash. A statement piece.</div>
           <div class="prod-specs">
-            <span class="prod-spec-tag">5 ft</span>
-            <span class="prod-spec-tag">Arch Base</span>
-            <span class="prod-spec-tag">Floral Column</span>
+            <span class="prod-spec-tag">3.15 ft</span>
+            <!-- <span class="prod-spec-tag">Arch Base</span>
+            <span class="prod-spec-tag">Floral Column</span> -->
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.8 (14 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 15,800</span></div>
@@ -507,11 +507,11 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 
       <!-- PRODUCT 3 -->
       <div class="product-card" data-size="large" data-price="24500" data-badge="" data-style="majestic" data-rating="5.0" data-reviews="9"
-           data-name="Majestic Grand" data-desc="Temple-grade Shikhara base with full vine &amp; Kalash relief sculpture. Designed for large courtyards and temples." data-specs="8 ft · Temple Base · Sculpted Column · Stepped Shikhara">
+           data-name="Deep Nandi" data-desc="Temple-grade Shikhara base with full vine &amp; Kalash relief sculpture. Designed for large courtyards and temples." data-specs="3.5 ft">
         <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
           <div class="swiper-track">
-            <img src="image_3.jpeg" alt="Majestic Grand">
-            <img src="image_3.jpeg" alt="Majestic Grand detail">
+            <img src="product_image/deep_nandi.png" alt="Deep Nandi">
+            <img src="product_image/deep_nandi_2.png" alt="Deep Nandi detail">
           </div>
           <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
@@ -521,12 +521,12 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Majestic Series</div>
-          <div class="prod-name">Majestic Grand</div>
+          <div class="prod-name">Deep Nandi</div>
           <div class="prod-desc">Temple-grade Shikhara base with full vine &amp; Kalash relief sculpture. Designed for large courtyards and temples.</div>
           <div class="prod-specs">
-            <span class="prod-spec-tag">8 ft</span>
-            <span class="prod-spec-tag">Temple Base</span>
-            <span class="prod-spec-tag">Sculpted Column</span>
+            <span class="prod-spec-tag">3.5 ft</span>
+            <!-- <span class="prod-spec-tag">Temple Base</span>
+            <span class="prod-spec-tag">Sculpted Column</span> -->
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">5.0 (9 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 24,500</span></div>
@@ -535,32 +535,32 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
       </div>
 
       <!-- PRODUCT 4 -->
-      <div class="product-card" data-size="small" data-price="8200" data-badge="bestseller" data-style="traditional" data-rating="4.7" data-reviews="52"
-           data-name="Ghar Tulsi" data-desc="Compact and beautiful. Perfect for balconies, flats, and small home courtyards. Our most popular compact design." data-specs="2.5 ft · Classic Base · Plain Column · Simple Crown">
+      <div class="product-card" data-size="small" data-price="15200" data-badge="sale" data-style="traditional" data-rating="4.7" data-reviews="52"
+           data-name="Shree Ram" data-desc="Compact and beautiful. Perfect for balconies, flats, and small home courtyards. Our most popular compact design." data-specs="3.5 ft">
         <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
           <div class="swiper-track">
-            <img src="image_5.jpeg" alt="Ghar Tulsi">
-            <img src="image_5.jpeg" alt="Ghar Tulsi detail">
+            <img src="product_image/shree_ram.png" alt="Shree Ram">
+            <img src="product_image/shree_ram_2.jpeg" alt="Shree Ram detail">
           </div>
           <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
           <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
-        <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
+        <div class="prod-badges"><span class="prod-badge badge-bestseller">Sale</span></div>
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Ghar Series</div>
-          <div class="prod-name">Ghar Tulsi</div>
+          <div class="prod-name">Shree Ram</div>
           <div class="prod-desc">Compact and beautiful. Perfect for balconies, flats, and small home courtyards. Our most popular compact design.</div>
           <div class="prod-specs">
-            <span class="prod-spec-tag">2.5 ft</span>
-            <span class="prod-spec-tag">Classic Base</span>
-            <span class="prod-spec-tag">Simple Crown</span>
+            <span class="prod-spec-tag">3.5 ft</span>
+            <!-- <span class="prod-spec-tag">Classic Base</span>
+            <span class="prod-spec-tag">Simple Crown</span> -->
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.7 (52 reviews)</span></div>
           <div class="prod-pricing">
-            <span class="prod-price">₹ 8,200</span>
-            <span class="prod-price-orig">₹ 9,500</span>
+            <span class="prod-price">₹ 12,200</span>
+            <span class="prod-price-orig">₹ 14,500</span>
             <span class="prod-price-off">14% off</span>
           </div>
           <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
@@ -568,12 +568,12 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
       </div>
 
       <!-- PRODUCT 5 -->
-      <div class="product-card" data-size="small" data-price="9800" data-badge="" data-style="floral" data-rating="4.6" data-reviews="21"
-           data-name="Ghar Lotus" data-desc="Small but detailed. Features hand-carved lotus motifs on the column — a premium compact choice." data-specs="2.5 ft · Arch Base · Floral Column · Simple Pinnacle">
+      <div class="product-card" data-size="large" data-price="50000" data-badge="new" data-style="temple" data-rating="4.6" data-reviews="21"
+           data-name="Stambh Vrindavan" data-desc="Small but detailed. Features hand-carved lotus motifs on the column — a premium compact choice." data-specs="5 ft ">
         <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
           <div class="swiper-track">
-            <img src="image_3.jpeg" alt="Ghar Lotus">
-            <img src="image_3.jpeg" alt="Ghar Lotus detail">
+            <img src="product_image/stambh_vrindavan.png" alt="Stambh Vrindavan">
+            <img src="product_image/stambh_vrindavan_2.jpeg" alt="Stambh Vrindavan detail">
           </div>
           <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
@@ -583,26 +583,27 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Ghar Series</div>
-          <div class="prod-name">Ghar Lotus</div>
+          <div class="prod-name">Stambh Vrindavan</div>
           <div class="prod-desc">Small but detailed. Features hand-carved lotus motifs on the column — a premium compact choice.</div>
           <div class="prod-specs">
-            <span class="prod-spec-tag">2.5 ft</span>
-            <span class="prod-spec-tag">Arch Base</span>
-            <span class="prod-spec-tag">Floral Column</span>
+            <span class="prod-spec-tag">5 ft</span>
+            <!-- <span class="prod-spec-tag">Arch Base</span>
+            <span class="prod-spec-tag">Floral Column</span> -->
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★☆</span><span class="prod-rating-count">4.6 (21 reviews)</span></div>
-          <div class="prod-pricing"><span class="prod-price">₹ 9,800</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 50
+            ,800</span></div>
           <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
 
       <!-- PRODUCT 6 -->
-      <div class="product-card" data-size="medium" data-price="18500" data-badge="sale" data-style="temple" data-rating="4.9" data-reviews="17"
-           data-name="Mandir Classic" data-desc="Temple arch base with Shikhara crown. Inspired by classical South Indian temple architecture — deeply sacred." data-specs="5 ft · Arch Base · Plain Column · Stepped Shikhara">
+      <div class="product-card" data-size="medium" data-price="12500" data-badge="sale" data-style="temple" data-rating="4.9" data-reviews="17"
+           data-name="Shree Vrindavan" data-desc="Temple arch base with Shikhara crown. Inspired by classical South Indian temple architecture — deeply sacred." data-specs="3.15 ft">
         <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
           <div class="swiper-track">
-            <img src="image_4.jpeg" alt="Mandir Classic">
-            <img src="image_4.jpeg" alt="Mandir Classic detail">
+            <img src="product_image/shree_vrindavan.png" alt="Shree Vrindavan">
+            <img src="product_image/shree_vrindavan_2.jpeg" alt="Shree Vrindavan detail">
           </div>
           <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
@@ -612,17 +613,17 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Mandir Series</div>
-          <div class="prod-name">Mandir Classic</div>
+          <div class="prod-name">Shree Vrindavan</div>
           <div class="prod-desc">Temple arch base with Shikhara crown. Inspired by classical South Indian temple architecture — deeply sacred.</div>
           <div class="prod-specs">
-            <span class="prod-spec-tag">5 ft</span>
+            <span class="prod-spec-tag">3.15 ft</span>
             <span class="prod-spec-tag">Arch Base</span>
             <span class="prod-spec-tag">Stepped Shikhara</span>
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">4.9 (17 reviews)</span></div>
           <div class="prod-pricing">
-            <span class="prod-price">₹ 18,500</span>
-            <span class="prod-price-orig">₹ 21,000</span>
+            <span class="prod-price">₹ 12,500</span>
+            <span class="prod-price-orig">₹ 14,000</span>
             <span class="prod-price-off">12% off</span>
           </div>
           <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
@@ -630,12 +631,12 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
       </div>
 
       <!-- PRODUCT 7 -->
-      <div class="product-card" data-size="large" data-price="31000" data-badge="new" data-style="majestic" data-rating="5.0" data-reviews="4"
-           data-name="Rajguru Grand" data-desc="The most premium design in our collection. Full sculpted column, Kalash dome crown, and decorative arch base — for those who want the best." data-specs="8 ft · Arch Base · Sculpted Column · Kalash Crown">
+      <div class="product-card" data-size="medium" data-price="12000" data-badge="new" data-style="floral" data-rating="5.0" data-reviews="4"
+           data-name="Simple Nandi" data-desc="The most premium design in our collection. Full sculpted column, Kalash dome crown, and decorative arch base — for those who want the best." data-specs="2.5 ft ">
         <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
           <div class="swiper-track">
-            <img src="image_6.jpeg" alt="Rajguru Grand">
-            <img src="image_6.jpeg" alt="Rajguru Grand detail">
+            <img src="product_image/simple_nandi.png" alt="Simple Nandi">
+            <img src="product_image/simple_nandi_2.png" alt="Simple Nandi detail">
           </div>
           <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
@@ -645,15 +646,15 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Rajguru Series</div>
-          <div class="prod-name">Rajguru Grand</div>
+          <div class="prod-name">Simple Nandi</div>
           <div class="prod-desc">The most premium design in our collection. Full sculpted column, Kalash dome crown, and decorative arch base — for those who want the best.</div>
           <div class="prod-specs">
-            <span class="prod-spec-tag">8 ft</span>
-            <span class="prod-spec-tag">Arch Base</span>
-            <span class="prod-spec-tag">Sculpted Column</span>
+            <span class="prod-spec-tag">2.5 ft</span>
+            <!-- <span class="prod-spec-tag">Arch Base</span>
+            <span class="prod-spec-tag">Sculpted Column</span> -->
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★★</span><span class="prod-rating-count">5.0 (4 reviews)</span></div>
-          <div class="prod-pricing"><span class="prod-price">₹ 31,000</span></div>
+          <div class="prod-pricing"><span class="prod-price">₹ 12,000</span></div>
           <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">View &amp; Enquire</button>
         </div>
       </div>
