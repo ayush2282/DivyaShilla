@@ -293,6 +293,17 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
     color:var(--saffron-deep);
   }
 }
+.nav-about-mob{display:none;}
+@media(max-width:640px){
+  .nav-about-mob{
+    display:inline-block;
+    font-family:'Josefin Sans',sans-serif;
+    font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;
+    margin-right:10px;
+  }
+  .nav-about-mob:hover{color:var(--saffron-deep);}
+}
 </style>
 </head>
 <body>
@@ -306,6 +317,7 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
     <a href="readymade.html" class="nav-special">Readymade</a>
     <a href="#order">Order</a>
   </div>
+  <a href="about.html" class="nav-about-mob">About Us</a>
   <button class="nav-ham" id="navHam" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
