@@ -34,7 +34,7 @@ nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-conten
 .nav-links a{font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-left:24px;transition:color 0.22s;}
 .nav-links a:hover{color:var(--saffron-deep);}
 .nav-links a.active-page{color:var(--saffron-deep);border-bottom:2px solid var(--saffron-deep);padding-bottom:2px;}
-@media(max-width:640px){.nav-links{display:none;}}
+
 
 /* PAGE HEADER */
 .page-header{
@@ -346,6 +346,65 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 .f-logo span{color:var(--saffron-light);}
 .f-sub{font-size:0.78rem;color:var(--muted);margin-top:3px;}
 .f-note{font-size:0.78rem;color:var(--muted);text-align:right;}
+
+/* HAMBURGER — mobile only */
+.nav-ham{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;
+  width:36px;height:36px;
+  background:none;border:none;cursor:pointer;padding:4px;
+  flex-shrink:0;
+}
+.nav-ham span{
+  display:block;width:22px;height:1.5px;
+  background:var(--brown);
+  transition:transform 0.28s ease, opacity 0.2s ease;
+  transform-origin:center;
+}
+/* Open state */
+.nav-ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+@media(max-width:640px){
+  .nav-ham{display:flex;}
+  .nav-links{
+    display:none;
+    position:fixed;top:57px;left:0;right:0;
+    background:rgba(251,245,234,0.98);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--sand);
+    flex-direction:column;
+    padding:18px 6% 22px;
+    gap:0;
+    z-index:199;
+    transform:translateY(-8px);
+    opacity:0;
+    transition:opacity 0.24s ease, transform 0.24s ease;
+    pointer-events:none;
+  }
+  .nav-links.open{
+    display:flex;
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+  .nav-links a{
+    margin-left:0;
+    padding:13px 0;
+    border-bottom:1px solid var(--sand);
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+  }
+  .nav-links a:last-child{border-bottom:none;}
+  .nav-links a.nav-special{
+    border:none;
+    border-bottom:1px solid var(--sand);
+    padding:13px 0;
+    color:var(--saffron-deep);
+  }
+}
 </style>
 </head>
 <body>
@@ -359,6 +418,9 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
     <a href="readymade.html" class="active-page">Readymade</a>
     <a href="index.html#order">Order</a>
   </div>
+  <button class="nav-ham" id="navHam" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- PAGE HEADER -->
@@ -1018,6 +1080,29 @@ function toggleWish(e, btn) {
   btn.classList.toggle('wished');
   btn.textContent = btn.classList.contains('wished') ? '♥' : '♡';
 }
+
+
+function toggleNav(){
+  document.getElementById('navHam').classList.toggle('open');
+  document.querySelector('.nav-links').classList.toggle('open');
+}
+// Close on outside click
+document.addEventListener('click',function(e){
+  const ham=document.getElementById('navHam');
+  const links=document.querySelector('.nav-links');
+  if(ham && links && !ham.contains(e.target) && !links.contains(e.target)){
+    ham.classList.remove('open');
+    links.classList.remove('open');
+  }
+});
+// Close on nav link tap
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.getElementById('navHam').classList.remove('open');
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
 </script>
 
 <!-- WhatsApp Floating Button -->
