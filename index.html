@@ -210,7 +210,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .tpt-desc{font-size:0.82rem;color:var(--muted);font-weight:300;}
 
 /* CAROUSEL */
-.carousel-wrap{position:relative;}
+.carousel-wrap{position:relative;max-width:100%;overflow:hidden;}
 .carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:14px;padding-bottom:12px;scrollbar-width:none;}
 .carousel-track::-webkit-scrollbar{display:none;}
 .c-arrows{display:flex;gap:8px;margin-bottom:14px;justify-content:flex-end;}
@@ -240,31 +240,34 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
   display:none;
   flex-direction:column;justify-content:center;align-items:center;
   gap:5px;
-  width:36px;height:36px;
+  width:40px;height:40px;
   background:none;border:none;cursor:pointer;padding:4px;
   flex-shrink:0;
+  z-index:201;
 }
 .nav-ham span{
-  display:block;width:22px;height:1.5px;
+  display:block;width:22px;height:2px;
   background:var(--brown);
   transition:transform 0.28s ease, opacity 0.2s ease;
   transform-origin:center;
+  border-radius:2px;
 }
 /* Open state */
-.nav-ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.nav-ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
 @media(max-width:640px){
+  nav{padding:12px 5%;}
   .nav-ham{display:flex;}
   .nav-links{
     display:none;
-    position:fixed;top:57px;left:0;right:0;
+    position:fixed;top:53px;left:0;right:0;
     background:rgba(251,245,234,0.98);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--sand);
     flex-direction:column;
-    padding:18px 6% 22px;
+    padding:16px 5% 20px;
     gap:0;
     z-index:199;
     transform:translateY(-8px);
@@ -282,8 +285,9 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
     margin-left:0;
     padding:13px 0;
     border-bottom:1px solid var(--sand);
-    font-size:0.72rem;
+    font-size:0.78rem;
     letter-spacing:0.22em;
+    color:var(--brown);
   }
   .nav-links a:last-child{border-bottom:none;}
   .nav-links a.nav-special{
@@ -291,18 +295,99 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
     border-bottom:1px solid var(--sand);
     padding:13px 0;
     color:var(--saffron-deep);
+    background:none;
   }
 }
-.nav-about-mob{display:none;}
+
+/* ===== MOBILE RESPONSIVE ===== */
 @media(max-width:640px){
-  .nav-about-mob{
-    display:inline-block;
-    font-family:'Josefin Sans',sans-serif;
-    font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
-    color:var(--muted);text-decoration:none;
-    margin-right:10px;
+
+  /* HERO */
+  #hero{min-height:auto;padding:72px 5% 40px;}
+  .hero-h1{font-size:2rem;line-height:1.1;margin-bottom:12px;}
+  .hero-sub{font-size:0.9rem;margin-bottom:24px;line-height:1.7;}
+  .hero-orn{font-size:0.95rem;margin-bottom:10px;}
+  .hero-btns{flex-direction:column;gap:10px;}
+  .hero-btns .btn{text-align:center;padding:13px 20px;font-size:0.68rem;}
+
+  /* SIZE SECTION */
+  #size{padding:40px 5%;}
+  #size h2{font-size:1.5rem !important;}
+  #size > p{font-size:0.88rem;}
+  .size-layout{gap:22px;}
+  .size-img-box{padding:16px 12px 12px;}
+  .size-img-box img{max-width:220px;}
+  .size-img-note{font-size:0.5rem;}
+
+  /* Size cards — clickable on mobile */
+  .size-card{
+    cursor:pointer;
+    padding:14px 14px;
+    gap:12px;
+    transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;
+    -webkit-tap-highlight-color:rgba(192,94,10,0.1);
   }
-  .nav-about-mob:hover{color:var(--saffron-deep);}
+  .size-card:active{border-color:var(--saffron-deep);background:#FFF9F3;box-shadow:0 4px 18px rgba(224,123,32,0.15);}
+  .sc-ft{font-size:1.35rem;}
+  .sc-desc{font-size:0.78rem;}
+  .sc-thumb{width:40px;}
+  .sc-thumb img{height:52px;}
+  /* Arrow hint on mobile to show it's clickable */
+  .size-card::after{
+    content:'→';
+    font-size:1rem;
+    color:var(--saffron-deep);
+    opacity:0.7;
+    margin-left:auto;
+    flex-shrink:0;
+  }
+
+  /* CUSTOM DESIGN */
+  #builder{padding:40px 5% !important;}
+  #builder h2{font-size:1.35rem !important;}
+  #builder p{font-size:0.88rem !important;margin-bottom:22px !important;}
+  #builder .btn{padding:13px 24px;font-size:0.68rem;}
+
+  /* READYMADE BANNER */
+  #readymade-banner{padding:40px 5%;}
+  .rm-banner-title{font-size:1.45rem;}
+  .rm-banner-sub{font-size:0.88rem;}
+  .rm-banner-num{font-size:2.5rem;}
+  .btn-rm{padding:13px 26px;font-size:0.66rem;}
+
+  /* ORDER FORM */
+  #order{padding:40px 5%;}
+  #order h2{font-size:1.5rem !important;}
+
+  /* TRUST */
+  #trust{padding:40px 5%;}
+  #trust h2{font-size:1.5rem !important;}
+  .tpt-title{font-size:0.95rem;}
+  .tpt-desc{font-size:0.78rem;}
+
+  /* FOOTER */
+  footer{padding:26px 5%;flex-direction:column;align-items:flex-start;gap:8px;}
+  .f-note{text-align:left;}
+}
+.nav-about{
+  display:none;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:0.7rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--brown);
+  text-decoration:none;
+  margin-right:12px;
+}
+
+@media(max-width:640px){
+  .nav-about{
+    display:block;
+  }
+}
+html, body{
+overflow-x:hidden;
+width:100%;
 }
 </style>
 </head>
@@ -311,13 +396,13 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Divya<span>Shilla</span></div>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="#size">Sizes</a>
     <a href="about.html">About Us</a>
     <a href="readymade.html" class="nav-special">Readymade</a>
     <a href="#order">Order</a>
   </div>
-  <a href="about.html" class="nav-about-mob">About Us</a>
+  <a href="about.html" class="nav-about">About Us</a>
   <button class="nav-ham" id="navHam" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -359,21 +444,21 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
       <p class="size-img-note">Human height reference for scale comparison</p>
     </div>
     <div class="size-cards">
-      <div class="size-card">
+      <div class="size-card" data-filter="small" onclick="goToSize(this)">
         <div class="sc-thumb"><img src="refrence_image/2.5_ref.png" alt="2.5 ft"></div>
         <div class="sc-info">
           <div class="sc-ft">2.5 ft</div>
           <div class="sc-desc">Compact &amp; elegant · Ideal for balcony or small courtyard</div>
         </div>
       </div>
-      <div class="size-card">
+      <div class="size-card" data-filter="medium" onclick="goToSize(this)">
         <div class="sc-thumb"><img src="refrence_image/3.15_ref.png" alt="3.15 ft"></div>
         <div class="sc-info">
           <div class="sc-ft">3.15 ft</div>
           <div class="sc-desc">Most popular · Perfect for an open courtyard</div>
         </div>
       </div>
-      <div class="size-card">
+      <div class="size-card" data-filter="large" onclick="goToSize(this)">
         <div class="sc-thumb"><img src="refrence_image/4_ref.png" alt="4 ft"></div>
         <div class="sc-info">
           <div class="sc-ft">4 ft</div>
@@ -511,12 +596,18 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 </style>
 
 <script>
+/* ============ SIZE CARD — NAVIGATE WITH FILTER (mobile) ============ */
+function goToSize(card) {
+  const filter = card.dataset.filter;
+  window.location.href = 'readymade.html?size=' + filter;
+}
+
 /* ============ CAROUSEL SCROLL ============ */
 function scrollC(id, dir) {
   const track = document.getElementById(id);
   if(!track) return;
-  const card  = track.querySelector('.part-card, .tc-slide');
-  if (!card) return;
+  const card = track.querySelector('.part-card, .tc-slide');
+  if(!card) return;
   track.scrollBy({ left: dir * (card.offsetWidth + 14), behavior: 'smooth' });
 }
 
@@ -525,47 +616,42 @@ function scrollC(id, dir) {
   const form = document.querySelector('#order form');
   if(!form) return;
   let submitted = false;
-
   form.addEventListener('submit', function(e){
     if(submitted){ e.preventDefault(); return; }
     submitted = true;
     const btn = form.querySelector('[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Sending…';
-
-    // Show success after brief delay (form posts to hidden iframe)
     setTimeout(function(){
       btn.textContent = '✓  Enquiry Sent — We Will Call You Shortly';
       btn.style.background = 'linear-gradient(135deg,#3a7a50,#2d6040)';
       form.reset();
-      // re-enable after 8s so user can re-submit if needed
       setTimeout(function(){ btn.disabled=false; btn.textContent='Request Confirmation Call'; btn.style.background=''; submitted=false; }, 8000);
     }, 1200);
   });
 })();
 
-
+/* ============ HAMBURGER NAV ============ */
 function toggleNav(){
-  document.getElementById('navHam').classList.toggle('open');
-  document.querySelector('.nav-links').classList.toggle('open');
+  const ham   = document.getElementById('navHam');
+  const links = document.getElementById('navLinks');
+  ham.classList.toggle('open');
+  links.classList.toggle('open');
 }
-// Close on outside click
-document.addEventListener('click',function(e){
-  const ham=document.getElementById('navHam');
-  const links=document.querySelector('.nav-links');
+document.addEventListener('click', function(e){
+  const ham   = document.getElementById('navHam');
+  const links = document.getElementById('navLinks');
   if(ham && links && !ham.contains(e.target) && !links.contains(e.target)){
     ham.classList.remove('open');
     links.classList.remove('open');
   }
 });
-// Close on nav link tap
-document.querySelectorAll('.nav-links a').forEach(function(a){
-  a.addEventListener('click',function(){
+document.querySelectorAll('#navLinks a').forEach(function(a){
+  a.addEventListener('click', function(){
     document.getElementById('navHam').classList.remove('open');
-    document.querySelector('.nav-links').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
   });
 });
-
 </script>
 <iframe name="hidden_iframe" style="display:none;"></iframe>
 </body>

@@ -262,7 +262,74 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 .f-sub{font-size:0.78rem;color:var(--muted);margin-top:3px;}
 .f-note{font-size:0.78rem;color:var(--muted);text-align:right;}
 
-/* ===== WHATSAPP ===== */
+/* ===== MOBILE RESPONSIVE FIXES (max-width:640px) ===== */
+@media(max-width:640px){
+
+  /* PAGE HERO */
+  .page-header{padding:52px 5% 44px;text-align:left;}
+  .ph-orn{font-size:0.85rem;letter-spacing:0.3em;margin-bottom:14px;}
+  .ph-title{font-size:1.9rem;line-height:1.1;margin-bottom:14px;}
+  .ph-para{font-size:0.9rem;line-height:1.8;}
+
+  /* SECTIONS — reduce padding */
+  section{padding:44px 5%;}
+  #process{padding:44px 5%;}
+  #partners{padding:44px 5%;}
+  #our-role{padding:44px 5%;}
+  #trust-bar{padding:44px 5% !important;}
+
+  /* Section headings */
+  #process h2,#partners h2,#our-role h2,#trust-bar h2{font-size:1.5rem !important;}
+  #process p,#partners p{font-size:0.88rem;}
+
+  /* PROCESS STEPS — stack, tighten */
+  .process-step{gap:18px;margin-bottom:36px;}
+  .ps-img-wrap{aspect-ratio:3/2;}
+  .ps-num{font-size:2.4rem;bottom:8px;left:8px;}
+  .ps-title{font-size:1.25rem;margin-bottom:8px;}
+  .ps-desc{font-size:0.86rem;line-height:1.7;}
+  .ps-step-label{font-size:0.52rem;margin-bottom:6px;}
+
+  /* PARTNERS INTRO — pillars full width */
+  .partners-intro{margin-bottom:36px;}
+  .pi-left p{font-size:0.9rem;line-height:1.75;}
+  .pi-pillar{padding:12px 14px;gap:12px;}
+  .pi-pillar-icon{width:26px;height:26px;font-size:0.72rem;}
+  .pi-pillar-title{font-size:0.92rem;}
+  .pi-pillar-desc{font-size:0.78rem;}
+
+  /* ARTISAN CARDS — 1 per row on mobile */
+  .artisan-grid{grid-template-columns:1fr;gap:16px;}
+  .artisan-card{padding:20px 18px 18px;}
+  .ac-photo{width:68px;height:68px;margin-bottom:12px;}
+  .ac-name{font-size:1rem;}
+  .ac-location{font-size:0.5rem;margin-bottom:10px;}
+  .ac-meta{gap:8px;margin-bottom:10px;}
+  .ac-tag{font-size:0.48rem;padding:3px 7px;}
+  .ac-spec{font-size:0.78rem;margin-bottom:12px;}
+  .ac-quote{font-size:0.82rem;}
+  .ac-quote::before,.ac-quote::after{font-size:1.8rem;}
+
+  /* OUR ROLE */
+  .role-item{padding:22px 18px;}
+  .role-icon{width:34px;height:34px;font-size:1rem;margin-bottom:12px;}
+  .role-title{font-size:0.96rem;margin-bottom:6px;}
+  .role-desc{font-size:0.78rem;}
+
+  /* TRUST STATS */
+  .trust-stat{padding:22px 14px;}
+  .ts-num{font-size:1.9rem;}
+  .ts-label{font-size:0.5rem;}
+
+  /* CTA BANNER */
+  #trust-bar > div:last-child{padding:24px 20px !important;flex-direction:column;align-items:flex-start !important;}
+  #trust-bar > div:last-child a{padding:12px 24px !important;font-size:0.65rem !important;width:100%;text-align:center;}
+
+  /* FOOTER */
+  footer{padding:24px 5%;flex-direction:column;align-items:flex-start;gap:8px;}
+  .f-note{text-align:left;}
+}
+
 .wa-float{
   position:fixed;bottom:28px;right:28px;z-index:999;
   width:56px;height:56px;border-radius:50%;

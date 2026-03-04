@@ -416,6 +416,144 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
   }
   .nav-about-mob:hover{color:var(--saffron-deep);}
 }
+
+/* ===== MOBILE IMAGE VIEWER (image-only overlay for mobile) ===== */
+.mob-img-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,0.96);
+  flex-direction:column;
+}
+.mob-img-overlay.open{display:flex;}
+
+/* Top bar */
+.mio-topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;
+  flex-shrink:0;
+}
+.mio-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;color:var(--cream);
+  flex:1;padding-right:12px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.mio-price{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:0.8rem;letter-spacing:0.1em;
+  color:var(--saffron-light);
+  white-space:nowrap;margin-right:14px;
+}
+.mio-close{
+  background:none;border:none;color:rgba(255,255,255,0.7);
+  font-size:1.4rem;cursor:pointer;line-height:1;padding:4px;
+  flex-shrink:0;
+}
+
+/* Image area — takes all remaining height */
+.mio-gallery{
+  flex:1;
+  position:relative;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.mio-track{
+  display:flex;
+  width:100%;height:100%;
+  transition:transform 0.32s ease;
+}
+.mio-track img{
+  flex:0 0 100%;
+  width:100%;height:100%;
+  object-fit:contain;
+  display:block;
+}
+.mio-arr{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.12);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1rem;z-index:5;
+}
+.mio-arr.prev{left:10px;}
+.mio-arr.next{right:10px;}
+.mio-dots{
+  position:absolute;bottom:10px;left:0;right:0;
+  display:flex;justify-content:center;gap:6px;
+}
+.mio-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.35);transition:background 0.2s,transform 0.2s;}
+.mio-dot.active{background:#fff;transform:scale(1.3);}
+
+/* Bottom action bar */
+.mio-bottom{
+  flex-shrink:0;
+  padding:14px 16px 20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;gap:10px;
+}
+.mio-desc{
+  flex:1;
+  font-size:0.8rem;color:rgba(255,255,255,0.5);
+  line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.mio-enquire{
+  flex-shrink:0;
+  font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
+  background:var(--saffron-deep);color:#fff;border:none;cursor:pointer;
+  padding:12px 20px;transition:background 0.22s;
+  white-space:nowrap;
+}
+.mio-enquire:hover{background:var(--terracotta);}
+
+/* ===== MOBILE RESPONSIVE FIXES ===== */
+@media(max-width:640px){
+
+  /* Page header */
+  .page-header{padding:36px 5% 28px;}
+  .ph-title{font-size:1.6rem;}
+  .ph-sub{font-size:0.85rem;}
+
+  /* Filter bar — make scrollable on mobile */
+  .filter-bar{
+    padding:10px 5%;
+    gap:8px;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .filter-bar::-webkit-scrollbar{display:none;}
+  .filter-group{flex-wrap:nowrap;}
+  .filter-btn{padding:6px 12px;font-size:0.58rem;}
+  .results-count{display:none;}
+  .sort-select{font-size:0.58rem;padding:6px 10px;}
+
+  /* Product area */
+  .product-area{padding:16px 4% 48px;}
+
+  /* Product grid — 2 per row, tighter */
+  .product-grid{gap:8px;}
+
+  /* Product card — tighter on mobile */
+  .product-body{padding:10px 10px 12px;}
+  .prod-series{font-size:0.48rem;margin-bottom:2px;}
+  .prod-name{font-size:0.92rem;margin-bottom:3px;}
+  .prod-desc{font-size:0.74rem;margin-bottom:6px;}
+  .prod-specs{gap:4px;margin-bottom:8px;}
+  .prod-spec-tag{font-size:0.46rem;padding:2px 6px;}
+  .prod-rating{margin-bottom:8px;}
+  .prod-stars{font-size:0.75rem;}
+  .prod-rating-count{font-size:0.68rem;}
+  .prod-pricing{margin-bottom:10px;}
+  .prod-price{font-size:1.1rem;}
+  .prod-price-orig{font-size:0.74rem;}
+  .prod-cta{font-size:0.58rem;padding:9px;letter-spacing:0.14em;}
+
+  /* Footer */
+  footer{padding:24px 5%;flex-direction:column;align-items:flex-start;gap:8px;}
+  .f-note{text-align:left;}
+}
 </style>
 </head>
 <body>
@@ -940,7 +1078,7 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
           <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
-        <div class="prod-badges"></div>
+        <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Shanthi Series</div>
@@ -970,7 +1108,7 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
           <div class="swiper-dots"><span class="swiper-dot active"></span><span class="swiper-dot"></span></div>
         </div>
-        <div class="prod-badges"></div>
+        <div class="prod-badges"><span class="prod-badge badge-bestseller">Bestseller</span></div>
         <button class="prod-wish" onclick="toggleWish(event,this)">♡</button>
         <div class="product-body">
           <div class="prod-series">Shanthi Series</div>
@@ -999,7 +1137,26 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
   </div><!-- end product-area -->
 </div><!-- end page-body -->
 
-<!-- PRODUCT MODAL — Instagram-style split layout -->
+<!-- MOBILE IMAGE VIEWER — fullscreen image only, no form -->
+<div class="mob-img-overlay" id="mobImgOverlay">
+  <div class="mio-topbar">
+    <div class="mio-name" id="mioName"></div>
+    <div class="mio-price" id="mioPrice"></div>
+    <button class="mio-close" onclick="closeMobImg()">✕</button>
+  </div>
+  <div class="mio-gallery" id="mioGallery">
+    <div class="mio-track" id="mioTrack"></div>
+    <button class="mio-arr prev" onclick="mioSlide(-1)">&#8592;</button>
+    <button class="mio-arr next" onclick="mioSlide(1)">&#8594;</button>
+    <div class="mio-dots" id="mioDots"></div>
+  </div>
+  <div class="mio-bottom">
+    <div class="mio-desc" id="mioDesc"></div>
+    <button class="mio-enquire" onclick="mioOpenEnquiry()">Enquire →</button>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL — Instagram-style split layout (desktop) -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <!-- Left: Image Gallery -->
@@ -1074,6 +1231,27 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 let activeFilter = 'all';
 let maxPrice = 35000;
 
+/* ============ URL SIZE FILTER (from homepage size card tap) ============ */
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const size = params.get('size');
+  if(size && ['small','medium','large'].includes(size)){
+    activeFilter = size;
+    // Activate the matching filter button
+    document.querySelectorAll('.filter-btn').forEach(function(btn){
+      btn.classList.remove('active');
+      const map = {small:'2.5 ft', medium:'3.15 ft', large:'3.5 ft'};
+      if(btn.textContent.trim() === map[size]) btn.classList.add('active');
+    });
+    // Remove active from "All" button
+    document.querySelectorAll('.filter-btn').forEach(function(btn){
+      if(btn.textContent.trim() === 'All') btn.classList.remove('active');
+    });
+    // Apply after DOM ready
+    setTimeout(applyFilters, 50);
+  }
+})();
+
 /* ============ CARD SWIPER ============ */
 function getCardSwiper(container) {
   return {
@@ -1119,11 +1297,87 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/* ============ PRODUCT MODAL ============ */
+/* ============ OPEN PRODUCT — ROUTE BY DEVICE ============ */
+function openProductModal(card) {
+  if(window.innerWidth <= 640) {
+    openMobImg(card);
+  } else {
+    openDesktopModal(card);
+  }
+}
+
+/* ============ MOBILE IMAGE VIEWER ============ */
+let mioImages = [];
+let mioIdx = 0;
+let mioCurrentCard = null;
+
+function openMobImg(card) {
+  mioCurrentCard = card;
+  const imgs = card.querySelectorAll('.swiper-track img');
+  mioImages = Array.from(imgs).map(i => ({ src: i.src, alt: i.alt }));
+  mioIdx = 0;
+
+  document.getElementById('mioName').textContent  = card.dataset.name || '';
+  document.getElementById('mioPrice').textContent = card.dataset.price ? '₹ ' + parseInt(card.dataset.price).toLocaleString('en-IN') : '';
+  document.getElementById('mioDesc').textContent  = card.dataset.desc || '';
+
+  // Build track
+  const track = document.getElementById('mioTrack');
+  track.innerHTML = mioImages.map(img => '<img src="' + img.src + '" alt="' + img.alt + '">').join('');
+  track.style.transform = 'translateX(0)';
+
+  // Build dots
+  const dots = document.getElementById('mioDots');
+  dots.innerHTML = mioImages.map((_,i) => '<span class="mio-dot' + (i===0?' active':'') + '"></span>').join('');
+
+  document.getElementById('mobImgOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function mioSlide(dir) {
+  mioIdx = (mioIdx + dir + mioImages.length) % mioImages.length;
+  document.getElementById('mioTrack').style.transform = 'translateX(-' + (mioIdx * 100) + '%)';
+  document.querySelectorAll('.mio-dot').forEach((d,i) => d.classList.toggle('active', i === mioIdx));
+}
+
+function closeMobImg() {
+  document.getElementById('mobImgOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  mioCurrentCard = null;
+}
+
+/* Touch swipe on mobile image viewer */
+(function(){
+  const gal = document.getElementById('mioGallery');
+  if(!gal) return;
+  let startX = 0;
+  gal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  gal.addEventListener('touchend', function(e){
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) < 30) return;
+    mioSlide(dx < 0 ? 1 : -1);
+  });
+})();
+
+/* Enquire button from mobile viewer → close mobile viewer, open desktop modal form */
+function mioOpenEnquiry() {
+  closeMobImg();
+  if(mioCurrentCard) {
+    // Open desktop modal but scroll to form directly
+    openDesktopModal(mioCurrentCard);
+    // On mobile, scroll the modal body to the form
+    setTimeout(function(){
+      const form = document.getElementById('modalForm');
+      if(form) form.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 200);
+  }
+}
+
+/* ============ DESKTOP MODAL ============ */
 let mgCurrentIdx = 0;
 let mgImages = [];
 
-function openProductModal(card) {
+function openDesktopModal(card) {
   const name  = card.dataset.name;
   const price = card.dataset.price;
   const desc  = card.dataset.desc;
@@ -1137,7 +1391,7 @@ function openProductModal(card) {
   document.getElementById('modalSpecsField').value  = specs;
 
   // Spec tags
-  const tags = specs.split('·');
+  const tags = (specs || '').split('·');
   document.getElementById('modalTags').innerHTML = tags.map(t =>
     '<span class="m-spec">' + t.trim() + '</span>'
   ).join('');
@@ -1197,14 +1451,18 @@ function closeModalDirect() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModalDirect();
+    closeMobImg();
+  }
+});
 
 /* ============ MODAL FORM SUBMIT — DUPLICATE PREVENTION ============ */
 (function(){
   let submitted = false;
   document.getElementById('modalForm').addEventListener('submit', function(e) {
     if(submitted){ e.preventDefault(); return; }
-    // Basic phone validation
     const phone = this.querySelector('[type="tel"]').value.trim();
     if(!/^[6-9][0-9]{9}$/.test(phone)){
       e.preventDefault();
@@ -1219,7 +1477,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDi
     setTimeout(function(){
       document.getElementById('modalForm').style.display = 'none';
       document.getElementById('modalSuccess').classList.add('show');
-      submitted = false; // reset for next product enquiry
+      submitted = false;
     }, 1400);
   });
 })();
@@ -1280,12 +1538,11 @@ function toggleWish(e, btn) {
   btn.textContent = btn.classList.contains('wished') ? '♥' : '♡';
 }
 
-
+/* ============ HAMBURGER NAV ============ */
 function toggleNav(){
   document.getElementById('navHam').classList.toggle('open');
   document.querySelector('.nav-links').classList.toggle('open');
 }
-// Close on outside click
 document.addEventListener('click',function(e){
   const ham=document.getElementById('navHam');
   const links=document.querySelector('.nav-links');
@@ -1294,7 +1551,6 @@ document.addEventListener('click',function(e){
     links.classList.remove('open');
   }
 });
-// Close on nav link tap
 document.querySelectorAll('.nav-links a').forEach(function(a){
   a.addEventListener('click',function(){
     document.getElementById('navHam').classList.remove('open');
