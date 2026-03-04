@@ -1227,37 +1227,125 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 </footer>
 
 <script>
-/* ============ FILTER STATE ============ */
+/* ============ STATE ============ */
 let activeFilter = 'all';
 let maxPrice = 35000;
+let mgCurrentIdx = 0;
+let mgImages = [];
+let mioImages = [];
+let mioIdx = 0;
+let mioCurrentCard = null;
 
-/* ============ URL SIZE FILTER (from homepage size card tap) ============ */
-(function(){
+/* ============ EVERYTHING RUNS AFTER DOM IS READY ============ */
+document.addEventListener('DOMContentLoaded', function() {
+
+  /* --- URL SIZE FILTER (from homepage size card tap) --- */
   const params = new URLSearchParams(window.location.search);
-  const size = params.get('size');
-  if(size && ['small','medium','large'].includes(size)){
-    activeFilter = size;
-    // Activate the matching filter button
+  const sizeParam = params.get('size');
+  if(sizeParam && ['small','medium','large'].includes(sizeParam)){
+    activeFilter = sizeParam;
+    const map = {small:'2.5 ft', medium:'3.15 ft', large:'3.5 ft'};
     document.querySelectorAll('.filter-btn').forEach(function(btn){
       btn.classList.remove('active');
-      const map = {small:'2.5 ft', medium:'3.15 ft', large:'3.5 ft'};
-      if(btn.textContent.trim() === map[size]) btn.classList.add('active');
+      if(btn.textContent.trim() === map[sizeParam]) btn.classList.add('active');
     });
-    // Remove active from "All" button
-    document.querySelectorAll('.filter-btn').forEach(function(btn){
-      if(btn.textContent.trim() === 'All') btn.classList.remove('active');
-    });
-    // Apply after DOM ready
-    setTimeout(applyFilters, 50);
+    applyFilters();
   }
-})();
+
+  /* --- Touch swipe for card images --- */
+  document.querySelectorAll('.product-imgs').forEach(function(c) {
+    let startX = 0;
+    c.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+    c.addEventListener('touchend', function(e) {
+      const dx = e.changedTouches[0].clientX - startX;
+      if(Math.abs(dx) < 30) return;
+      const s = getCardSwiper(c);
+      if(dx < 0) s.idx = (s.idx + 1) % s.imgs.length;
+      else        s.idx = (s.idx - 1 + s.imgs.length) % s.imgs.length;
+      updateSwiper(c, s);
+    });
+  });
+
+  /* --- Touch swipe for mobile image viewer --- */
+  const mioGal = document.getElementById('mioGallery');
+  if(mioGal){
+    let startX = 0;
+    mioGal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+    mioGal.addEventListener('touchend', function(e){
+      const dx = e.changedTouches[0].clientX - startX;
+      if(Math.abs(dx) < 30) return;
+      mioSlide(dx < 0 ? 1 : -1);
+    });
+  }
+
+  /* --- Touch swipe for desktop modal gallery --- */
+  const mgGal = document.getElementById('mgGallery');
+  if(mgGal){
+    let startX = 0;
+    mgGal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+    mgGal.addEventListener('touchend', function(e){
+      const dx = e.changedTouches[0].clientX - startX;
+      if(Math.abs(dx) < 30) return;
+      mgSlide(dx < 0 ? 1 : -1);
+    });
+  }
+
+  /* --- Modal form submit --- */
+  let submitted = false;
+  const modalForm = document.getElementById('modalForm');
+  if(modalForm){
+    modalForm.addEventListener('submit', function(e) {
+      if(submitted){ e.preventDefault(); return; }
+      const phone = this.querySelector('[type="tel"]').value.trim();
+      if(!/^[6-9][0-9]{9}$/.test(phone)){
+        e.preventDefault();
+        this.querySelector('[type="tel"]').focus();
+        return;
+      }
+      submitted = true;
+      const btn = document.getElementById('modalSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      setTimeout(function(){
+        modalForm.style.display = 'none';
+        document.getElementById('modalSuccess').classList.add('show');
+        submitted = false;
+      }, 1400);
+    });
+  }
+
+  /* --- Hamburger nav --- */
+  document.addEventListener('click', function(e){
+    const ham   = document.getElementById('navHam');
+    const links = document.querySelector('.nav-links');
+    if(ham && links && !ham.contains(e.target) && !links.contains(e.target)){
+      ham.classList.remove('open');
+      links.classList.remove('open');
+    }
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.addEventListener('click', function(){
+      document.getElementById('navHam').classList.remove('open');
+      document.querySelector('.nav-links').classList.remove('open');
+    });
+  });
+
+  /* --- ESC key closes modals --- */
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      closeModalDirect();
+      closeMobImg();
+    }
+  });
+
+}); /* end DOMContentLoaded */
 
 /* ============ CARD SWIPER ============ */
 function getCardSwiper(container) {
   return {
     track: container.querySelector('.swiper-track'),
-    dots: container.querySelectorAll('.swiper-dot'),
-    imgs: container.querySelectorAll('.swiper-track img'),
+    dots:  container.querySelectorAll('.swiper-dot'),
+    imgs:  container.querySelectorAll('.swiper-track img'),
     get idx() { return parseInt(container.dataset.swiperIdx || 0); },
     set idx(v) { container.dataset.swiperIdx = v; }
   };
@@ -1281,22 +1369,6 @@ function updateSwiper(c, s) {
   s.dots.forEach((d,i) => d.classList.toggle('active', i === s.idx));
 }
 
-/* Touch swipe for card images */
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.product-imgs').forEach(function(c) {
-    let startX = 0;
-    c.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-    c.addEventListener('touchend', function(e) {
-      const dx = e.changedTouches[0].clientX - startX;
-      if(Math.abs(dx) < 30) return;
-      const s = getCardSwiper(c);
-      if(dx < 0) s.idx = (s.idx + 1) % s.imgs.length;
-      else        s.idx = (s.idx - 1 + s.imgs.length) % s.imgs.length;
-      updateSwiper(c, s);
-    });
-  });
-});
-
 /* ============ OPEN PRODUCT — ROUTE BY DEVICE ============ */
 function openProductModal(card) {
   if(window.innerWidth <= 640) {
@@ -1307,34 +1379,32 @@ function openProductModal(card) {
 }
 
 /* ============ MOBILE IMAGE VIEWER ============ */
-let mioImages = [];
-let mioIdx = 0;
-let mioCurrentCard = null;
-
 function openMobImg(card) {
   mioCurrentCard = card;
   const imgs = card.querySelectorAll('.swiper-track img');
   mioImages = Array.from(imgs).map(i => ({ src: i.src, alt: i.alt }));
   mioIdx = 0;
 
-  document.getElementById('mioName').textContent  = card.dataset.name || '';
-  document.getElementById('mioPrice').textContent = card.dataset.price ? '₹ ' + parseInt(card.dataset.price).toLocaleString('en-IN') : '';
-  document.getElementById('mioDesc').textContent  = card.dataset.desc || '';
+  document.getElementById('mioName').textContent  = card.dataset.name  || '';
+  document.getElementById('mioPrice').textContent = card.dataset.price
+    ? '₹ ' + parseInt(card.dataset.price).toLocaleString('en-IN') : '';
+  document.getElementById('mioDesc').textContent  = card.dataset.desc  || '';
 
-  // Build track
   const track = document.getElementById('mioTrack');
   track.innerHTML = mioImages.map(img => '<img src="' + img.src + '" alt="' + img.alt + '">').join('');
   track.style.transform = 'translateX(0)';
 
-  // Build dots
   const dots = document.getElementById('mioDots');
-  dots.innerHTML = mioImages.map((_,i) => '<span class="mio-dot' + (i===0?' active':'') + '"></span>').join('');
+  dots.innerHTML = mioImages.map((_,i) =>
+    '<span class="mio-dot' + (i===0?' active':'') + '"></span>'
+  ).join('');
 
   document.getElementById('mobImgOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function mioSlide(dir) {
+  if(!mioImages.length) return;
   mioIdx = (mioIdx + dir + mioImages.length) % mioImages.length;
   document.getElementById('mioTrack').style.transform = 'translateX(-' + (mioIdx * 100) + '%)';
   document.querySelectorAll('.mio-dot').forEach((d,i) => d.classList.toggle('active', i === mioIdx));
@@ -1343,73 +1413,48 @@ function mioSlide(dir) {
 function closeMobImg() {
   document.getElementById('mobImgOverlay').classList.remove('open');
   document.body.style.overflow = '';
-  mioCurrentCard = null;
 }
 
-/* Touch swipe on mobile image viewer */
-(function(){
-  const gal = document.getElementById('mioGallery');
-  if(!gal) return;
-  let startX = 0;
-  gal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-  gal.addEventListener('touchend', function(e){
-    const dx = e.changedTouches[0].clientX - startX;
-    if(Math.abs(dx) < 30) return;
-    mioSlide(dx < 0 ? 1 : -1);
-  });
-})();
-
-/* Enquire button from mobile viewer → close mobile viewer, open desktop modal form */
 function mioOpenEnquiry() {
+  const card = mioCurrentCard;
   closeMobImg();
-  if(mioCurrentCard) {
-    // Open desktop modal but scroll to form directly
-    openDesktopModal(mioCurrentCard);
-    // On mobile, scroll the modal body to the form
-    setTimeout(function(){
-      const form = document.getElementById('modalForm');
-      if(form) form.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 200);
+  if(card) {
+    setTimeout(function(){ openDesktopModal(card); }, 80);
   }
 }
 
 /* ============ DESKTOP MODAL ============ */
-let mgCurrentIdx = 0;
-let mgImages = [];
-
 function openDesktopModal(card) {
-  const name  = card.dataset.name;
-  const price = card.dataset.price;
-  const desc  = card.dataset.desc;
-  const specs = card.dataset.specs;
+  const name  = card.dataset.name  || '';
+  const price = card.dataset.price || '0';
+  const desc  = card.dataset.desc  || '';
+  const specs = card.dataset.specs || '';
 
   document.getElementById('modalName').textContent  = name;
   document.getElementById('modalPrice').textContent = '₹ ' + parseInt(price).toLocaleString('en-IN');
   document.getElementById('modalDesc').textContent  = desc;
   document.getElementById('modalProductField').value = name;
-  document.getElementById('modalPriceField').value  = price;
-  document.getElementById('modalSpecsField').value  = specs;
+  document.getElementById('modalPriceField').value   = price;
+  document.getElementById('modalSpecsField').value   = specs;
 
-  // Spec tags
-  const tags = (specs || '').split('·');
+  const tags = specs.split('·');
   document.getElementById('modalTags').innerHTML = tags.map(t =>
     '<span class="m-spec">' + t.trim() + '</span>'
   ).join('');
 
-  // Build gallery from all images in card
   const imgs = card.querySelectorAll('.swiper-track img');
   mgImages = Array.from(imgs).map(i => ({ src: i.src, alt: i.alt }));
   mgCurrentIdx = 0;
   buildMgGallery();
 
-  // Reset form
-  document.getElementById('modalForm').reset();
+  const modalForm = document.getElementById('modalForm');
+  modalForm.reset();
+  modalForm.style.display = '';
   const btn = document.getElementById('modalSubmitBtn');
   btn.disabled = false;
   btn.textContent = 'Request Confirmation Call';
   btn.style.background = '';
   document.getElementById('modalSuccess').classList.remove('show');
-  document.getElementById('modalForm').style.display = '';
 
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1419,7 +1464,9 @@ function buildMgGallery() {
   const track = document.getElementById('mgTrack');
   const dots  = document.getElementById('mgDots');
   track.innerHTML = mgImages.map(img => '<img src="' + img.src + '" alt="' + img.alt + '">').join('');
-  dots.innerHTML  = mgImages.map((_,i) => '<span class="mg-dot' + (i===0?' active':'') + '"></span>').join('');
+  dots.innerHTML  = mgImages.map((_,i) =>
+    '<span class="mg-dot' + (i===0?' active':'') + '"></span>'
+  ).join('');
   track.style.transform = 'translateX(0)';
   document.getElementById('mgPrev').style.display = mgImages.length < 2 ? 'none' : '';
   document.getElementById('mgNext').style.display = mgImages.length < 2 ? 'none' : '';
@@ -1431,56 +1478,13 @@ function mgSlide(dir) {
   document.querySelectorAll('.mg-dot').forEach((d,i) => d.classList.toggle('active', i === mgCurrentIdx));
 }
 
-/* Touch swipe for modal gallery */
-(function(){
-  let startX = 0;
-  const gal = document.getElementById('mgGallery');
-  if(!gal) return;
-  gal.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-  gal.addEventListener('touchend', function(e){
-    const dx = e.changedTouches[0].clientX - startX;
-    if(Math.abs(dx) < 30) return;
-    mgSlide(dx < 0 ? 1 : -1);
-  });
-})();
-
 function closeModal(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+  if(e.target === document.getElementById('modalOverlay')) closeModalDirect();
 }
 function closeModalDirect() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeModalDirect();
-    closeMobImg();
-  }
-});
-
-/* ============ MODAL FORM SUBMIT — DUPLICATE PREVENTION ============ */
-(function(){
-  let submitted = false;
-  document.getElementById('modalForm').addEventListener('submit', function(e) {
-    if(submitted){ e.preventDefault(); return; }
-    const phone = this.querySelector('[type="tel"]').value.trim();
-    if(!/^[6-9][0-9]{9}$/.test(phone)){
-      e.preventDefault();
-      this.querySelector('[type="tel"]').focus();
-      return;
-    }
-    submitted = true;
-    const btn = document.getElementById('modalSubmitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    setTimeout(function(){
-      document.getElementById('modalForm').style.display = 'none';
-      document.getElementById('modalSuccess').classList.add('show');
-      submitted = false;
-    }, 1400);
-  });
-})();
 
 /* ============ FILTER BY SIZE BUTTON ============ */
 function filterProducts(filter, btn) {
@@ -1494,40 +1498,43 @@ function filterProducts(filter, btn) {
 function applyFilters() {
   const cards = document.querySelectorAll('.product-card');
   let visible = 0;
-  cards.forEach(card => {
+  cards.forEach(function(card) {
     const size  = card.dataset.size;
     const price = parseInt(card.dataset.price);
     const badge = card.dataset.badge;
     let show = true;
-    if (activeFilter === 'small'      && size !== 'small')       show = false;
-    if (activeFilter === 'medium'     && size !== 'medium')      show = false;
-    if (activeFilter === 'large'      && size !== 'large')       show = false;
-    if (activeFilter === 'bestseller' && badge !== 'bestseller') show = false;
-    if (price > maxPrice) show = false;
+    if(activeFilter === 'small'      && size  !== 'small')       show = false;
+    if(activeFilter === 'medium'     && size  !== 'medium')      show = false;
+    if(activeFilter === 'large'      && size  !== 'large')       show = false;
+    if(activeFilter === 'bestseller' && badge !== 'bestseller')  show = false;
+    if(price > maxPrice) show = false;
     card.style.display = show ? '' : 'none';
     if(show) visible++;
   });
-  document.getElementById('resultCount').textContent = 'Showing ' + visible + ' design' + (visible !== 1 ? 's' : '');
-  document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+  const rc = document.getElementById('resultCount');
+  if(rc) rc.textContent = 'Showing ' + visible + ' design' + (visible !== 1 ? 's' : '');
+  const es = document.getElementById('emptyState');
+  if(es) es.style.display = visible === 0 ? 'block' : 'none';
 }
 
 /* ============ SORT ============ */
 function sortProducts(val) {
   const grid  = document.getElementById('productGrid');
   const cards = Array.from(grid.querySelectorAll('.product-card'));
-  cards.sort((a, b) => {
-    if (val === 'price-low')  return parseInt(a.dataset.price) - parseInt(b.dataset.price);
-    if (val === 'price-high') return parseInt(b.dataset.price) - parseInt(a.dataset.price);
-    if (val === 'rating')     return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+  cards.sort(function(a, b) {
+    if(val === 'price-low')  return parseInt(a.dataset.price) - parseInt(b.dataset.price);
+    if(val === 'price-high') return parseInt(b.dataset.price) - parseInt(a.dataset.price);
+    if(val === 'rating')     return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
     return 0;
   });
-  cards.forEach(c => grid.appendChild(c));
+  cards.forEach(function(c){ grid.appendChild(c); });
 }
 
 /* ============ PRICE RANGE ============ */
 function updatePriceRange(val) {
   maxPrice = parseInt(val);
-  document.getElementById('priceMax').textContent = '₹ ' + parseInt(val).toLocaleString('en-IN');
+  const el = document.getElementById('priceMax');
+  if(el) el.textContent = '₹ ' + parseInt(val).toLocaleString('en-IN');
   applyFilters();
 }
 
@@ -1543,21 +1550,6 @@ function toggleNav(){
   document.getElementById('navHam').classList.toggle('open');
   document.querySelector('.nav-links').classList.toggle('open');
 }
-document.addEventListener('click',function(e){
-  const ham=document.getElementById('navHam');
-  const links=document.querySelector('.nav-links');
-  if(ham && links && !ham.contains(e.target) && !links.contains(e.target)){
-    ham.classList.remove('open');
-    links.classList.remove('open');
-  }
-});
-document.querySelectorAll('.nav-links a').forEach(function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('navHam').classList.remove('open');
-    document.querySelector('.nav-links').classList.remove('open');
-  });
-});
-
 </script>
 
 <!-- WhatsApp Floating Button -->
