@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N409KTDMY7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-N409KTDMY7');
+</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vswvoetql9");
+</script>
 <link rel="icon" href="/logo/favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -475,189 +490,6 @@ line-height:1.7;
     <div class="badge-t">Homes Delivered</div>
   </div>
 </section>
-
-<!-- PRODUCT PREVIEW -->
-<section id="preview-products" style="background:var(--ivory);padding:72px 6% 60px;">
-  <div style="text-align:center;margin-bottom:48px;">
-    <span class="lbl">Featured Designs</span>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.4vw,2.8rem);color:var(--brown);margin-bottom:12px;">Our Most Loved Pieces</h2>
-    <p style="color:var(--muted);font-weight:300;max-width:480px;margin:0 auto;font-size:0.97rem;line-height:1.8;">Handpicked by our customers — solid black stone, delivered in 7–12 days.</p>
-    <span class="rule" style="margin:18px auto 0;"></span>
-  </div>
-
-  <div class="prev-grid">
-
-    <!-- CARD 1 — Classic Design -->
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/classic_design.png" alt="Classic Design Tulsi Vrindavan" class="prev-img-main">
-        <img src="product_image/classic_design_2.jpeg" alt="Classic Design detail" class="prev-img-hover">
-        <span class="prev-badge bestseller">Bestseller</span>
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Majestic Series</div>
-        <div class="prev-name">Classic Design</div>
-        <div class="prev-desc">15 × 15 inch base with special Nakshi carving and sharp temple corner design.</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 18,000</div>
-          <div class="prev-cta">View Details →</div>
-        </div>
-      </div>
-    </a>
-
-    <!-- CARD 2 — Simple Vertical -->
-    <!-- <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/simple_vertical.png" alt="Simple Vertical Tulsi Vrindavan" class="prev-img-main">
-        <img src="product_image/simple_vertical_2.jpeg" alt="Simple Vertical detail" class="prev-img-hover">
-        <span class="prev-badge sale">Sale</span>
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Shanthi Series</div>
-        <div class="prev-name">Simple Vertical</div>
-        <div class="prev-desc">12 × 12 inch Tulsi Vrindavan with open mandap and vertical stone columns.</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 7,500 <span class="prev-orig">₹ 8,500</span></div>
-          <div class="prev-cta">View Details →</div>
-        </div>
-      </div>
-    </a> -->
-
-    <!-- CARD 3 — Classic Vrindavan -->
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/classic_vrindavan.png" alt="Classic Vrindavan Tulsi Katta" class="prev-img-main">
-        <img src="product_image/classic_vrindavan_2.jpeg" alt="Classic Vrindavan detail" class="prev-img-hover">
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Traditional Series</div>
-        <div class="prev-name">Classic Vrindavan</div>
-        <div class="prev-desc">15 × 15 inch traditional Tulsi Vrindavan with simple and elegant stone design.</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 15,000</div>
-          <div class="prev-cta">View Details →</div>
-        </div>
-      </div>
-    </a>
-
-  </div>
-
-  <!-- View All button -->
-  <div style="text-align:center;margin-top:44px;">
-    <a href="readymade.html" class="btn btn-fill" style="display:inline-block;">View All Designs →</a>
-  </div>
-</section>
-
-<style>
-/* ── PRODUCT PREVIEW GRID ── */
-.prev-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:28px;
-  max-width:1100px;
-  margin:0 auto;
-}
-@media(max-width:860px){.prev-grid{grid-template-columns:repeat(2,1fr);gap:16px;}}
-@media(max-width:540px){.prev-grid{grid-template-columns:1fr 1fr;gap:10px;}}
-
-.prev-card{
-  text-decoration:none;
-  color:inherit;
-  background:var(--white);
-  border:1.5px solid var(--sand);
-  display:flex;flex-direction:column;
-  transition:border-color 0.26s,box-shadow 0.26s,transform 0.26s;
-  position:relative;
-}
-.prev-card:hover{
-  border-color:var(--saffron);
-  box-shadow:0 8px 32px rgba(224,123,32,0.13);
-  transform:translateY(-3px);
-}
-
-/* Image */
-.prev-img-wrap{
-  position:relative;
-  aspect-ratio:3/4;
-  overflow:hidden;
-  background:var(--cream-dark);
-}
-.prev-img-main,
-.prev-img-hover{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  transition:opacity 0.42s ease, transform 0.42s ease;
-}
-.prev-img-hover{opacity:0;}
-.prev-card:hover .prev-img-main{opacity:0;transform:scale(1.04);}
-.prev-card:hover .prev-img-hover{opacity:1;transform:scale(1.04);}
-
-/* Badge */
-.prev-badge{
-  position:absolute;top:12px;left:12px;
-  font-family:'Josefin Sans',sans-serif;
-  font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;
-  padding:4px 9px;
-  z-index:2;
-}
-.prev-badge.bestseller{background:var(--saffron-deep);color:#fff;}
-.prev-badge.sale{background:var(--terracotta);color:#fff;}
-.prev-badge.new{background:var(--stone);color:#fff;}
-
-/* Body */
-.prev-body{
-  padding:16px 16px 18px;
-  flex:1;display:flex;flex-direction:column;
-}
-.prev-series{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:0.52rem;letter-spacing:0.26em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:4px;
-}
-.prev-name{
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem;color:var(--brown);
-  margin-bottom:6px;line-height:1.2;
-}
-.prev-desc{
-  font-size:0.8rem;color:var(--muted);
-  font-weight:300;line-height:1.6;
-  flex:1;margin-bottom:14px;
-}
-.prev-footer{
-  display:flex;align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;gap:6px;
-}
-.prev-price{
-  font-family:'Playfair Display',serif;
-  font-size:1.15rem;color:var(--saffron-deep);
-}
-.prev-orig{
-  font-family:'Lato',sans-serif;
-  font-size:0.78rem;color:var(--muted);
-  text-decoration:line-through;margin-left:4px;
-}
-.prev-cta{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--saffron-deep);
-  transition:letter-spacing 0.22s;
-}
-.prev-card:hover .prev-cta{letter-spacing:0.22em;}
-
-/* Mobile tweaks */
-@media(max-width:540px){
-  .prev-body{padding:10px 10px 12px;}
-  .prev-name{font-size:0.88rem;}
-  .prev-desc{display:none;}
-  .prev-price{font-size:0.95rem;}
-  .prev-cta{font-size:0.5rem;}
-  .prev-badge{font-size:0.44rem;padding:3px 7px;top:8px;left:8px;}
-}
-</style>
 
 <!-- SIZE REFERENCE -->
 <section id="size">
