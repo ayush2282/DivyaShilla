@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DivyaShilla — Product Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Josefin+Sans:wght@300;400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --saffron:#E07B20;
+  --saffron-deep:#C05E0A;
+  --saffron-light:#F0A855;
+  --terracotta:#B84E32;
+  --stone:#5C4A32;
+  --cream:#FBF5EA;
+  --cream-dark:#F2E8D5;
+  --ivory:#FAF7F0;
+  --sand:#E2CEAA;
+  --sand-dark:#C8AF88;
+  --brown:#3D2B1A;
+  --muted:#7A6652;
+  --white:#FFFDF8;
+  --green:#2d6040;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ivory);color:var(--brown);font-family:'Lato',sans-serif;font-size:15px;line-height:1.6;}
+
+/* ── TOP BAR ── */
+.topbar{
+  background:var(--brown);
+  padding:16px 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:3px solid var(--saffron-deep);
+  position:sticky;top:0;z-index:100;
+}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--cream);}
+.topbar-logo span{color:var(--saffron-light);}
+.topbar-badge{
+  font-family:'Josefin Sans',sans-serif;font-size:0.55rem;letter-spacing:0.28em;
+  text-transform:uppercase;color:var(--sand);
+  border:1px solid rgba(224,123,32,0.3);padding:5px 12px;
+}
+.back-link{
+  font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--sand);text-decoration:none;
+  transition:color 0.2s;
+}
+.back-link:hover{color:var(--saffron-light);}
+
+/* ── LAYOUT ── */
+.page{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:calc(100vh - 57px);}
+@media(max-width:900px){.page{grid-template-columns:1fr;}}
+
+/* ── LEFT — FORM ── */
+.form-panel{
+  padding:36px 5%;
+  border-right:1px solid var(--sand);
+  background:var(--white);
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;color:var(--brown);
+  margin-bottom:4px;
+}
+.section-sub{
+  font-size:0.82rem;color:var(--muted);
+  margin-bottom:28px;font-weight:300;
+}
+.divider{
+  height:1px;background:var(--sand);
+  margin:28px 0;
+}
+.field-group{margin-bottom:18px;}
+.field-group label{
+  display:block;
+  font-family:'Josefin Sans',sans-serif;font-size:0.56rem;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--stone);margin-bottom:6px;
+}
+.field-group input,
+.field-group textarea,
+.field-group select{
+  width:100%;
+  background:var(--ivory);border:1.5px solid var(--sand-dark);
+  color:var(--brown);font-family:'Lato',sans-serif;font-size:0.92rem;
+  padding:10px 13px;outline:none;
+  transition:border-color 0.22s;border-radius:0;
+}
+.field-group input:focus,
+.field-group textarea:focus,
+.field-group select:focus{border-color:var(--saffron-deep);}
+.field-group textarea{min-height:80px;resize:vertical;}
+.field-group select{cursor:pointer;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.field-hint{font-size:0.75rem;color:var(--muted);margin-top:4px;font-style:italic;}
+
+/* Image rows */
+.img-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+.img-row input{flex:1;}
+.img-row .img-label{
+  font-family:'Josefin Sans',sans-serif;font-size:0.5rem;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--muted);width:36px;flex-shrink:0;
+}
+.add-img-btn{
+  font-family:'Josefin Sans',sans-serif;font-size:0.56rem;letter-spacing:0.18em;
+  text-transform:uppercase;background:transparent;
+  border:1px dashed var(--sand-dark);color:var(--muted);
+  padding:8px 14px;cursor:pointer;width:100%;margin-top:4px;
+  transition:all 0.2s;
+}
+.add-img-btn:hover{border-color:var(--saffron);color:var(--saffron-deep);}
+.remove-img{
+  background:none;border:none;color:var(--muted);
+  cursor:pointer;font-size:1rem;padding:4px 6px;flex-shrink:0;
+  transition:color 0.2s;
+}
+.remove-img:hover{color:var(--terracotta);}
+
+/* Spec tags */
+.spec-tags-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+.spec-tag-chip{
+  display:flex;align-items:center;gap:6px;
+  background:var(--cream-dark);border:1px solid var(--sand);
+  padding:4px 10px;font-size:0.8rem;color:var(--stone);
+}
+.spec-tag-chip button{
+  background:none;border:none;color:var(--muted);
+  cursor:pointer;font-size:0.9rem;line-height:1;padding:0;
+}
+.spec-tag-chip button:hover{color:var(--terracotta);}
+.spec-add-row{display:flex;gap:8px;}
+.spec-add-row input{flex:1;}
+.spec-add-btn{
+  font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.14em;
+  text-transform:uppercase;background:var(--brown);color:var(--white);
+  border:none;padding:10px 16px;cursor:pointer;flex-shrink:0;
+  transition:background 0.2s;
+}
+.spec-add-btn:hover{background:var(--stone);}
+
+/* Generate button */
+.gen-btn{
+  width:100%;padding:16px;margin-top:8px;
+  background:linear-gradient(135deg,var(--saffron-deep),var(--terracotta));
+  color:var(--white);border:none;cursor:pointer;
+  font-family:'Josefin Sans',sans-serif;font-size:0.72rem;
+  letter-spacing:0.28em;text-transform:uppercase;
+  transition:all 0.26s;box-shadow:0 6px 20px rgba(192,94,10,0.28);
+}
+.gen-btn:hover{box-shadow:0 10px 28px rgba(192,94,10,0.42);transform:translateY(-1px);}
+
+/* ── RIGHT — OUTPUT ── */
+.output-panel{
+  padding:36px 5%;
+  background:var(--cream);
+  position:sticky;top:57px;
+  height:calc(100vh - 57px);
+  overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+@media(max-width:900px){
+  .output-panel{position:static;height:auto;}
+}
+.output-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;flex-wrap:wrap;gap:10px;
+}
+.output-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--brown);}
+.copy-btn{
+  font-family:'Josefin Sans',sans-serif;font-size:0.58rem;letter-spacing:0.2em;
+  text-transform:uppercase;background:var(--brown);color:var(--white);
+  border:none;padding:10px 20px;cursor:pointer;
+  transition:background 0.22s;
+}
+.copy-btn:hover{background:var(--stone);}
+.copy-btn.copied{background:var(--green);}
+
+/* Code block */
+.code-wrap{
+  flex:1;
+  background:#1e1208;
+  border:1px solid rgba(224,123,32,0.2);
+  overflow:auto;
+  position:relative;
+}
+.code-block{
+  font-family:'Courier New',monospace;font-size:0.78rem;
+  color:#e8d5b0;line-height:1.65;
+  padding:20px;
+  white-space:pre;
+  min-height:200px;
+}
+
+/* Placeholder state */
+.placeholder-msg{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;min-height:300px;text-align:center;
+  padding:40px 20px;
+}
+.placeholder-icon{font-size:2.5rem;margin-bottom:14px;opacity:0.3;}
+.placeholder-text{
+  font-family:'Playfair Display',serif;font-size:1.1rem;
+  color:var(--muted);margin-bottom:6px;
+}
+.placeholder-sub{font-size:0.84rem;color:var(--sand-dark);font-weight:300;}
+
+/* Instructions box */
+.instructions{
+  margin-top:18px;
+  background:var(--cream-dark);
+  border:1px solid var(--sand);
+  border-left:3px solid var(--saffron-deep);
+  padding:14px 16px;
+}
+.inst-title{
+  font-family:'Josefin Sans',sans-serif;font-size:0.58rem;
+  letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--saffron-deep);margin-bottom:8px;
+}
+.inst-step{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:5px 0;font-size:0.82rem;color:var(--muted);
+}
+.inst-step-num{
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  background:var(--saffron-deep);color:#fff;
+  font-family:'Josefin Sans',sans-serif;font-size:0.56rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+
+/* Success toast */
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--green);color:#fff;
+  font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.18em;
+  text-transform:uppercase;padding:12px 28px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.2);
+  transition:transform 0.3s ease;z-index:999;
+  pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">Divya<span>Shilla</span></div>
+  <div class="topbar-badge">Product Admin</div>
+  <a href="readymade.html" class="back-link">← Back to Website</a>
+</div>
+
+<div class="page">
+
+  <!-- ══ LEFT: FORM ══ -->
+  <div class="form-panel">
+
+    <div class="section-title">Add New Product</div>
+    <div class="section-sub">Fill in the details below and click Generate to get the HTML code.</div>
+
+    <!-- BASIC INFO -->
+    <div class="two-col">
+      <div class="field-group">
+        <label>Product Name *</label>
+        <input type="text" id="f-name" placeholder="e.g. Classic Lotus">
+      </div>
+      <div class="field-group">
+        <label>Series Name *</label>
+        <input type="text" id="f-series" placeholder="e.g. Majestic Series">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Short Description *</label>
+      <textarea id="f-desc" placeholder="e.g. 15 × 15 inch base with special Nakshi carving and sharp temple corner design."></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SIZE & PRICE -->
+    <div class="two-col">
+      <div class="field-group">
+        <label>Size Category *</label>
+        <select id="f-size">
+          <option value="">— Select —</option>
+          <option value="small">Small (2 – 2.5 ft)</option>
+          <option value="medium">Medium (3 – 3.15 ft)</option>
+          <option value="large">Large (3.5 – 4 ft)</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Display Size Label *</label>
+        <input type="text" id="f-sizelabel" placeholder="e.g. 3.15 ft">
+        <div class="field-hint">Shown on the product card tag</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <label>Price (₹) *</label>
+        <input type="number" id="f-price" placeholder="e.g. 17500" min="0">
+      </div>
+      <div class="field-group">
+        <label>Original Price (₹) — optional</label>
+        <input type="number" id="f-origprice" placeholder="e.g. 19000 (for sale tag)">
+        <div class="field-hint">Leave blank if no discount</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BADGE & STYLE -->
+    <div class="two-col">
+      <div class="field-group">
+        <label>Badge</label>
+        <select id="f-badge">
+          <option value="">None</option>
+          <option value="bestseller">Bestseller</option>
+          <option value="new">New</option>
+          <option value="sale">Sale</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label>Style</label>
+        <select id="f-style">
+          <option value="traditional">Traditional</option>
+          <option value="majestic">Majestic</option>
+          <option value="temple">Temple</option>
+          <option value="floral">Floral</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <label>Rating (e.g. 4.8)</label>
+        <input type="number" id="f-rating" placeholder="4.8" min="1" max="5" step="0.1">
+      </div>
+      <div class="field-group">
+        <label>Number of Reviews</label>
+        <input type="number" id="f-reviews" placeholder="24" min="0">
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SPEC TAGS -->
+    <div class="field-group">
+      <label>Spec Tags</label>
+      <div class="spec-tags-wrap" id="specTagsWrap"></div>
+      <div class="spec-add-row">
+        <input type="text" id="specTagInput" placeholder="e.g. Lotus Carving · Nakshi Work · Extra Base">
+        <button class="spec-add-btn" onclick="addSpecTag()">Add</button>
+      </div>
+      <div class="field-hint">Press Add or Enter after each tag. The size label is added automatically.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- IMAGES -->
+    <div class="field-group">
+      <label>Product Images *</label>
+      <div class="field-hint" style="margin-bottom:10px;">Enter file paths exactly as they are in your website folder. e.g. <strong>product_image/classic_design.png</strong></div>
+      <div id="imageRows">
+        <div class="img-row">
+          <span class="img-label">Img 1</span>
+          <input type="text" placeholder="product_image/your_image.png">
+          <button class="remove-img" onclick="removeImgRow(this)" title="Remove">✕</button>
+        </div>
+        <div class="img-row">
+          <span class="img-label">Img 2</span>
+          <input type="text" placeholder="product_image/your_image_2.jpeg">
+          <button class="remove-img" onclick="removeImgRow(this)" title="Remove">✕</button>
+        </div>
+        <div class="img-row">
+          <span class="img-label">Ref</span>
+          <input type="text" placeholder="refrence_image/3.15_ref.png">
+          <button class="remove-img" onclick="removeImgRow(this)" title="Remove">✕</button>
+        </div>
+      </div>
+      <button class="add-img-btn" onclick="addImgRow()">+ Add Another Image</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- GENERATE -->
+    <button class="gen-btn" onclick="generateCode()">Generate Product Card HTML →</button>
+
+  </div>
+
+  <!-- ══ RIGHT: OUTPUT ══ -->
+  <div class="output-panel">
+    <div class="output-header">
+      <div class="output-title">Generated HTML Code</div>
+      <button class="copy-btn" id="copyBtn" onclick="copyCode()">Copy Code</button>
+    </div>
+
+    <div class="code-wrap" id="codeWrap">
+      <div class="placeholder-msg" id="placeholder">
+        <div class="placeholder-icon">✦</div>
+        <div class="placeholder-text">Your code will appear here</div>
+        <div class="placeholder-sub">Fill the form and click Generate</div>
+      </div>
+      <div class="code-block" id="codeOutput" style="display:none;"></div>
+    </div>
+
+    <div class="instructions">
+      <div class="inst-title">How to add to your website</div>
+      <div class="inst-step">
+        <div class="inst-step-num">1</div>
+        <div>Fill the form → click <strong>Generate</strong> → click <strong>Copy Code</strong></div>
+      </div>
+      <div class="inst-step">
+        <div class="inst-step-num">2</div>
+        <div>Open <strong>readymade.html</strong> in any text editor (Notepad, VS Code, etc.)</div>
+      </div>
+      <div class="inst-step">
+        <div class="inst-step-num">3</div>
+        <div>Find the line <code style="background:var(--sand);padding:1px 5px;font-size:0.78rem;">&lt;!-- ADD NEW PRODUCTS ABOVE THIS LINE --&gt;</code> near the bottom of the product grid</div>
+      </div>
+      <div class="inst-step">
+        <div class="inst-step-num">4</div>
+        <div>Paste the copied code <strong>above</strong> that comment line</div>
+      </div>
+      <div class="inst-step">
+        <div class="inst-step-num">5</div>
+        <div>Save the file and upload to GitHub — done!</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">✓ Code Copied to Clipboard</div>
+
+<script>
+/* ── SPEC TAGS ── */
+let specTags = [];
+
+document.getElementById('specTagInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter'){ e.preventDefault(); addSpecTag(); }
+});
+
+function addSpecTag(){
+  const input = document.getElementById('specTagInput');
+  const val = input.value.trim();
+  if(!val) return;
+  specTags.push(val);
+  renderSpecTags();
+  input.value = '';
+  input.focus();
+}
+
+function removeSpecTag(i){
+  specTags.splice(i, 1);
+  renderSpecTags();
+}
+
+function renderSpecTags(){
+  const wrap = document.getElementById('specTagsWrap');
+  wrap.innerHTML = specTags.map((t,i) =>
+    `<div class="spec-tag-chip">${t}<button onclick="removeSpecTag(${i})">✕</button></div>`
+  ).join('');
+}
+
+/* ── IMAGE ROWS ── */
+let imgCount = 3;
+
+function addImgRow(){
+  imgCount++;
+  const row = document.createElement('div');
+  row.className = 'img-row';
+  row.innerHTML = `
+    <span class="img-label">Img ${imgCount}</span>
+    <input type="text" placeholder="product_image/your_image.png">
+    <button class="remove-img" onclick="removeImgRow(this)" title="Remove">✕</button>
+  `;
+  document.getElementById('imageRows').appendChild(row);
+}
+
+function removeImgRow(btn){
+  const rows = document.querySelectorAll('#imageRows .img-row');
+  if(rows.length <= 1) return; // keep at least 1
+  btn.closest('.img-row').remove();
+  // Re-label
+  document.querySelectorAll('#imageRows .img-row').forEach((r, i) => {
+    const lbl = r.querySelector('.img-label');
+    lbl.textContent = i === 0 ? 'Img 1' : i === 1 ? 'Img 2' : i === 2 ? 'Ref' : `Img ${i+1}`;
+  });
+}
+
+/* ── ESCAPE HTML ── */
+function esc(str){
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+/* ── GENERATE ── */
+function generateCode(){
+  // Collect values
+  const name      = document.getElementById('f-name').value.trim();
+  const series    = document.getElementById('f-series').value.trim();
+  const desc      = document.getElementById('f-desc').value.trim();
+  const size      = document.getElementById('f-size').value;
+  const sizelabel = document.getElementById('f-sizelabel').value.trim();
+  const price     = document.getElementById('f-price').value.trim();
+  const origprice = document.getElementById('f-origprice').value.trim();
+  const badge     = document.getElementById('f-badge').value;
+  const style     = document.getElementById('f-style').value;
+  const rating    = document.getElementById('f-rating').value.trim() || '4.8';
+  const reviews   = document.getElementById('f-reviews').value.trim() || '0';
+
+  // Validate required
+  if(!name || !series || !desc || !size || !sizelabel || !price){
+    alert('Please fill in all required fields (marked with *)');
+    return;
+  }
+
+  // Images
+  const imgInputs = document.querySelectorAll('#imageRows .img-row input');
+  const images = Array.from(imgInputs).map(i => i.value.trim()).filter(Boolean);
+  if(images.length === 0){
+    alert('Please add at least one product image path.');
+    return;
+  }
+
+  // Spec tags — always include sizelabel first
+  const allSpecs = [sizelabel, ...specTags];
+
+  // Badge HTML
+  let badgeHTML = '';
+  if(badge === 'bestseller') badgeHTML = `<span class="prod-badge badge-bestseller">Bestseller</span>`;
+  else if(badge === 'new')   badgeHTML = `<span class="prod-badge badge-new">New</span>`;
+  else if(badge === 'sale')  badgeHTML = `<span class="prod-badge badge-sale">Sale</span>`;
+
+  // Stars
+  const ratingNum = parseFloat(rating);
+  const fullStars = Math.floor(ratingNum);
+  const halfStar  = (ratingNum - fullStars) >= 0.5;
+  let stars = '★'.repeat(fullStars);
+  if(halfStar) stars += '★';
+  stars = stars.padEnd(5, '☆');
+
+  // Price HTML
+  let priceHTML = `<span class="prod-price">₹ ${parseInt(price).toLocaleString('en-IN')}</span>`;
+  if(origprice){
+    const discount = Math.round((1 - parseInt(price)/parseInt(origprice)) * 100);
+    priceHTML += `\n            <span class="prod-price-orig">₹ ${parseInt(origprice).toLocaleString('en-IN')}</span>`;
+    priceHTML += `\n            <span class="prod-price-off">${discount}% off</span>`;
+  }
+
+  // Image swiper HTML
+  const imgTags = images.map(src =>
+    `            <img src="${esc(src)}" alt="${esc(name)} black stone Tulsi Vrindavan">`
+  ).join('\n');
+
+  // Dot indicators — one per image
+  const dots = images.map((_,i) =>
+    `<span class="swiper-dot${i===0?' active':''}"></span>`
+  ).join('');
+
+  // Spec tags HTML
+  const specTagsHTML = allSpecs.map(t =>
+    `            <span class="prod-spec-tag">${esc(t)}</span>`
+  ).join('\n');
+
+  // Final specs data attr (for modal)
+  const specsAttr = allSpecs.join(' · ');
+
+  // Assemble card
+  const code =
+`<!-- PRODUCT: ${esc(name).toUpperCase()} -->
+<div class="product-card"
+     data-size="${esc(size)}"
+     data-price="${esc(price)}"
+     data-badge="${esc(badge)}"
+     data-style="${esc(style)}"
+     data-rating="${esc(rating)}"
+     data-reviews="${esc(reviews)}"
+     data-name="${esc(name)}"
+     data-desc="${esc(desc)}"
+     data-specs="${esc(specsAttr)}">
+
+  <div class="product-imgs" onclick="openProductModal(this.closest('.product-card'))">
+    <div class="swiper-track">
+${imgTags}
+    </div>
+    <button class="swiper-arr prev" onclick="swiperPrev(event,this)">&#8592;</button>
+    <button class="swiper-arr next" onclick="swiperNext(event,this)">&#8594;</button>
+    <div class="swiper-dots">${dots}</div>
+  </div>
+
+  <div class="prod-badges">${badgeHTML}</div>
+  <button class="prod-wish" onclick="toggleWish(event,this)">&#9825;</button>
+
+  <div class="product-body">
+    <div class="prod-series">${esc(series)}</div>
+    <div class="prod-name">${esc(name)}</div>
+    <div class="prod-desc">${esc(desc)}</div>
+    <div class="prod-specs">
+${specTagsHTML}
+    </div>
+    <div class="prod-rating">
+      <span class="prod-stars">${stars}</span>
+      <span class="prod-rating-count">${rating} (${reviews} reviews)</span>
+    </div>
+    <div class="prod-pricing">
+      ${priceHTML}
+    </div>
+    <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Book &amp; Enquire</button>
+  </div>
+
+</div>`;
+
+  // Show output
+  const codeEl = document.getElementById('codeOutput');
+  codeEl.textContent = code;
+  codeEl.style.display = 'block';
+  document.getElementById('placeholder').style.display = 'none';
+
+  // Reset copy button
+  const btn = document.getElementById('copyBtn');
+  btn.textContent = 'Copy Code';
+  btn.classList.remove('copied');
+
+  // Scroll to output on mobile
+  if(window.innerWidth <= 900){
+    document.querySelector('.output-panel').scrollIntoView({behavior:'smooth'});
+  }
+}
+
+/* ── COPY ── */
+function copyCode(){
+  const code = document.getElementById('codeOutput').textContent;
+  if(!code || document.getElementById('placeholder').style.display !== 'none') return;
+
+  navigator.clipboard.writeText(code).then(function(){
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(function(){
+      toast.classList.remove('show');
+      btn.textContent = 'Copy Code';
+      btn.classList.remove('copied');
+    }, 2500);
+  }).catch(function(){
+    // Fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = code;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(function(){
+      btn.textContent = 'Copy Code';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+</script>
+</body>
+</html>
