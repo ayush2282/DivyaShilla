@@ -541,14 +541,6 @@ function generateCode(){
   else if(badge === 'new')   badgeHTML = `<span class="prod-badge badge-new">New</span>`;
   else if(badge === 'sale')  badgeHTML = `<span class="prod-badge badge-sale">Sale</span>`;
 
-  // Stars
-  const ratingNum = parseFloat(rating);
-  const fullStars = Math.floor(ratingNum);
-  const halfStar  = (ratingNum - fullStars) >= 0.5;
-  let stars = '★'.repeat(fullStars);
-  if(halfStar) stars += '★';
-  stars = stars.padEnd(5, '☆');
-
   // Price HTML
   let priceHTML = `<span class="prod-price">₹ ${parseInt(price).toLocaleString('en-IN')}</span>`;
   if(origprice){
@@ -559,7 +551,7 @@ function generateCode(){
 
   // Image swiper HTML
   const imgTags = images.map(src =>
-    `            <img src="${esc(src)}" alt="${esc(name)} black stone Tulsi Vrindavan">`
+    `            <img src="${esc(src)}" alt="handcrafted black stone Tulsi Vrindavan">`
   ).join('\n');
 
   // Dot indicators — one per image
@@ -608,14 +600,11 @@ ${imgTags}
     <div class="prod-specs">
 ${specTagsHTML}
     </div>
-    <div class="prod-rating">
-      <span class="prod-stars">${stars}</span>
-      <span class="prod-rating-count">${rating} (${reviews} reviews)</span>
-    </div>
     <div class="prod-pricing">
       ${priceHTML}
     </div>
-    <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Book &amp; Enquire</button>
+    <div class="prod-delivery-note">Price excl. delivery</div>
+    <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
   </div>
 
 </div>`;

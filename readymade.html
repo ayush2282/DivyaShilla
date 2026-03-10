@@ -221,7 +221,8 @@ nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-conten
 .prod-desc{font-size:0.8rem;color:var(--muted);font-weight:300;margin-bottom:10px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .prod-specs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
 .prod-spec-tag{font-family:'Josefin Sans',sans-serif;font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;padding:3px 8px;background:var(--cream-dark);color:var(--stone);border:1px solid var(--sand);}
-.prod-pricing{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
+.prod-pricing{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+.prod-delivery-note{font-size:0.68rem;color:var(--muted);margin-bottom:12px;font-style:italic;}
 .prod-price{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--saffron-deep);line-height:1;}
 .prod-price-orig{font-size:0.85rem;color:var(--muted);text-decoration:line-through;}
 .prod-price-off{font-family:'Josefin Sans',sans-serif;font-size:0.62rem;color:var(--green);letter-spacing:0.1em;}
@@ -569,9 +570,61 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
   /* Footer */
   footer{padding:24px 5%;flex-direction:column;align-items:flex-start;gap:8px;}
   .f-note{text-align:left;}
+/* ── UX IMPROVEMENTS ── */
+
+/* Trust line above form */
+.modal-trust-top{
+  font-size:0.8rem;color:var(--stone);
+  background:linear-gradient(135deg,rgba(224,123,32,0.07),rgba(192,94,10,0.04));
+  border:1px solid rgba(224,123,32,0.22);
+  border-left:3px solid var(--saffron-deep);
+  padding:9px 12px;margin-bottom:14px;margin-top:4px;
+  line-height:1.55;
 }
+
+/* No payment line below submit */
+.modal-no-payment{
+  text-align:center;font-size:0.76rem;
+  color:var(--muted);margin-top:8px;
+  letter-spacing:0.02em;
+}
+.modal-no-payment::before{content:'🔒 ';}
+
+/* Delivery note in modal header */
+.modal-delivery-note{
+  font-size:0.68rem;color:rgba(255,255,255,0.42);
+  font-style:italic;margin-top:3px;letter-spacing:0.01em;
+}
+
+/* WhatsApp alternative button inside modal */
+.modal-wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:11px 14px;margin-top:10px;
+  background:#25d366;color:#fff;
+  font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:background 0.22s;
+}
+.modal-wa-btn:hover{background:#1db954;}
+
+/* Mobile: hide gallery when enquiry view is active */
+@media(max-width:680px){
+  .modal.enquiry-mode .modal-gallery{display:none;}
+  .modal.enquiry-mode .modal-detail{max-height:95vh;}
+}
+
+/* Prod-cta: add right margin so floating WA button never overlaps */
+@media(max-width:640px){
+  .prod-cta{
+    margin-right:0;
+    /* ensure it doesn't stretch under the fixed WA button (56px + 28px gap = 84px) */
+    max-width:calc(100% - 0px); /* card is full-width so no issue */
+  }
+  /* Shift WA float up on very small screens when near bottom cards */
+  .wa-float{bottom:20px;right:16px;width:48px;height:48px;}
+}
+
 </style>
-</head>
 <body>
 
 <!-- NAV -->
@@ -710,7 +763,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 18,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -744,7 +798,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <span class="prod-price-orig">₹ 8,500</span>
             <span class="prod-price-off">12% off</span>
           </div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -773,7 +828,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <!-- <span class="prod-spec-tag">Floral Column</span> -->
           </div>
           <div class="prod-pricing"><span class="prod-price">₹ 15,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -806,7 +862,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <span class="prod-price-orig">₹8,500</span>
             <span class="prod-price-off">12% off</span>
           </div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -835,7 +892,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <!-- <span class="prod-spec-tag">Sculpted Column</span> -->
           </div>
           <div class="prod-pricing"><span class="prod-price">₹ 24,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -868,7 +926,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <span class="prod-price-orig">₹ 21,500</span>
             <span class="prod-price-off">14% off</span>
           </div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -897,7 +956,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           <div class="prod-rating"><span class="prod-stars">★★★★☆</span><span class="prod-rating-count">4.6 (21 reviews)</span></div>
           <div class="prod-pricing"><span class="prod-price">₹ 80,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -926,7 +986,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <!-- <span class="prod-spec-tag">Stepped Shikhara</span> -->
           </div>
           <div class="prod-pricing"><span class="prod-price">₹ 18,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -955,7 +1016,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <!-- <span class="prod-spec-tag">Sculpted Column</span> -->
           </div>
           <div class="prod-pricing"><span class="prod-price">₹ 11,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -984,7 +1046,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <!-- <span class="prod-spec-tag">Stepped Shikhara</span> -->
           </div>
           <div class="prod-pricing"><span class="prod-price">₹ 22,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1014,7 +1077,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 24,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1043,7 +1107,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
             <!-- <span class="prod-spec-tag">Sculpted Column</span> -->
           </div>
           <div class="prod-pricing"><span class="prod-price">₹ 11,500</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1073,7 +1138,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
          
           <div class="prod-pricing"><span class="prod-price">₹ 15,500</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1103,7 +1169,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 18,500</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1133,7 +1200,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 11,500</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
       
@@ -1163,7 +1231,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 19,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1193,7 +1262,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 18,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1223,7 +1293,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 74,000</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1253,7 +1324,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
           
           <div class="prod-pricing"><span class="prod-price">₹ 45,500</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1283,7 +1355,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
         
           <div class="prod-pricing"><span class="prod-price">₹ 32,500</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1313,7 +1386,8 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
           </div>
         
           <div class="prod-pricing"><span class="prod-price">₹ 78,500</span></div>
-          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Enquire / अधिक माहिती</button>
+          <div class="prod-delivery-note">Price excl. delivery</div>
+          <button class="prod-cta" onclick="openProductModal(this.closest('.product-card'))">Get Delivery Details</button>
         </div>
       </div>
 
@@ -1365,6 +1439,7 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <div>
           <div class="modal-product-name" id="modalName">Product Name</div>
           <div class="modal-product-price" id="modalPrice">₹ 0</div>
+          <div class="modal-delivery-note">Price excludes delivery · Arranged based on location</div>
         </div>
         <button class="modal-close" onclick="closeModalDirect()">✕</button>
       </div>
@@ -1372,25 +1447,35 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         <div class="modal-desc" id="modalDesc"></div>
         <div class="modal-specs" id="modalTags"></div>
 
+        <!-- Trust line above form -->
+        <div class="modal-trust-top">Our team will call you within 15 minutes to confirm design, price and delivery.</div>
+
         <form id="modalForm" action="https://docs.google.com/forms/d/e/1FAIpQLSeIi3OS6mnOyv9KM06NwHMRZCpr63C8DYcWtg4JJU5-Yah11Q/formResponse" method="POST" target="hidden_iframe">
           <div class="modal-2col">
             <div>
-              <label class="modal-form-lbl">Full Name</label>
+              <label class="modal-form-lbl">Your Name</label>
               <input class="modal-inp" type="text" name="entry.448886202" placeholder="Your name" required>
             </div>
             <div>
-              <label class="modal-form-lbl">Phone Number</label>
+              <label class="modal-form-lbl">Mobile Number</label>
               <input class="modal-inp" type="tel" name="entry.960694153" placeholder="+91 XXXXX XXXXX" required
                 pattern="[6-9][0-9]{9}" title="Enter valid 10-digit mobile number">
             </div>
           </div>
-          <label class="modal-form-lbl">City Name</label>
-          <textarea class="modal-ta" name="entry.1984381595" placeholder="Enter your city name" required></textarea>
+          <label class="modal-form-lbl">City</label>
+          <textarea class="modal-ta" name="entry.1984381595" placeholder="Your city" required></textarea>
           <input type="hidden" id="modalProductField" name="entry.1711063176" value="">
           <input type="hidden" id="modalPriceField"   name="entry.811843989"  value="">
           <input type="hidden" id="modalSpecsField"   name="entry.160852949"  value="">
-          <button type="submit" class="modal-submit" id="modalSubmitBtn">Request Confirmation Call</button>
+          <button type="submit" class="modal-submit" id="modalSubmitBtn">Get Price &amp; Delivery Details</button>
+          <div class="modal-no-payment">No payment required now.</div>
         </form>
+
+        <!-- WhatsApp alternative -->
+        <a href="https://wa.me/918605131717?text=Hello%2C%20I%20am%20interested%20in%20a%20Tulsi%20Vrindavan.%20Please%20share%20price%20and%20delivery%20details." target="_blank" class="modal-wa-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp Instead
+        </a>
 
         <!-- Success state -->
         <div class="modal-success" id="modalSuccess">
@@ -1400,7 +1485,7 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
         </div>
 
         <div class="modal-note">
-          We call within 15 minutes to confirm · 30% advance only after approval
+          30% advance only after you approve the design
         </div>
       </div>
     </div>
@@ -1501,8 +1586,15 @@ document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('modalSubmitBtn');
       btn.disabled = true;
       btn.textContent = 'Sending…';
+      // hide extras during sending
+      const waBtn = document.querySelector('.modal-wa-btn');
+      const trustTop = document.querySelector('.modal-trust-top');
+      const noPayment = document.querySelector('.modal-no-payment');
       setTimeout(function(){
         modalForm.style.display = 'none';
+        if(waBtn) waBtn.style.display = 'none';
+        if(trustTop) trustTop.style.display = 'none';
+        if(noPayment) noPayment.style.display = 'none';
         document.getElementById('modalSuccess').classList.add('show');
         submitted = false;
       }, 1400);
@@ -1614,7 +1706,13 @@ function mioOpenEnquiry() {
   const card = mioCurrentCard;
   closeMobImg();
   if(card) {
-    setTimeout(function(){ openDesktopModal(card); }, 80);
+    setTimeout(function(){
+      openDesktopModal(card);
+      // On mobile: hide gallery so only the form is visible
+      if(window.innerWidth <= 680){
+        document.querySelector('.modal').classList.add('enquiry-mode');
+      }
+    }, 80);
   }
 }
 
@@ -1647,9 +1745,16 @@ function openDesktopModal(card) {
   modalForm.style.display = '';
   const btn = document.getElementById('modalSubmitBtn');
   btn.disabled = false;
-  btn.textContent = 'Request Confirmation Call';
+  btn.textContent = 'Get Price & Delivery Details';
   btn.style.background = '';
   document.getElementById('modalSuccess').classList.remove('show');
+  // restore extras that get hidden on success
+  const waBtn = document.querySelector('.modal-wa-btn');
+  const trustTop = document.querySelector('.modal-trust-top');
+  const noPayment = document.querySelector('.modal-no-payment');
+  if(waBtn) waBtn.style.display = '';
+  if(trustTop) trustTop.style.display = '';
+  if(noPayment) noPayment.style.display = '';
 
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1679,6 +1784,7 @@ function closeModal(e) {
 function closeModalDirect() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.querySelector('.modal').classList.remove('enquiry-mode');
 }
 
 /* ============ FILTER BY SIZE BUTTON ============ */
