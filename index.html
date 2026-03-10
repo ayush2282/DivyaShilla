@@ -247,6 +247,13 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
     <a href="readymade.html" class="nav-special">Readymade</a>
     <a href="tulsi-vrindavan-designs.html">Designs</a>
   </div>
+  <button id="translateBtn" onclick="toggleTranslate()" style="
+  font-family:'Josefin Sans',sans-serif;
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--saffron-deep);
+  color:var(--saffron-deep);padding:5px 12px;cursor:pointer;
+  margin-right:10px;white-space:nowrap;
+  ">मराठी</button>
   <button class="nav-ham" id="navHam" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -518,5 +525,51 @@ document.querySelectorAll('#navLinks a').forEach(function(a){
   });
 });
 </script>
+<script>
+function getCookie(name){
+  const match = document.cookie.match(new RegExp('(^| )'+name+'=([^;]+)'));
+  return match ? match[2] : null;
+}
+function toggleTranslate(){
+  const btn = document.getElementById('translateBtn');
+  const current = getCookie('googtrans');
+  if(current && current.includes('/mr')){
+    document.cookie = 'googtrans=; path=/; domain=.divyashilla.in; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    btn.textContent = 'मराठी';
+    location.reload();
+  } else {
+    document.cookie = 'googtrans=/en/mr; path=/; domain=.divyashilla.in';
+    document.cookie = 'googtrans=/en/mr; path=/';
+    btn.textContent = 'English';
+    location.reload();
+  }
+}
+function setButtonLabel(){
+  const current = getCookie('googtrans');
+  const btn = document.getElementById('translateBtn');
+  if(btn){
+    btn.textContent = (current && current.includes('/mr')) ? 'English' : 'मराठी';
+  }
+}
+window.addEventListener('load', setButtonLabel);
+</script>
+
+<script type="text/javascript">
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({
+    pageLanguage:'en',
+    includedLanguages:'mr',
+    autoDisplay:false
+  },'gt_hidden');
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<div id="gt_hidden" style="display:none;"></div>
+
+<style>
+.goog-te-banner-frame{display:none !important;}
+body{top:0 !important;}
+</style>
 </body>
 </html>
