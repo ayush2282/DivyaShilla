@@ -1575,6 +1575,9 @@ footer{background:var(--brown);color:var(--sand);padding:36px 6%;display:flex;ju
 </footer>
 
 <script>
+if (typeof _autofillcallbackhandler === 'undefined') {
+  window._autofillcallbackhandler = function() {};
+}
 /* ============ STATE ============ */
 let activeFilter = 'all';
 let maxPrice = 35000;
@@ -1721,7 +1724,7 @@ function swiperNext(e, btn) {
 }
 function updateSwiper(c, s) {
   s.track.style.transform = 'translateX(-' + (s.idx * 100) + '%)';
-  s.dots.forEach((d,i) => d.classList.toggle('active', i === s.idx));
+  s.dots.forEach(function(d,i){ d.classList.toggle('active', i === s.idx); });
 }
 
 /* ============ OPEN PRODUCT — ROUTE BY DEVICE ============ */
@@ -1762,7 +1765,7 @@ function mioSlide(dir) {
   if(!mioImages.length) return;
   mioIdx = (mioIdx + dir + mioImages.length) % mioImages.length;
   document.getElementById('mioTrack').style.transform = 'translateX(-' + (mioIdx * 100) + '%)';
-  document.querySelectorAll('.mio-dot').forEach((d,i) => d.classList.toggle('active', i === mioIdx));
+  document.querySelectorAll('.mio-dot').forEach(function(d,i){ d.classList.toggle('active', i === mgCurrentIdx); });
 }
 
 function closeMobImg() {
@@ -1843,7 +1846,7 @@ function buildMgGallery() {
 function mgSlide(dir) {
   mgCurrentIdx = (mgCurrentIdx + dir + mgImages.length) % mgImages.length;
   document.getElementById('mgTrack').style.transform = 'translateX(-' + (mgCurrentIdx * 100) + '%)';
-  document.querySelectorAll('.mg-dot').forEach((d,i) => d.classList.toggle('active', i === mgCurrentIdx));
+  document.querySelectorAll('.mg-dot').forEach(function(d,i){ d.classList.toggle('active', i === mioIdx); });
 }
 
 function closeModal(e) {
@@ -1977,7 +1980,7 @@ function googleTranslateElementInit(){
   },'gt_hidden');
 }
 </script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script defer src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <div id="gt_hidden" style="display:none;"></div>
 
 <style>
