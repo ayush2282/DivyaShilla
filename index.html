@@ -356,7 +356,7 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
   <p style="color:var(--muted);font-weight:300;margin-bottom:0;max-width:420px;font-size:0.92rem;">Three sizes — choose what fits your sacred space.</p>
   <span class="rule"></span>
   <div class="size-layout">
-    <div class="size-img-box">
+    <div class="size-img-box" onclick="window.location.href='readymade.html'" style="cursor:pointer;">
       <img src="refrence_image/all_ref.png" alt="Tulsi Vrindavan size comparison">
       <p class="size-img-note">Height reference for scale</p>
     </div>
@@ -498,6 +498,7 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
 <script>
 if (typeof _autofillcallbackhandler === 'undefined') {
   window._autofillcallbackhandler = function() {};
+}
 function goToSize(card){
   window.location.href = 'readymade.html?size=' + card.dataset.filter;
 }
