@@ -231,11 +231,22 @@ nav{position:sticky;top:0;left:0;right:0;z-index:200;display:flex;justify-conten
 .prod-rating-count{font-size:0.78rem;color:var(--muted);}
 .prod-cta{
   display:block;width:100%;
-  font-family:'Josefin Sans',sans-serif;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;
-  padding:11px;background:var(--saffron-deep);color:var(--white);border:none;cursor:pointer;
+  font-family:'Josefin Sans',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
+  padding:14px 11px;background:var(--saffron-deep);color:var(--white);border:none;cursor:pointer;
   transition:all 0.26s;text-align:center;text-decoration:none;
+  font-weight:600;
+  box-shadow:0 4px 14px rgba(192,94,10,0.35);
 }
-.prod-cta:hover{background:var(--terracotta);}
+.prod-cta:hover{background:var(--terracotta);box-shadow:0 6px 20px rgba(192,94,10,0.5);}
+@media(max-width:600px){
+  .prod-cta{
+    font-size:0.78rem;
+    padding:15px 11px;
+    letter-spacing:0.12em;
+  }
+  /* Extra bottom space so WA button never covers last card's Enquire */
+  .product-area{padding-bottom:100px;}
+}
 
 /* ORDER MODAL — Instagram-style split layout */
 .modal-overlay{
@@ -2320,6 +2331,9 @@ function toggleNav(){
   text-decoration:none;
 }
 .wa-float:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,0.55);}
+@media(max-width:600px){
+  .wa-float{bottom:80px;right:16px;width:50px;height:50px;}
+}
 </style>
 
 <script>
