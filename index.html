@@ -245,13 +245,46 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
 
 /* SEO hidden text */
 .seo-text{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+
+/* FEATURED — extra dims line on data-driven cards */
+.prev-name{flex:0 0 auto;margin-bottom:6px;}
+.prev-footer{margin-top:auto;}
+.prev-dims{font-family:'Josefin Sans',sans-serif;font-size:0.56rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;}
+.prev-tier{position:absolute;top:10px;right:10px;font-family:'Josefin Sans',sans-serif;font-size:0.46rem;letter-spacing:0.16em;text-transform:uppercase;padding:3px 8px;z-index:2;color:#fff;}
+.prev-tier.regular{background:var(--saffron-deep);}
+.prev-tier.premium{background:var(--brown);}
+.prev-count{position:absolute;bottom:10px;right:10px;font-family:'Josefin Sans',sans-serif;font-size:0.5rem;letter-spacing:0.1em;background:rgba(61,43,26,0.78);color:#fff;padding:2px 7px;z-index:2;}
+@media(max-width:520px){.prev-dims{display:none;}}
+
+/* CATEGORY SPLIT */
+#category-split{background:var(--ivory);}
+.cs-head{text-align:center;margin-bottom:38px;}
+.cs-h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--brown);margin-bottom:10px;}
+.cs-sub{color:var(--muted);font-weight:300;max-width:520px;margin:0 auto;font-size:0.92rem;line-height:1.75;}
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1000px;margin:0 auto;}
+@media(max-width:760px){.cs-grid{grid-template-columns:1fr;gap:16px;}}
+.cs-panel{position:relative;text-decoration:none;color:inherit;overflow:hidden;border:1.5px solid var(--sand);display:flex;flex-direction:column;min-height:340px;transition:border-color 0.28s,box-shadow 0.28s,transform 0.28s;}
+.cs-panel:hover{border-color:var(--saffron);box-shadow:0 14px 40px rgba(61,43,26,0.18);transform:translateY(-4px);}
+.cs-panel-img{position:absolute;inset:0;z-index:0;}
+.cs-panel-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+.cs-panel:hover .cs-panel-img img{transform:scale(1.06);}
+.cs-panel::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(61,43,26,0.15) 0%,rgba(61,43,26,0.55) 55%,rgba(61,43,26,0.9) 100%);}
+.cs-premium::after{background:linear-gradient(180deg,rgba(20,12,6,0.2) 0%,rgba(20,12,6,0.62) 55%,rgba(20,12,6,0.94) 100%);}
+.cs-panel-body{position:relative;z-index:2;margin-top:auto;padding:26px 24px 28px;}
+.cs-tag{display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:0.54rem;letter-spacing:0.24em;text-transform:uppercase;color:#fff;padding:4px 12px;margin-bottom:12px;background:var(--saffron-deep);}
+.cs-premium .cs-tag{background:var(--saffron-light);color:var(--brown);}
+.cs-panel-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--cream);margin-bottom:8px;line-height:1.15;}
+.cs-panel-desc{font-size:0.88rem;color:var(--sand);font-weight:300;line-height:1.7;margin-bottom:16px;max-width:340px;}
+.cs-panel-cta{font-family:'Josefin Sans',sans-serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--saffron-light);}
+.cs-premium .cs-panel-cta{color:var(--saffron-light);}
+@media(max-width:760px){.cs-panel{min-height:280px;}.cs-panel-title{font-size:1.3rem;}}
 </style>
 </head>
 <body>
 
 <!-- SEO text — invisible to users, indexed by Google -->
 <div class="seo-text" aria-hidden="true">
-  DivyaShilla handcrafted black stone Tulsi Vrindavan and Tulsi katta. Traditional stone Tulsi Vrindavan designs for home courtyards and temples. Black stone Tulsi katta delivered across India. Stone Tulsi Vrindavan online from skilled Indian artisans. Tulsi Vrindavan designs in 2.5 ft, 3.15 ft, and 3.5 ft sizes.
+  DivyaShilla handcrafted black stone Tulsi Vrindavan and Tulsi katta. Traditional stone Tulsi Vrindavan designs for home courtyards and temples. Black stone Tulsi katta delivered across India. Stone Tulsi Vrindavan online from skilled Indian artisans. Tulsi Vrindavan designs in 2 ft, 2.5 ft, 3 ft, 3.15 ft, and 3.5 ft sizes.
 </div>
 
 <!-- NAV -->
@@ -305,101 +338,39 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
     <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.4vw,2.6rem);color:var(--brown);margin-bottom:0;">Our Most Loved Pieces</h2>
     <span class="rule" style="margin:16px auto 0;"></span>
   </div>
-  <div class="prev-grid">
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/special_design.webp" alt="Special Design Tulsi Vrindavan stone" class="prev-img-main" loading="lazy">
-        <img src="product_image/special_design_2.webp" alt="Special Design Tulsi katta" class="prev-img-hover" loading="lazy">
-        <span class="prev-badge bestseller">Bestseller</span>
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Majestic Series</div>
-        <div class="prev-name">Special Design</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 30,000</div>
-          <div class="prev-cta">View →</div>
-        </div>
-      </div>
-    </a>
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/traditional_base.webp" alt="Traditional Base Tulsi Vrindavan stone" class="prev-img-main" loading="lazy">
-        <img src="product_image/traditional_base_2.webp" alt="Traditional Base Tulsi katta" class="prev-img-hover" loading="lazy">
-        <span class="prev-badge new">New</span>
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Shanthi Series</div>
-        <div class="prev-name">Traditional Base</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 7,600 </div>
-          <div class="prev-cta">View →</div>
-        </div>
-      </div>
-    </a>
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/classic_design.webp" alt="Classic Design black stone Tulsi Vrindavan" class="prev-img-main" loading="lazy">
-        <img src="product_image/classic_design_2.webp" alt="Classic Design Tulsi katta" class="prev-img-hover" loading="lazy">
-        <span class="prev-badge bestseller">Bestseller</span>
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Majestic Series</div>
-        <div class="prev-name">Classic Design</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 18,000</div>
-          <div class="prev-cta">View →</div>
-        </div>
-      </div>
-    </a>
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/classic_vrindavan.webp" alt="Classic Vrindavan stone Tulsi katta" class="prev-img-main" loading="lazy">
-        <img src="product_image/classic_vrindavan_2.webp" alt="Classic Vrindavan Tulsi Vrindavan" class="prev-img-hover" loading="lazy">
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Traditional Series</div>
-        <div class="prev-name">Classic Vrindavan</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 15,000</div>
-          <div class="prev-cta">View →</div>
-        </div>
-      </div>
-    </a>
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/simple_vertical.webp" alt="Simple Vertical Tulsi Vrindavan stone" class="prev-img-main" loading="lazy">
-        <img src="product_image/simple_vertical_2.webp" alt="Simple Vertical Tulsi katta" class="prev-img-hover" loading="lazy">
-        <span class="prev-badge sale">Sale</span>
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Shanthi Series</div>
-        <div class="prev-name">Simple Vertical</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 7,500 <span class="prev-orig">₹ 8,500</span></div>
-          <div class="prev-cta">View →</div>
-        </div>
-      </div>
-    </a>
-    
-    
-    <a href="readymade.html" class="prev-card">
-      <div class="prev-img-wrap">
-        <img src="product_image/special_heritage.webp" alt="Special Heritage Tulsi Vrindavan stone" class="prev-img-main" loading="lazy">
-        <img src="product_image/special_heritage_2.webp" alt="Special Heritage Tulsi katta" class="prev-img-hover" loading="lazy">
-        <span class="prev-badge new">New</span>
-      </div>
-      <div class="prev-body">
-        <div class="prev-series">Heritage Series</div>
-        <div class="prev-name">Special Heritage</div>
-        <div class="prev-footer">
-          <div class="prev-price">₹ 17,500</div>
-          <div class="prev-cta">View →</div>
-        </div>
-      </div>
-    </a>
-  </div>
+  <div class="prev-grid" id="featGrid"></div>
   <div style="text-align:center;margin-top:32px;">
     <a href="readymade.html" class="btn btn-fill">View All Designs →</a>
+  </div>
+</section>
+
+<!-- CATEGORY SPLIT: REGULAR vs PREMIUM -->
+<section id="category-split">
+  <div class="cs-head">
+    <span class="lbl">Two Ways to Own One</span>
+    <h2 class="cs-h2">Regular or Premium</h2>
+    <p class="cs-sub">Every design comes in two crafting levels. Pick the finish that suits your space and budget — then explore that collection.</p>
+    <span class="rule" style="margin:18px auto 0;"></span>
+  </div>
+  <div class="cs-grid">
+    <a href="readymade.html?tier=regular" class="cs-panel cs-regular">
+      <div class="cs-panel-img"><img src="product_image/2.5feet/210.webp" alt="Regular black stone Tulsi Vrindavan" loading="lazy"></div>
+      <div class="cs-panel-body">
+        <div class="cs-tag">Regular</div>
+        <h3 class="cs-panel-title">Everyday Devotion</h3>
+        <p class="cs-panel-desc">Clean, sturdy black stone designs for homes and balconies. Honest craftsmanship at a friendly price.</p>
+        <span class="cs-panel-cta">Browse Regular →</span>
+      </div>
+    </a>
+    <a href="readymade.html?tier=premium" class="cs-panel cs-premium">
+      <div class="cs-panel-img"><img src="product_image/3.5feet/514.PNG" alt="Premium black stone Tulsi Vrindavan" loading="lazy"></div>
+      <div class="cs-panel-body">
+        <div class="cs-tag">Premium</div>
+        <h3 class="cs-panel-title">Heritage Craft</h3>
+        <p class="cs-panel-desc">Deep Nakshi carving, Gomukh spouts and hand-polished detail. Statement pieces for courtyards and temples.</p>
+        <span class="cs-panel-cta">Browse Premium →</span>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -418,7 +389,7 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
 <section id="size">
   <span class="lbl">Size Reference</span>
   <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:8px;">Available Sizes</h2>
-  <p style="color:var(--muted);font-weight:300;margin-bottom:0;max-width:420px;font-size:0.92rem;">Three sizes — choose what fits your sacred space.</p>
+  <p style="color:var(--muted);font-weight:300;margin-bottom:0;max-width:420px;font-size:0.92rem;">Five sizes — choose what fits your sacred space.</p>
   <span class="rule"></span>
   <div class="size-layout">
     <div class="size-img-box" onclick="window.location.href='readymade.html'" style="cursor:pointer;">
@@ -426,7 +397,15 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
       <p class="size-img-note">Height reference for scale</p>
     </div>
     <div class="size-cards">
-      <div class="size-card" data-filter="small" onclick="goToSize(this)">
+      <div class="size-card" data-filter="2" onclick="goToSize(this)">
+        <div class="sc-thumb"><img src="refrence_image/2_ref.webp" alt="2 ft Tulsi Vrindavan" loading="lazy"></div>
+        <div class="sc-info">
+          <div class="sc-ft">2 ft</div>
+          <div class="sc-desc">Smallest · Indoor niche or tabletop</div>
+        </div>
+        <span class="sc-arr">→</span>
+      </div>
+      <div class="size-card" data-filter="2.5" onclick="goToSize(this)">
         <div class="sc-thumb"><img src="refrence_image/2.5_ref.webp" alt="2.5 ft Tulsi Vrindavan" loading="lazy"></div>
         <div class="sc-info">
           <div class="sc-ft">2.5 ft</div>
@@ -434,7 +413,16 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
         </div>
         <span class="sc-arr">→</span>
       </div>
-      <div class="size-card" data-filter="medium" onclick="goToSize(this)">
+      <!-- 3 ft: no refrence_image/3_ref.webp yet — using 3.15 image as placeholder; add a 3_ref.webp and swap the src below -->
+      <div class="size-card" data-filter="3" onclick="goToSize(this)">
+        <div class="sc-thumb"><img src="refrence_image/3.15_ref.webp" alt="3 ft Tulsi Vrindavan" loading="lazy"></div>
+        <div class="sc-info">
+          <div class="sc-ft">3 ft</div>
+          <div class="sc-desc">Medium · Verandah or courtyard</div>
+        </div>
+        <span class="sc-arr">→</span>
+      </div>
+      <div class="size-card" data-filter="3.15" onclick="goToSize(this)">
         <div class="sc-thumb"><img src="refrence_image/3.15_ref.webp" alt="3.15 ft Tulsi Vrindavan" loading="lazy"></div>
         <div class="sc-info">
           <div class="sc-ft">3.15 ft</div>
@@ -442,7 +430,7 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
         </div>
         <span class="sc-arr">→</span>
       </div>
-      <div class="size-card" data-filter="large" onclick="goToSize(this)">
+      <div class="size-card" data-filter="3.5" onclick="goToSize(this)">
         <div class="sc-thumb"><img src="refrence_image/3.5_ref.webp" alt="3.5 ft Tulsi Vrindavan" loading="lazy"></div>
         <div class="sc-info">
           <div class="sc-ft">3.5 ft</div>
@@ -459,11 +447,11 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
   <div class="rm-banner-left">
     <div class="rm-banner-eyebrow">Ready to Ship</div>
     <h2 class="rm-banner-title">Browse Our Readymade Collection</h2>
-    <p class="rm-banner-sub">20+ curated Tulsi Vrindavan designs — ready to order, delivered in 7–12 days.</p>
+    <p class="rm-banner-sub">Curated Tulsi Vrindavan designs — ready to order, delivered in 7–12 days.</p>
   </div>
   <div class="rm-banner-right">
     <div class="rm-banner-count">
-      <div class="rm-banner-num">20+</div>
+      <div class="rm-banner-num" id="rmCount">—</div>
       <div class="rm-banner-num-lbl">Designs Available</div>
     </div>
     <a href="readymade.html" class="btn-rm">View All Designs →</a>
@@ -560,6 +548,52 @@ footer{background:var(--brown);color:var(--sand);padding:32px 6%;display:flex;ju
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<script src="products.js"></script>
+<script>
+/* Featured designs + live count, read from products.js (shared with readymade.html) */
+(function(){
+  var TIER={regular:'Regular',premium:'Premium'};
+  var BADGE={bestseller:'Bestseller','new':'New',sale:'Sale'};
+  function inr(n){return '₹ '+Number(n).toLocaleString('en-IN');}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  document.addEventListener('DOMContentLoaded', function(){
+    if(typeof products === 'undefined') return;
+    var rm=document.getElementById('rmCount');
+    if(rm) rm.textContent = products.length>0 ? String(products.length) : '—';
+
+    var feat = products.filter(function(p){return p.badge==='bestseller';});
+    products.forEach(function(p){ if(feat.indexOf(p)<0) feat.push(p); });
+    feat = feat.slice(0,6);
+
+    var grid=document.getElementById('featGrid');
+    if(!grid) return;
+    if(feat.length===0){
+      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:30px 0;font-family:\'Playfair Display\',serif;">New designs are being added soon.</div>';
+      return;
+    }
+    grid.innerHTML = feat.map(function(p){
+      var hover = p.images[1] ? p.images[1] : p.images[0];
+      var badge = p.badge ? '<span class="prev-badge '+p.badge+'">'+BADGE[p.badge]+'</span>' : '';
+      var count = p.images.length>1 ? '<span class="prev-count">⊞ '+p.images.length+'</span>' : '';
+      var price='<span class="prev-price">'+inr(p.price)+'</span>';
+      if(p.origPrice&&p.origPrice>p.price) price+='<span class="prev-orig">'+inr(p.origPrice)+'</span>';
+      return '<a href="readymade.html?open='+encodeURIComponent(p.id)+'" class="prev-card">'
+        + '<div class="prev-img-wrap">'
+          + '<img src="'+esc(p.images[0])+'" alt="Tulsi Vrindavan design '+esc(p.id)+'" class="prev-img-main" loading="lazy">'
+          + '<img src="'+esc(hover)+'" alt="" class="prev-img-hover" loading="lazy">'
+          + '<span class="prev-tier '+p.tier+'">'+TIER[p.tier]+'</span>'
+          + badge + count
+        + '</div>'
+        + '<div class="prev-body">'
+          + '<div class="prev-name">Design #'+esc(p.id)+'</div>'
+          + '<div class="prev-dims">'+esc(p.size)+' ft'+(p.width?' × '+esc(p.width):'')+'</div>'
+          + '<div class="prev-footer">'+price+'<div class="prev-cta">View →</div></div>'
+        + '</div>'
+      + '</a>';
+    }).join('');
+  });
+})();
+</script>
 <script>
 if (typeof _autofillcallbackhandler === 'undefined') {
   window._autofillcallbackhandler = function() {};
